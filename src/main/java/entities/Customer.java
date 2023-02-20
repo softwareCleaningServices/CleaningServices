@@ -2,9 +2,8 @@ package entities;
 
 public class Customer {
     private int id;
-    private String name;
-    private String phone;
-    private String address;
+    private String fName;
+    private String lName;
 
     public int getId() {
         return id;
@@ -14,12 +13,20 @@ public class Customer {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getfName() {
+        return fName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setfName(String fName) {
+        this.fName = fName;
+    }
+
+    public String getlName() {
+        return lName;
+    }
+
+    public void setlName(String lName) {
+        this.lName = lName;
     }
 
     public String getPhone() {
@@ -30,21 +37,55 @@ public class Customer {
         this.phone = phone;
     }
 
-    public String getAddress() {
-        return address;
+    public String getCity() {
+        return city;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public Customer(int id, String name, String phone, String address) {
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    private String phone;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Customer(int id, String fName, String lName, String email, String phone, String city, String street, String password) {
         this.id = id;
-        this.name = name;
+        this.fName = fName;
+        this.lName = lName;
         this.phone = phone;
-        this.address = address;
+        this.city = city;
+        this.street = street;
+        this.email = email;
+        this.password = password;
     }
 
-    public Customer() {
-    }
+    private String city;
+    private String street;
+    private String email;
+    private String password;
+
+
 }
