@@ -19,7 +19,7 @@ public class productFile { //Create Read Update Delete
             }
             fromFile.close();
         }catch (Exception e){
-            System.out.println("Error in read products");
+            System.out.println(e.getMessage());
         }
         return products;
     }

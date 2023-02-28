@@ -12,18 +12,20 @@ public class Product {
     private String dimension;
     private String material;
     private String specialTreatment;
-    private String picturePath="src/main/resources/img"+pictureName+".jpg";//TODO name from user then concatenation with path
-    BufferedImage picture;
+    private enum category{CARPET,COVER,SOFA};
+    //private String picturePath="src/main/resources/img"+pictureName+".jpg";//TODO name from user then concatenation with path
+    //BufferedImage picture;
+//    {
+//        try {
+//            picture = ImageIO.read(new File(picturePath));
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
     public Product() {
 
     }
-    {
-        try {
-            picture = ImageIO.read(new File(picturePath));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+
     public Product(String name, String pictureName, String dimension, String material, String specialTreatment) {
         this.name = name;
         this.pictureName = pictureName;
