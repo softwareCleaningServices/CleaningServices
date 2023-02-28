@@ -12,22 +12,18 @@ public class Product {
     private String dimension;
     private String material;
     private String specialTreatment;
-    private String picturePath;//TODO name from user then concatenation with path
+    private String picturePath="src/main/resources/img"+pictureName+".jpg";//TODO name from user then concatenation with path
     BufferedImage picture;
-    /*
+    public Product() {
+
+    }
     {
         try {
-            picture = ImageIO.read(getClass().getResource("\"resources/img/carpet.jpg\""));
+            picture = ImageIO.read(new File(picturePath));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-    * */
-
-    public Product() {
-
-    }
-
     public Product(String name, String pictureName, String dimension, String material, String specialTreatment) {
         this.name = name;
         this.pictureName = pictureName;
@@ -80,4 +76,5 @@ public class Product {
     public String toString() {
         return name + " " + pictureName + " " + dimension + " " + material + " " + specialTreatment ;
     }
+
 }
