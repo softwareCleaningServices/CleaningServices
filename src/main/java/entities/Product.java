@@ -12,7 +12,8 @@ public class Product {
     private String dimension;
     private String material;
     private String specialTreatment;
-    private enum category{CARPET,COVER,SOFA};
+
+    private Category category;
     //private String picturePath="src/main/resources/img"+pictureName+".jpg";//TODO name from user then concatenation with path
     //BufferedImage picture;
 //    {
@@ -26,12 +27,13 @@ public class Product {
 
     }
 
-    public Product(String name, String pictureName, String dimension, String material, String specialTreatment) {
+    public Product(String name, String pictureName, String dimension, String material, String specialTreatment ,Category category) {
         this.name = name;
         this.pictureName = pictureName;
         this.dimension = dimension;
         this.material = material;
         this.specialTreatment = specialTreatment;
+        this.category= category;
     }
 
     public String getName() {
@@ -76,7 +78,7 @@ public class Product {
 
     @Override
     public String toString() {
-        return name + " " + pictureName + " " + dimension + " " + material + " " + specialTreatment ;
+        return name + " " + pictureName + " " + dimension + " " + material + " " + specialTreatment + " " +category;
     }
 
 }
