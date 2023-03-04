@@ -1,3 +1,4 @@
+import entities.Category;
 import entities.Product;
 
 import java.io.BufferedWriter;
@@ -15,7 +16,7 @@ public class productFile { //Create Read Update Delete
             String productSplit;
             while ((productSplit = fromFile.readLine()) != null){
                 String[] array = productSplit.split(" ");
-                products.add(new Product(array[0],array[1],array[2],array[3],array[4]));
+                products.add(new Product(array[0],array[1],array[2],array[3],array[4], Category.valueOf(array[5].toUpperCase())));
             }
             fromFile.close();
         }catch (Exception e){
