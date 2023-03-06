@@ -5,62 +5,68 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.io.RandomAccessFile;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Customer {
     private int id;
-    private String fName;
-    private String lName;
+    private String fullName;
     private Customer existCustomer;
+    private String password;
+    public int getId() {
+        return id;
+    }
+
     private String email;
-    private String city;
-    private String street;
+    private String address;
     private String phone;
-
-    public String getfName() {
-        return fName;
-    }
-
-    public void setfName(String fName) {
-        this.fName = fName;
-    }
-
-    public String getlName() {
-        return lName;
-    }
-
-    public void setlName(String lName) {
-        this.lName = lName;
-    }
 
     public String getPhone() {
         return phone;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Customer customer = (Customer) o;
+        if (!Objects.equals(email, customer.email)) return false;
+
+        return Objects.equals(id, customer.id);
+    }
+
+
+
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public String getCity() {
-        return city;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public String getStreet() {
-        return street;
+    public String getAddress() {
+        return address;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public String getEmail() {
         return email;
@@ -69,16 +75,29 @@ public class Customer {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public Customer(int id, String fName, String lName, String email, String phone, String city, String street) {
-        this.id = id;
-        this.fName = fName;
-        this.lName = lName;
+    public Customer(int id,String fullName, String email, String phone, String address,String password) {
+        this.id =id;
+        this.fullName=fullName;
+        this.address=address;
         this.phone = phone;
-        this.city = city;
-        this.street = street;
         this.email = email;
+        this.password=password;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Customer(String fullName, String email, String phone, String address, String password){
+        this.id =Data.getId();
+        this.fullName=fullName;
+        this.address=address;
+        this.phone = phone;
+        this.email = email;
+        this.password=password;
+    }
+
+
     public Customer() {
     }
 
@@ -111,11 +130,9 @@ public class Customer {
     public String toString() {
         return
                  id +
-                "\t " + fName +
-                "\t " + lName +
+                "\t " + fullName +
                 "\t " + phone +
-                "\t " + city +
-                "\t " + street +
+                "\t " + address +
                 "\t " + email ;
     }
 
@@ -154,18 +171,4 @@ public class Customer {
         return existCustomer;
     }
 
-    public void storeCustomer(Customer customer) {
-        try{
-            RandomAccessFile raf = new RandomAccessFile("Customer.txt", "rw");
-            raf.seek(raf.length());
-                raf.writeBytes(customer.getfName() + " " + customer.getlName() + " " + customer.getEmail() + " " + customer.getPhone() + " " +
-                        customer.getCity() + " " + customer.getStreet()+ "\r\n");
-
-            raf.close();
-        }
-        catch(Exception e){
-            System.out.println("Error");
-        }
-
-    }
 }

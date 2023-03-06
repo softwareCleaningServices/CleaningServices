@@ -4,24 +4,28 @@ import entities.Customer;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import static org.junit.Assert.*;
+import najah.edu.RecordCustomer;
+
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class recordCustomerTest {
+   RecordCustomer recordCustomer;
 Customer customer;
     @Given("that I choose to record new customer")
     public void thatIChooseToRecordNewCustomer() {
-        customer=new Customer();
-
+      recordCustomer=new RecordCustomer();
     }
     @When("I enter the correct required customer information")
     public void iEnterTheCorrectRequiredCustomerInformation() {
-    customer=new Customer(1,"Ruba","Osama","ruba12@gmail.com","059823135","Nablus","Awarta");
+        customer=new Customer("Ibrahim Ahmed","ibrahim@gmail.com","059823135","Nablus","ruba12");
     }
     @Then("the customer will recorded successfully")
     public void theCustomerWillRecordedSuccessfully() {
         assertTrue(customer.isValidEmail());
         assertFalse(customer.isTakenEmail());
-        customer.storeCustomer(customer);
+            recordCustomer.addNewCustomer(customer);
         System.out.println("Customer recorded successfully");
 
     }
@@ -34,14 +38,14 @@ Customer customer;
 
     @When("I enter the customer information but already taken email")
     public void i_enter_the_customer_information_but_already_taken_email() {
-        customer=new Customer(1,"Ruba","Osama","rubaqawareeq2@gmail.com","059823135","Tulkarem","Awarta");
+        customer=new Customer("Ruba","ruba12@gmail.com","059823135","Nablus","ruba12");
     }
 
     @Then("I show a message that the email is already taken")
     public void i_show_a_message_that_the_email_is_already_taken() {
         assertTrue(customer.isValidEmail());
         assertTrue(customer.isTakenEmail());
-        System.out.println("This email is already taken try another");
+        recordCustomer.takenMsg();
     }
 
     @Then("I show the customer details who has this email")
@@ -57,8 +61,7 @@ Customer customer;
         assertTrue(customer.isTakenEmail());
         customer.setEmail("rubaosama@gmail.com");
         assertFalse(customer.isTakenEmail());
-        customer.storeCustomer(customer);
-
+        recordCustomer.addNewCustomer(customer);
     }
 
 }
