@@ -1,5 +1,8 @@
 package entities;
 
+import java.io.RandomAccessFile;
+import java.util.ArrayList;
+
 public class Worker {
     private int id;
     private String name;

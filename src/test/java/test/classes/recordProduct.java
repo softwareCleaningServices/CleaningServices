@@ -1,3 +1,5 @@
+package test.classes;
+
 import entities.Category;
 import entities.Customer;
 import entities.Product;
@@ -19,10 +21,10 @@ public class recordProduct {
     public void insertInfo(String string) {
         String name=null;
         String pictureName=null;
-        String dimension=null;
+        int [] dimension=new int[2];
         String material=null;
         String specialTreatment=null;
-        product=new Product(name,pictureName,dimension,material,specialTreatment,Category.valueOf(string.toUpperCase()));
+        //product=new Product(name,pictureName,dimension,material,specialTreatment,Category.valueOf(string.toUpperCase()));
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
     }

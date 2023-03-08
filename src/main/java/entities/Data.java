@@ -1,7 +1,4 @@
 package entities;
-
-
-
 import najah.edu.AddOrder;
 import najah.edu.Login;
 import java.io.BufferedWriter;
@@ -9,7 +6,6 @@ import java.io.FileWriter;
 import java.io.RandomAccessFile;
 import java.time.LocalDate;
 import java.util.ArrayList;
-
 public class Data {
     static RandomAccessFile raf;
     public static ArrayList<Login> users(){
@@ -84,41 +80,13 @@ public class Data {
                 order.setStatus(arr[4]);
             String[]product=arr[5].split(" ");
             for (String value : product) {
-                Product prod = getProductByName(value);
+                Product prod = ProductFile.getProductByName(value);
                 products.add(prod);
             }
                order.setProducts(products);
             orders.add(order);
         }
         return orders;
-    }
-    public static ArrayList<Product> getProducts(){
-        ArrayList<Product>products=new ArrayList<>();
-        try {
-            raf = new RandomAccessFile("Back/Products.txt", "rw");
-            raf.seek(0);
-            String s;
-            while ((s = raf.readLine()) != null) {
-                String[] arr = s.split(",");
-                Product product=new Product(arr[0],arr[1],arr[2]);
-                product.setCoast(Integer.parseInt(arr[3]));
-                products.add(product);
-            }
-            raf.close();
-        }
-        catch (Exception ignored){
-        }
-        return products;
-    }
-    private static Product getProductByName(String product) {
-        Product foundProduct=new Product();
-        for(Product product1:getProducts()){
-            if(product1.getName().equals(product)){
-                foundProduct=product1;
-                break;
-            }
-        }
-        return foundProduct;
     }
     public static int getId(){
         ArrayList<Customer>customers=getCustomers();
@@ -154,21 +122,6 @@ public class Data {
             System.out.println("Error");
         }
     }
-
-    public static void storeProducts(ArrayList<Product> products) {
-        try{
-            RandomAccessFile raf = new RandomAccessFile("Back/Products.txt", "rw");
-            for (Product product:products) {
-                raf.seek(raf.length());
-                raf.writeBytes(product.getCategory() + "," + product.getName() + "," + product.getDescription() + "," + product.getCoast() + "\r\n");
-            }
-            raf.close();
-        }
-        catch(Exception e){
-            System.out.println("Error");
-        }
-    }
-
     public static void updateOrders(ArrayList<AddOrder> orders) {
                 try {
             BufferedWriter     writer = new BufferedWriter(new FileWriter("Back/Orders.txt"));

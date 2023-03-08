@@ -82,7 +82,7 @@ private double total;
     public double getTotal(){
         total=0;
         for (Product product:products){
-            total+=product.getCoast();
+            total+=product.getCost();
         }
         return total;
     }

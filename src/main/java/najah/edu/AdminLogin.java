@@ -1,12 +1,9 @@
 package najah.edu;
 
+import entities.*;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JasperViewer;
-import entities.Admin;
-import entities.Customer;
-import entities.Data;
-import entities.Product;
 
 import javax.mail.Message;
 import javax.mail.Session;
@@ -186,7 +183,8 @@ public class AdminLogin {
                 System.out.println(order.getId()+"\t\t"+order.getCustomer().getFullName()+getSpaces(order.getCustomer().getFullName())+order.getDate()+getSpaces(String.valueOf(order.getDate()))+order.getTotal()+"\t"+
                         order.getStatus()+getSpaces(order.getStatus()));
                 for(Product product:order.getProducts()){
-                    System.out.println(product.getCategory()+"\t"+product.getName()+"\t"+product.getDescription());
+                    //System.out.println(product.getCategory()+"\t"+product.getName()+"\t"+product.getDescription());
+                    System.out.println(product);
                 }
                 System.out.println("********************************************************************************************************************************");
             }
@@ -233,13 +231,14 @@ public class AdminLogin {
         ArrayList<Product> products = new ArrayList<>();
         AddOrder order;
         while (true) {
-            System.out.print("Enter the product category ");
-            String category = in.nextLine();
-            System.out.print("Enter the product name ");
-            String name = in.nextLine();
-            System.out.print("Enter short description about the product ");
-            String description = in.nextLine();
-            products.add(new Product(category, name, description));
+//            System.out.print("Enter the product category ");
+//            String category = in.nextLine();
+//            System.out.print("Enter the product name ");
+//            String name = in.nextLine();
+//            System.out.print("Enter short description about the product ");
+//            String description = in.nextLine();
+            Product product=ProductFile.productInfo();
+            products.add(product);
             System.out.println("Do you want to add another product to this order? \"yes or no\"");
             String ans = in.nextLine();
             if (ans.equalsIgnoreCase("no")) {
@@ -258,7 +257,7 @@ public class AdminLogin {
         addOrder(order);
     }
     public void addOrder(AddOrder order) {
-        Data.storeProducts(order.getProducts());
+        ProductFile.storeProducts(order.getProducts());
         try{
             RandomAccessFile raf = new RandomAccessFile("Back/Orders.txt", "rw");
             raf.seek(raf.length());
@@ -317,7 +316,7 @@ public class AdminLogin {
             StringBuilder coast= new StringBuilder();
             for(int i=0;i<order.getProducts().size();i++){
                 prod.append(order.getProducts().get(i).getName()).append("\n\n");
-                coast.append(order.getProducts().get(i).getCoast()).append("\n\n");
+                coast.append(order.getProducts().get(i).getCost()).append("\n\n");
             }
             parameters.put("product", prod.toString());
             parameters.put("price", coast.toString());
