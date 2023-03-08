@@ -1,84 +1,58 @@
 package entities;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.Objects;
-
 public class Product {
-    private String name;
-    private String pictureName;
-    private String dimension;
-    private String material;
-    private String specialTreatment;
+    private String category;
 
-    private Category category;
-    //private String picturePath="src/main/resources/img"+pictureName+".jpg";//TODO name from user then concatenation with path
-    //BufferedImage picture;
-//    {
-//        try {
-//            picture = ImageIO.read(new File(picturePath));
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
     public Product() {
-
     }
 
-    public Product(String name, String pictureName, String dimension, String material, String specialTreatment ,Category category) {
-        this.name = name;
-        this.pictureName = pictureName;
-        this.dimension = dimension;
-        this.material = material;
-        this.specialTreatment = specialTreatment;
-        this.category= category;
+    public String getCategory() {
+        return category;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    private String name;
+    private String description;
+    private int coast;
+
+    public int getCoast() {
+        return coast;
+    }
+
+    public void setCoast(int coast) {
+        this.coast = coast;
+    }
+
+    public Product(String category, String name, String description) {
+        this.category = category;
         this.name = name;
+        this.description = description;
     }
 
-    public String getPictureName() {
-        return pictureName;
-    }
-
-    public void setPictureName(String pictureName) {
-        this.pictureName = pictureName;
-    }
-
-    public String getDimension() {
-        return dimension;
-    }
-
-    public void setDimension(String dimension) {
-        this.dimension = dimension;
-    }
-
-    public String getMaterial() {
-        return material;
-    }
-
-    public void setMaterial(String material) {
-        this.material = material;
-    }
-
-    public String getSpecialTreatment() {
-        return specialTreatment;
-    }
-
-    public void setSpecialTreatment(String specialTreatment) {
-        this.specialTreatment = specialTreatment;
+    public String getDescription() {
+        return description;
     }
 
     @Override
     public String toString() {
-        return name + " " + pictureName + " " + dimension + " " + material + " " + specialTreatment + " " +category;
+        return
+                "category=" + category +
+                ", name='" + name + '\'' +
+                ", description='" + description ;
     }
+    /*
+        private String picturePath = "";
+    BufferedImage picture;
 
+    {
+        try {
+            picture = ImageIO.read(new File(picturePath));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    */
 }
