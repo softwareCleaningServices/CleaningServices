@@ -5,6 +5,7 @@ package najah.edu;
 import entities.Customer;
 import entities.Data;
 import entities.Product;
+import entities.ProductFile;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -25,13 +26,14 @@ public class CustomerLogin {
         ArrayList<Product> products = new ArrayList<>();
         AddOrder order;
         while (true) {
-            System.out.print("Enter the product category ");
-            String category = in.nextLine();
-            System.out.print("Enter the product name ");
-            String name = in.nextLine();
-            System.out.print("Enter short description about the product ");
-            String description = in.nextLine();
-            products.add(new Product(category, name, description));
+//            System.out.print("Enter the product category ");
+//            String category = in.nextLine();
+//            System.out.print("Enter the product name ");
+//            String name = in.nextLine();
+//            System.out.print("Enter short description about the product ");
+//            String description = in.nextLine();
+            Product product=ProductFile.productInfo();
+            products.add(product);
             System.out.println("Do you want to add another product to this order? \"yes or no\"");
             String ans = in.nextLine();
             if (ans.equalsIgnoreCase("no")) {

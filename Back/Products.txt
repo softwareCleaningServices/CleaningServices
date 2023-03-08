@@ -1,4 +1,0 @@
-Carpet,test,2*2m,210
-Cover,double,large size,120
-cover,hello,345,10Carpet,test,2m,0
-Carpet,test,2m,0
