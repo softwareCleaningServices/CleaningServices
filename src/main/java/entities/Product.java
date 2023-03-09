@@ -93,26 +93,26 @@ public class Product {
     }
     public static double carpetCost(Double dimension){
         double costOfProduct = 0.0;
-        costOfProduct=dimension*5.0;
+        costOfProduct=dimension*8.0;
         return costOfProduct;
     }
     public static double sofaCost(Integer numOfSofa){
         double costOfProduct = 0.0;
-        costOfProduct=numOfSofa*6.0;
+        costOfProduct=numOfSofa*25.0;
         return costOfProduct;
     }
     public static double coverCost(String sizeOfCover){
         double costOfProduct = 0.0;
         if(sizeOfCover.equalsIgnoreCase("KING")){
-            costOfProduct=10.0;
+            costOfProduct=20.0;
         }else if (sizeOfCover.equalsIgnoreCase("QUEEN")) {
-            costOfProduct=8.0;
+            costOfProduct=18.0;
         }else if (sizeOfCover.equalsIgnoreCase("TWIN_XL")) {
-            costOfProduct=7.0;
+            costOfProduct=12.0;
         }else if (sizeOfCover.equalsIgnoreCase("TWIN")) {
-            costOfProduct=6.0;
+            costOfProduct=10.0;
         }else if (sizeOfCover.equalsIgnoreCase("CRIB")) {
-            costOfProduct=4.0;
+            costOfProduct=8.0;
         }
         return costOfProduct;
     }

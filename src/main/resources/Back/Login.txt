@@ -6,3 +6,7 @@ eman@gmail.com eman12 customer
 alaa@gmail.com alaa20 customer
 ibrahim@gmail.com ruba12 customer
 rubaosama@gmail.com erty customer
+asmaa@gmail.com 12345 customer
+alaa@gmail.com alaa20 customer
+ibrahim@gmail.com ruba12 customer
+rubaosama@gmail.com erty customer

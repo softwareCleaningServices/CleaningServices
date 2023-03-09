@@ -11,7 +11,7 @@ public class Data {
     public static ArrayList<Login> users(){
         ArrayList<Login> list = new ArrayList<>();
         try {
-            raf = new RandomAccessFile("Back/Login.txt", "rw");
+            raf = new RandomAccessFile("src/main/resources/Back/Login.txt", "rw");
             raf.seek(0);
             String s;
             while ((s = raf.readLine()) != null) {
@@ -39,7 +39,7 @@ public class Data {
     public static ArrayList<Customer> getCustomers(){
         ArrayList<Customer> customers = new ArrayList<>();
         try {
-            raf = new RandomAccessFile("Back/Customer.txt", "rw");
+            raf = new RandomAccessFile("src/main/resources/Back/Customer.txt", "rw");
             raf.seek(0);
             String s;
             while ((s = raf.readLine()) != null) {
@@ -58,7 +58,7 @@ public class Data {
         ArrayList<AddOrder> orders = new ArrayList<>();
         ArrayList<String>strings=new ArrayList<>();
         try {
-            raf = new RandomAccessFile("Back/Orders.txt", "rw");
+            raf = new RandomAccessFile("src/main/resources/Back/Orders.txt", "rw");
             raf.seek(0);
             String s;
             while ((s = raf.readLine()) != null) {
@@ -105,11 +105,11 @@ public class Data {
     }
     public static void updateCustomers(ArrayList<Customer>customers){
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("Back/Customer.txt"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/Back/Customer.txt"));
             writer.write("");
             writer.flush();
             writer.close();
-            RandomAccessFile raf = new RandomAccessFile("Back/Customer.txt", "rw");
+            RandomAccessFile raf = new RandomAccessFile("src/main/resources/Back/Customer.txt", "rw");
             raf.seek(0);
             for (Customer customer : customers) {
                 raf.writeBytes(customer.getId() + "," +customer.getFullName() + "," + customer.getEmail() + "," + customer.getPhone() + "," +
@@ -124,11 +124,11 @@ public class Data {
     }
     public static void updateOrders(ArrayList<AddOrder> orders) {
                 try {
-            BufferedWriter     writer = new BufferedWriter(new FileWriter("Back/Orders.txt"));
+            BufferedWriter     writer = new BufferedWriter(new FileWriter("src/main/resources/Back/Orders.txt"));
             writer.write("");
             writer.flush();
             writer.close();
-            RandomAccessFile raf = new RandomAccessFile("Back/Orders.txt", "rw");
+            RandomAccessFile raf = new RandomAccessFile("src/main/resources/Back/Orders.txt", "rw");
             raf.seek(0);
             for (AddOrder order : orders) {
                 raf.writeBytes(order.getId()+","+order.getCustomer().getId()+","+order.getDate()+","+order.getTotal()+","+order.getStatus()+ "," );
@@ -147,6 +147,16 @@ public class Data {
         AddOrder order=new AddOrder();
         for (AddOrder order1:getOrders()){
             if(order1.getId()==id){
+                order=order1;
+                break;
+            }
+        }
+        return order;
+    }
+    public static AddOrder getOrderByCustomer(Customer customer){
+        AddOrder order=new AddOrder();
+        for (AddOrder order1:getOrders()){
+            if(order1.getCustomer().equals(customer)){
                 order=order1;
                 break;
             }

@@ -16,10 +16,10 @@ import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class Order_Test {
-AddOrder order=new AddOrder();
-AdminLogin admin=new AdminLogin();
-Customer customer;
+public class OrderTest {
+    AddOrder order=new AddOrder();
+    AdminLogin admin=new AdminLogin();
+    Customer customer;
     boolean added;
     @Given("that the order is not added yet")
     public void that_the_order_is_not_added_yet() {
@@ -28,7 +28,7 @@ Customer customer;
     @When("I enter the correct order details")
     public void i_enter_the_correct_order_details() {
         ArrayList<Product>products=new ArrayList<>();
-        products.add(new Product("Carpet","test","2m"));
+        //products.add(new Product("Carpet","test","2m"));
     order=new AddOrder(products,"waiting");
 
     }

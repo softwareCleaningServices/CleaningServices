@@ -18,10 +18,10 @@ public class AddOrder {
                 ", products=" + products +
                 ", status='" + status + '\'' ;
     }
-private int id=13;
+    private int id=13;
     private Customer customer;
-private LocalDate date;
-private double total;
+    private LocalDate date;
+    private double total;
 
     public LocalDate getDate() {
         return date;

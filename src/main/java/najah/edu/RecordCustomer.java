@@ -34,13 +34,13 @@ public class RecordCustomer {
     public void addNewCustomer(Customer customer) {
 
         try{
-            RandomAccessFile raf = new RandomAccessFile("Back/Customer.txt", "rw");
+            RandomAccessFile raf = new RandomAccessFile("src/main/resources/Back/Customer.txt", "rw");
             raf.seek(raf.length());
             raf.writeBytes(customer.getId()+","+customer.getFullName()+ "," + customer.getEmail() + "," + customer.getPhone() + "," +
                     customer.getAddress()+","+customer.getPassword() +"\r\n");
 
             raf.close();
-            raf=new RandomAccessFile("Back/Login.txt", "rw");
+            raf=new RandomAccessFile("src/main/resources/Back/Login.txt", "rw");
             raf.seek(raf.length());
             raf.writeBytes(customer.getEmail()+" "+customer.getPassword()+" customer"+"\r\n");
         }

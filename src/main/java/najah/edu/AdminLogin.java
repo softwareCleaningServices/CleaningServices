@@ -231,13 +231,7 @@ public class AdminLogin {
         ArrayList<Product> products = new ArrayList<>();
         AddOrder order;
         while (true) {
-//            System.out.print("Enter the product category ");
-//            String category = in.nextLine();
-//            System.out.print("Enter the product name ");
-//            String name = in.nextLine();
-//            System.out.print("Enter short description about the product ");
-//            String description = in.nextLine();
-            Product product=ProductFile.productInfo();
+            Product product=RecordProduct.NewProduct();
             products.add(product);
             System.out.println("Do you want to add another product to this order? \"yes or no\"");
             String ans = in.nextLine();
@@ -254,12 +248,14 @@ public class AdminLogin {
             recordCustomer.newCustomer();
         }
         order.setCustomer(customer);
+        System.out.println("The total is:"+order.getTotal());
+        System.out.println("The new total with discount is:");//TODO
         addOrder(order);
     }
     public void addOrder(AddOrder order) {
         ProductFile.storeProducts(order.getProducts());
         try{
-            RandomAccessFile raf = new RandomAccessFile("Back/Orders.txt", "rw");
+            RandomAccessFile raf = new RandomAccessFile("src/main/resources/Back/Orders.txt", "rw");
             raf.seek(raf.length());
             raf.writeBytes(order.getId()+","+order.getCustomer().getId()+","+order.getDate()+","+order.getTotal()+","+order.getStatus()+ "," );
             for(Product product:order.getProducts()){
@@ -303,7 +299,7 @@ public class AdminLogin {
         }
     }
 
-    public void invoice(AddOrder order) {
+    public void invoice(AddOrder order) {//TODO
         try {
             List<AddOrder> list=Data.getOrders();
             JasperReport report= JasperCompileManager.compileReport("CSS.jrxml");

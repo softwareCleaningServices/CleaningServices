@@ -11,25 +11,24 @@ public class Main {
         try {
             System.out.println("If you want to login enter number 1");
             System.out.println("If you are new customer enter number 2");
-             option = in.nextInt();
-
+            option = in.nextInt();
         }
         catch (InputMismatchException e){
             System.out.println("please enter a valid number");
-           option= menu();
+            option= menu();
         }
         return option;
     }
 
     public static void main(String[]args){
-    int option=menu();
-    if(option==1){
-        userLogin();
-    }
-    else {
-        RecordCustomer recordCustomer=new RecordCustomer();
-        recordCustomer.newCustomer();
-    }
+        int option=menu();
+        if(option==1){
+            userLogin();
+        }
+        else {
+            RecordCustomer recordCustomer=new RecordCustomer();
+            recordCustomer.newCustomer();
+        }
     }
 
 

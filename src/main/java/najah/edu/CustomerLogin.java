@@ -26,13 +26,7 @@ public class CustomerLogin {
         ArrayList<Product> products = new ArrayList<>();
         AddOrder order;
         while (true) {
-//            System.out.print("Enter the product category ");
-//            String category = in.nextLine();
-//            System.out.print("Enter the product name ");
-//            String name = in.nextLine();
-//            System.out.print("Enter short description about the product ");
-//            String description = in.nextLine();
-            Product product=ProductFile.productInfo();
+            Product product=RecordProduct.NewProduct();
             products.add(product);
             System.out.println("Do you want to add another product to this order? \"yes or no\"");
             String ans = in.nextLine();
@@ -43,6 +37,8 @@ public class CustomerLogin {
         order=new AddOrder(products,"waiting");
         order.setCustomer(this.customer);
         AdminLogin admin=new AdminLogin();
+        System.out.println("The total is:"+order.getTotal());
+        System.out.println("The new total with discount is:");//TODO
         admin.addOrder(order);
     }
 
