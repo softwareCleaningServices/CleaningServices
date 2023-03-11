@@ -4,7 +4,6 @@ import najah.edu.AddOrder;
 
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class ProductFile { //Create Read Update Delete
     static RandomAccessFile fromFile;
@@ -74,24 +73,16 @@ public class ProductFile { //Create Read Update Delete
         }
         return products;
     }
-    public static double discountFiveHundred(AddOrder order){
-        double newTotal=order.getTotal();
+    public static double totalAfterDiscount(AddOrder order){
+        double newTotal;
         if(order.getTotal()>=500){
-            newTotal=order.getTotal()-(order.getTotal()*15/100);
-        }
-        return newTotal;
-    }
-    public static double discountOneHundredFifty(AddOrder order){
-        double newTotal=order.getTotal();
-        if(order.getTotal()>=150){
-            newTotal=order.getTotal()-(order.getTotal()*10/100);
-        }
-        return newTotal;
-    }
-    public static double discountOneHundred(AddOrder order){
-        double newTotal=order.getTotal();
-        if(order.getTotal()>=100){
-            newTotal=order.getTotal()-(order.getTotal()*7/100);
+            newTotal = order.getTotal()-(order.getTotal()*20/100);
+        }else if(order.getTotal()>=150 && order.getTotal()<500){
+            newTotal = order.getTotal()-(order.getTotal()*15/100);
+        }else if(order.getTotal()>=100 && order.getTotal()<150){
+            newTotal = order.getTotal()-(order.getTotal()*7/100);
+        }else{
+            newTotal = order.getTotal();
         }
         return newTotal;
     }
