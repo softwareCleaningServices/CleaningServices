@@ -1,44 +1,42 @@
 package najah.edu;
 
-
-
 import entities.Customer;
 import entities.Data;
 import entities.Product;
-import entities.ProductFile;
-
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 public class CustomerLogin {
     private Customer customer;
+    Logger logger = Logger.getLogger(CustomerLogin.class.getName());
     public void menu(){
-        System.out.println("If you want to add new order enter number 1");
-        System.out.println("If you want to see your orders enter number 2");
-        System.out.println("If you want to see your information enter number 3");
-        System.out.println("If you want to logout enter number 4");
+        logger.info("If you want to add new order enter number 1");
+        logger.info("If you want to see your orders enter number 2");
+        logger.info("If you want to see your information enter number 3");
+        logger.info("If you want to logout enter number 4");
 
 
     }
     public void takeOrder(){
         Scanner in=new Scanner(System.in);
         ArrayList<Product> products = new ArrayList<>();
-        AddOrder order;
+        Order order;
         while (true) {
             Product product=RecordProduct.NewProduct();
             products.add(product);
-            System.out.println("Do you want to add another product to this order? \"yes or no\"");
+            logger.info("Do you want to add another product to this order? \"yes or no\"");
             String ans = in.nextLine();
             if (ans.equalsIgnoreCase("no")) {
                 break;
             }
         }
-        order=new AddOrder(products,"waiting");
+        order=new Order(products,"waiting");
         order.setCustomer(this.customer);
         AdminLogin admin=new AdminLogin();
-        System.out.println("The total is:"+order.getTotal());
-        System.out.println("The new total with discount is:");//TODO
+        logger.info("The total is:"+order.getTotal());
+        logger.info("The new total with discount is:");//TODO
         admin.addOrder(order);
     }
 
@@ -51,7 +49,7 @@ public class CustomerLogin {
                 if(option==1){
                     takeOrder();
                 } else if (option==2) {
-                    for (AddOrder order: Data.getOrders()){
+                    for (Order order: Data.getOrders()){
                         if(order.getCustomer().getId()==this.customer.getId()){
                             System.out.println(order);
                         }
@@ -65,7 +63,7 @@ public class CustomerLogin {
                 }
             }
             catch (InputMismatchException e){
-                System.out.println("please enter a valid number ");
+                logger.info("please enter a valid number ");
                 customerPage();
             }
         }

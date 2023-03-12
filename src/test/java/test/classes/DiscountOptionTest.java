@@ -3,13 +3,13 @@ import entities.Product;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import najah.edu.AddOrder;
+import najah.edu.Order;
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DiscountOptionTest {
-    AddOrder order;
+    Order order;
     ArrayList<Product> product;
     double discountFifty ;
     double discountOneAndFifteen ;
@@ -17,7 +17,7 @@ public class DiscountOptionTest {
     double noDiscount ;
     @Given("that i add a new order")
     public void thatIAddANewOrder() {
-        order=new AddOrder();
+        order=new Order();
     }
     @When("the total cost of the order more than or equal five hundred")
     public void theTotalCostOfTheOrderMoreThanOrEqualFiveHundred() {

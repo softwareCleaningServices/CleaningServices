@@ -1,14 +1,16 @@
 package entities;
 
-import najah.edu.AddOrder;
-
+import najah.edu.Order;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
 
 public class ProductFile { //Create Read Update Delete
     static RandomAccessFile fromFile;
-    public static ArrayList<Product> getProduct() {
-        ArrayList<Product> products = new ArrayList<>();
+    static Logger logger = Logger.getLogger(ProductFile.class.getName());
+    public static List<Product> getProduct() {
+        List<Product> products = new ArrayList<>();
         try {
             fromFile=new RandomAccessFile("src/main/resources/Back/product", "rw");
             fromFile.seek(0);
@@ -35,22 +37,20 @@ public class ProductFile { //Create Read Update Delete
             }
             fromFile.close();
         }catch (Exception e){
-            System.out.println(e.getMessage());
+            logger.info(e.getMessage());
         }
         return products;
     }
-    public static void storeProducts(ArrayList<Product> products) {
-        try{
-            RandomAccessFile writer = new RandomAccessFile("src/main/resources/Back/product", "rw");
+    public static void storeProducts(List<Product> products) {
+        try(RandomAccessFile writer = new RandomAccessFile("src/main/resources/Back/product", "rw")){
             for (Product product:products) {
                 writer.seek(writer.length());
                 writer.write(product.toString().getBytes());
                 writer.write("\n".getBytes());
             }
-            writer.close();
         }
         catch(Exception e){
-            System.out.println("Error");
+            logger.info("Error");
         }
     }
     public static Product getProductByName(String name){
@@ -63,8 +63,8 @@ public class ProductFile { //Create Read Update Delete
         }
         return product;
     }
-    public static ArrayList<Product> getAllProductByCategory(Category category){
-        ArrayList<Product> products = new ArrayList<>();
+    public static List<Product> getAllProductByCategory(Category category){
+        List<Product> products = new ArrayList<>();
         for (Product product1:getProduct()){
             if(product1.getCategory()==category){
                 products.add(product1);
@@ -73,7 +73,7 @@ public class ProductFile { //Create Read Update Delete
         }
         return products;
     }
-    public static double totalAfterDiscount(AddOrder order){
+    public static double totalAfterDiscount(Order order){
         double newTotal;
         if(order.getTotal()>=500){
             newTotal = order.getTotal()-(order.getTotal()*20/100);
@@ -86,4 +86,6 @@ public class ProductFile { //Create Read Update Delete
         }
         return newTotal;
     }
+
+    private ProductFile(){}
 }

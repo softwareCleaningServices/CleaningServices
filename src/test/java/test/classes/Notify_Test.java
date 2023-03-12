@@ -4,7 +4,7 @@ import entities.Data;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import najah.edu.AddOrder;
+import najah.edu.Order;
 import najah.edu.AdminLogin;
 
 
@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 
 public class Notify_Test {
     AdminLogin admin;
-    AddOrder order=new AddOrder();
+    Order order=new Order();
     String status;
     @Given("the admin choose to change the order status")
     public void the_admin_choose_to_change_the_order_status() {

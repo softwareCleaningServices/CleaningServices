@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class Admin {
     private String email;
+    private String password;
 
     public Admin() {
     }
@@ -25,9 +26,6 @@ public class Admin {
         result = 31 * result + (password != null ? password.hashCode() : 0);
         return result;
     }
-
-    private String password;
-
 
     public String getEmail() {
         return email;
