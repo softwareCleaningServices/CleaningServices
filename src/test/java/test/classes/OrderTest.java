@@ -3,6 +3,7 @@ package test.classes;
 import entities.Customer;
 import entities.Data;
 import entities.Product;
+import entities.ProductFile;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -27,7 +28,7 @@ public class OrderTest {
     @When("I enter the correct order details")
     public void i_enter_the_correct_order_details() {
         ArrayList<Product>products=new ArrayList<>();
-        //products.add(new Product("Carpet","test","2m"));
+        products.add(ProductFile.getProduct().get(0));
     order=new Order(products,"waiting");
 
     }
