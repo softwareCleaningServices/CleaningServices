@@ -75,11 +75,7 @@ public class Data {
                 order.setDate(LocalDate.parse(arr[2]));
                 order.setCustomer(customer);
                 order.setStatus(arr[4]);
-            String[]product=arr[5].split(" ");
-            for (String value : product) {
-                Product prod = ProductFile.getProductByName(value);
-                products.add(prod);
-            }
+            products=ProductFile.getProductByOrder(order.getId());
                order.setProducts(products);
             orders.add(order);
         }
