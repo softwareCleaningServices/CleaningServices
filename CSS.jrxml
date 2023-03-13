@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CSS" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6b2ce83d-6ab6-4bb8-bb02-1aec875d47e4">
+	<parameter name="name" class="java.lang.String"/>
+	<parameter name="address" class="java.lang.String"/>
+	<parameter name="date" class="java.lang.String"/>
+	<parameter name="product" class="java.lang.String"/>
+	<parameter name="coast" class="java.lang.Double"/>
+	<parameter name="discount" class="java.lang.String"/>
+	<parameter name="total" class="java.lang.Double"/>
+	<parameter name="products" class="java.lang.String"/>
+	<parameter name="price" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="80" splitType="Stretch">
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="440" y="0" width="132" height="34" uuid="a8eed3a0-f879-405a-822d-da7f07dec31b"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm">
+				<reportElement x="450" y="40" width="100" height="30" uuid="b146effe-623c-465c-92f9-670e356e4954"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="90" y="16" width="330" height="49" uuid="8c05248b-1c56-4e7c-b6cb-317e2c5c9843"/>
+				<textElement>
+					<font fontName="Algerian" size="20"/>
+				</textElement>
+				<text><![CDATA[AR-Cleaning Services System]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="5" width="121" height="30" uuid="96a42bc1-4623-411d-b784-695780760675"/>
+				<textElement>
+					<font fontName="Franklin Gothic Demi" size="14"/>
+				</textElement>
+				<text><![CDATA[Customer name:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="170" y="5" width="180" height="30" uuid="27a3068e-330c-4348-99fd-524cd610d206"/>
+				<textElement>
+					<font fontName="Britannic Bold" size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="10" width="110" height="30" uuid="da944eeb-38e3-49ff-964f-499bd0b2df0f"/>
+				<textElement>
+					<font fontName="Britannic Bold" size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{address}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="200" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="115" height="30" uuid="be3f2f3a-8d7f-4352-8698-8d5c1f72d904"/>
+				<textElement>
+					<font fontName="Britannic Bold" size="16"/>
+				</textElement>
+				<text><![CDATA[Order Date]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="150" y="0" width="130" height="30" uuid="e44fec76-bf75-44f1-91c3-dac107dc1410"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="260" y="50" width="100" height="30" uuid="150431b4-18df-4e54-bdcb-5df5c5df1756"/>
+				<textElement>
+					<font fontName="Eras Bold ITC" size="16"/>
+				</textElement>
+				<text><![CDATA[Coast]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="50" width="100" height="30" uuid="b73e8082-3736-45b0-a22d-ee60e35fc1e4"/>
+				<textElement>
+					<font fontName="Eras Bold ITC" size="16"/>
+				</textElement>
+				<text><![CDATA[Product]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="30" y="110" width="120" height="85" uuid="c92df8d2-7c68-4c7a-a079-0ea09862bbeb"/>
+				<textElement>
+					<font fontName="Britannic Bold" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{product}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="260" y="110" width="130" height="85" uuid="dcf31d86-16e1-4c3d-a52c-25393055e46c"/>
+				<textElement>
+					<font fontName="Franklin Gothic Heavy" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{price}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="135" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="55" splitType="Stretch">
+			<staticText>
+				<reportElement x="7" y="10" width="100" height="30" uuid="6a78e6a7-77bd-42bf-aa7b-07ecab9f0e3d"/>
+				<textElement>
+					<font fontName="Eras Bold ITC" size="16"/>
+				</textElement>
+				<text><![CDATA[Discount:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="130" y="10" width="100" height="30" uuid="adeef73b-aaf4-495a-931a-9597adc05424"/>
+				<textElement>
+					<font fontName="Britannic Bold" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{discount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement x="80" y="10" width="150" height="50" uuid="da59a0e1-4cf3-4e45-853c-dd10668e8be9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Eras Bold ITC" size="16"/>
+				</textElement>
+				<text><![CDATA[Total Price]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="260" y="15" width="110" height="40" uuid="9dc836a7-ee72-4c0d-adf1-a88f95cf3b9a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Eras Bold ITC" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
