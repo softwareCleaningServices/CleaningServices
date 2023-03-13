@@ -4,6 +4,7 @@ import entities.*;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JasperViewer;
+
 import javax.mail.Message;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -66,8 +67,8 @@ public class AdminLogin {
         Customer customer=new Customer();
         try {
             int id=in.nextInt();
-            Data.getCustomerById(id);
-            customer.setId(id);
+           customer=Data.getCustomerById(id);
+
         }
         catch (InputMismatchException e){
             logger.info("Invalid Input, try again");
@@ -183,8 +184,7 @@ public class AdminLogin {
                 logger.info(order.getId()+"\t\t"+order.getCustomer().getFullName()+getSpaces(order.getCustomer().getFullName())+order.getDate()+getSpaces(String.valueOf(order.getDate()))+order.getTotal()+"\t"+
                         order.getStatus()+getSpaces(order.getStatus()));
                 for(Product product:order.getProducts()){
-                    //System.out.println(product.getCategory()+"\t"+product.getName()+"\t"+product.getDescription());
-                    System.out.println(product);
+                    logger.info(product.toString());
                 }
                 logger.info("********************************************************************************************************************************");
             }
@@ -263,6 +263,7 @@ public class AdminLogin {
             }
             raf.writeBytes("\r\n");
             raf.close();
+            ProductFile.storeProducts(order.getProducts());
             logger.info("The Order Added Successfully");
         }
         catch(Exception e){

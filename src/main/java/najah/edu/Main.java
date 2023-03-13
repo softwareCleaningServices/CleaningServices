@@ -1,5 +1,7 @@
 package najah.edu;
 
+import entities.Data;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.logging.Logger;
@@ -22,14 +24,17 @@ public class Main {
     }
 
     public static void main(String[]args){
+        System.out.println(Data.getOrderByID(11));
         int option=menu();
-        if(option==1){
-            userLogin();
-        }
-        else {
-            RecordCustomer recordCustomer=new RecordCustomer();
-            recordCustomer.newCustomer();
-        }
+    if(option==1){
+        userLogin();
+    }
+    else {
+        RecordCustomer recordCustomer=new RecordCustomer();
+        recordCustomer.newCustomer();
+        userLogin();
+    }
+
     }
 
 

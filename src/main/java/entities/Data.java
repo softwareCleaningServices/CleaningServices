@@ -57,7 +57,7 @@ public class Data {
     public static List<Order> getOrders(){
         List<Order> orders = new ArrayList<>();
         List<String>strings=new ArrayList<>();
-        try ( RandomAccessFile raf =new RandomAccessFile("src/main/resources/Back/Login.txt", "rw")){
+        try ( RandomAccessFile raf =new RandomAccessFile("src/main/resources/Back/Orders.txt", "rw")){
             raf.seek(0);
             String s;
             while ((s = raf.readLine()) != null) {
