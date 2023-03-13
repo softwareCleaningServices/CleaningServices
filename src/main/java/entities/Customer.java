@@ -5,9 +5,10 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Properties;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,18 +17,16 @@ public class Customer {
     private String fullName;
     private Customer existCustomer;
     private String password;
-    public int getId() {
-        return id;
-    }
-
     private String email;
     private String address;
     private String phone;
-
+    Logger logger = Logger.getLogger(Customer.class.getName());
+    public int getId() {
+        return id;
+    }
     public String getPhone() {
         return phone;
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -37,9 +36,6 @@ public class Customer {
 
         return Objects.equals(id, customer.id);
     }
-
-
-
     public void setPhone(String phone) {
         this.phone = phone;
     }
@@ -104,7 +100,7 @@ public class Customer {
 
 
     public boolean isTakenEmail(){
-        ArrayList<Customer> customers;
+        List<Customer> customers;
         customers= Data.getCustomers();
         int flag=0;
         for (Customer customer : customers) {
@@ -160,7 +156,7 @@ public class Customer {
             message1.setSubject("Sign Up");
             message1.setText("Hello You are Signed-Up to Cleaning System Company Welcome to our application");
             Transport.send(message1);
-            System.out.println("We send a confirmation message to customer on email");
+            logger.info("We send a confirmation message to customer on email");
 
         } catch (Exception ignored) {
 

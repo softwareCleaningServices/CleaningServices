@@ -7,8 +7,9 @@ import entities.Product;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
-public class AddOrder {
+public class Order {
     @Override
     public String toString() {
         return
@@ -18,42 +19,41 @@ public class AddOrder {
                 ", products=" + products +
                 ", status='" + status + '\'' ;
     }
-private int id=13;
+    private int id=13;
     private Customer customer;
-private LocalDate date;
-private double total;
+    private LocalDate date;
+    private double total;
 
     public LocalDate getDate() {
         return date;
     }
 
-    public AddOrder() {
+    public Order() {
+        products=new ArrayList<>();
     }
 
     public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    public void setTotal(double total) {
-        this.total = total;
-    }
 
     public void setStatus(String status) {
         this.status = status;
     }
 
-    private  ArrayList<Product> products;
+    private  List<Product> products;
     private String status;
 
     public Customer getCustomer() {
         return customer;
     }
 
-    public void setProducts(ArrayList<Product> products) {
+    public void setProducts(List<Product> products) {
         this.products = products;
+        calcTotal();
     }
 
-    public ArrayList<Product> getProducts() {
+    public List<Product> getProducts() {
         return products;
     }
 
@@ -61,11 +61,19 @@ private double total;
         return status;
     }
 
-    public AddOrder(ArrayList<Product> products, String status) {
+    public Order(List<Product> products, String status) {
         this.id++;
         this.date=LocalDate.now();
         this.products=products;
         this.status=status;
+        calcTotal();
+    }
+    void calcTotal(){
+        double out=0;
+        for (Product product:products){
+            out+=product.getCost();
+        }
+        total=out;
     }
 
     public int getId() {
@@ -80,10 +88,6 @@ private double total;
         this.customer=customer;
     }
     public double getTotal(){
-        total=0;
-        for (Product product:products){
-            total+=product.getCost();
-        }
         return total;
     }
 }

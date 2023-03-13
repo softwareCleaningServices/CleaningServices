@@ -23,19 +23,7 @@ public class Product {
         setCover(builder.cover);
         setCost(builder.cost);
     }
-    public static Builder builder(Product copy) {
-        Builder builder = new Builder();
-        builder.name = copy.getName();
-        builder.pictureName = copy.getPictureName();
-        builder.dimension = copy.getDimension();
-        builder.numOfSofa = copy.getNumOfSofa();
-        builder.material = copy.getMaterial();
-        builder.specialTreatment = copy.getSpecialTreatment();
-        builder.category = copy.getCategory();
-        builder.cover = copy.getCover();
-        builder.cost = copy.getCost();
-        return builder;
-    }
+
     public Integer getNumOfSofa() {
         return numOfSofa;
     }
@@ -92,27 +80,23 @@ public class Product {
         return String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s", name, pictureName, dimension==null?"":dimension,numOfSofa==null?"":numOfSofa,cover==null?"":cover, material, specialTreatment, category, cost);
     }
     public static double carpetCost(Double dimension){
-        double costOfProduct = 0.0;
-        costOfProduct=dimension*5.0;
-        return costOfProduct;
+        return dimension * 8.0;
     }
     public static double sofaCost(Integer numOfSofa){
-        double costOfProduct = 0.0;
-        costOfProduct=numOfSofa*6.0;
-        return costOfProduct;
+        return numOfSofa * 25.0;
     }
     public static double coverCost(String sizeOfCover){
         double costOfProduct = 0.0;
         if(sizeOfCover.equalsIgnoreCase("KING")){
-            costOfProduct=10.0;
+            costOfProduct=20.0;
         }else if (sizeOfCover.equalsIgnoreCase("QUEEN")) {
-            costOfProduct=8.0;
+            costOfProduct=18.0;
         }else if (sizeOfCover.equalsIgnoreCase("TWIN_XL")) {
-            costOfProduct=7.0;
+            costOfProduct=12.0;
         }else if (sizeOfCover.equalsIgnoreCase("TWIN")) {
-            costOfProduct=6.0;
+            costOfProduct=10.0;
         }else if (sizeOfCover.equalsIgnoreCase("CRIB")) {
-            costOfProduct=4.0;
+            costOfProduct=8.0;
         }
         return costOfProduct;
     }

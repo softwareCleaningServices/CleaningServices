@@ -6,20 +6,19 @@ import entities.Product;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import najah.edu.AddOrder;
+import najah.edu.Order;
 import najah.edu.AdminLogin;
 import najah.edu.RecordCustomer;
 
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
-public class Order_Test {
-AddOrder order=new AddOrder();
-AdminLogin admin=new AdminLogin();
-Customer customer;
+public class OrderTest {
+    Order order=new Order();
+    AdminLogin admin=new AdminLogin();
+    Customer customer;
     boolean added;
     @Given("that the order is not added yet")
     public void that_the_order_is_not_added_yet() {
@@ -28,21 +27,21 @@ Customer customer;
     @When("I enter the correct order details")
     public void i_enter_the_correct_order_details() {
         ArrayList<Product>products=new ArrayList<>();
-        products.add(new Product("Carpet","test","2m"));
-    order=new AddOrder(products,"waiting");
+        //products.add(new Product("Carpet","test","2m"));
+    order=new Order(products,"waiting");
 
     }
     @When("the customer is already exist in our customers")
     public void the_customer_is_already_exist_in_our_customers() {
          customer= Data.getCustomerBy("Ali Mohammed");
-        assertTrue(customer.getId()!=0);
+        assertNotEquals(customer.getId(), 0);
         order.setCustomer(customer);
         System.out.println(customer);
     }
 
     @Then("the order added successfully")
     public void the_order_added_successfully() {
-        assertTrue(customer.getId()!=0);
+        assertNotEquals(customer.getId(),0);
         admin.addOrder(order);
         System.out.println("The Order added successfully");
     }
