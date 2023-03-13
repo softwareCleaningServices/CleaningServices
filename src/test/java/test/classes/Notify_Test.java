@@ -22,7 +22,7 @@ public class Notify_Test {
 
     @When("the admin set order status to {string}")
     public void the_admin_set_order_status_to(String status) {
-        order= Data.getOrderByID(11);
+       order= Data.getOrderByID(11);
        admin.changeStatus(11,status);
       this.status=status;
     }
@@ -30,7 +30,7 @@ public class Notify_Test {
     @Then("a notify message will send to customer")
     public void a_notify_message_will_send_to_customer() {
         assertEquals("complete", status);
-        System.out.println(order);
+       System.out.println(order);
         admin.notifyCustomer(order.getCustomer());
 
     }

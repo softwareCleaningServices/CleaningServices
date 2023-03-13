@@ -1,10 +1,7 @@
-asmaa,as,20.0,,,as,as,CARPET,100.0
-sof,as,,4,,as,as,SOFA,24.0
-cov,as,,,KING,sd,df,COVER,10.0
-car,carpet1,20.0,,,as,white,CARPET,100.0
-cove,cover1,,,KING,as,sd,COVER,10.0
-ssss,as,,7,,as,sd,SOFA,175.0
-soso,as,,7,,asd,sdf,SOFA,175.0
-asasas,adc,,7,,asd,adf,SOFA,175.0
-as,as,,,KING,as,as,COVER,20.0
-as,asd,,5,,asdv,adv,SOFA,125.0
+asmaa,as,20.0,,,as,as,CARPET,100.0,11
+sof,as,,4,,as,as,SOFA,24.0,11
+cov,as,,,KING,sd,df,COVER,10.0,14
+car,carpet1,20.0,,,as,white,CARPET,100.0,13
+cove,cover1,,,KING,as,sd,COVER,10.0,16
+ssss,as,,7,,as,sd,SOFA,175.0,13
+len,sdfgh,3.0,,,sdfgh,dfghfg,CARPET,24.0,18

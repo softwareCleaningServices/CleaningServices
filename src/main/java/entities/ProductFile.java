@@ -21,9 +21,11 @@ public class ProductFile { //Create Read Update Delete
                 Double dimension=array[2].equals("")?null:Double.parseDouble(array[2]);
                 Integer numOfSofa=array[3].equals("")?null:Integer.parseInt(array[3]);
                 SizeOfCover sizeOfCover=array[4].equals("")?null:SizeOfCover.valueOf(array[4]);
+                int orderId=Integer.parseInt(array[9]);
                 product=Product
                         .builder()
                         .setName(array[0])
+                        .setOrderId(orderId)
                         .setPictureName(array[1])
                         .setDimension(dimension)
                         .setNumOfSofa(numOfSofa)
@@ -53,15 +55,14 @@ public class ProductFile { //Create Read Update Delete
             logger.info("Error");
         }
     }
-    public static Product getProductByName(String name){
-        Product product=new Product();
+    public static ArrayList<Product> getProductByOrder(int id){
+       ArrayList<Product> products=new ArrayList<>();
         for (Product product1:getProduct()){
-            if(product1.getName().equals(name)){
-                product=product1;
-                break;
+            if(product1.getOrderId()==id){
+                products.add(product1);
             }
         }
-        return product;
+        return products;
     }
     public static List<Product> getAllProductByCategory(Category category){
         List<Product> products = new ArrayList<>();
@@ -75,17 +76,23 @@ public class ProductFile { //Create Read Update Delete
     }
     public static double totalAfterDiscount(Order order){
         double newTotal;
-        if(order.getTotal()>=500){
-            newTotal = order.getTotal()-(order.getTotal()*20/100);
-        }else if(order.getTotal()>=150 && order.getTotal()<500){
-            newTotal = order.getTotal()-(order.getTotal()*15/100);
-        }else if(order.getTotal()>=100 && order.getTotal()<150){
-            newTotal = order.getTotal()-(order.getTotal()*7/100);
-        }else{
-            newTotal = order.getTotal();
-        }
+        double disc=discount(order.getTotal());
+        newTotal=order.getTotal()-(order.getTotal()*disc);
         return newTotal;
     }
+public static double discount(double total){
+        double disc;
 
+    if(total>=500){
+        disc = 0.2;
+    }else if(total>=150 && total<500){
+        disc = 0.15;
+    }else if(total>=100 && total<150){
+        disc = 0.07;
+    }else{
+        disc=0;
+    }
+    return disc;
+}
     private ProductFile(){}
 }

@@ -57,7 +57,7 @@ public class Data {
     public static List<Order> getOrders(){
         List<Order> orders = new ArrayList<>();
         List<String>strings=new ArrayList<>();
-        try ( RandomAccessFile raf =new RandomAccessFile("src/main/resources/Back/Login.txt", "rw")){
+        try ( RandomAccessFile raf =new RandomAccessFile("src/main/resources/Back/Orders.txt", "rw")){
             raf.seek(0);
             String s;
             while ((s = raf.readLine()) != null) {
@@ -75,11 +75,7 @@ public class Data {
                 order.setDate(LocalDate.parse(arr[2]));
                 order.setCustomer(customer);
                 order.setStatus(arr[4]);
-            String[]product=arr[5].split(" ");
-            for (String value : product) {
-                Product prod = ProductFile.getProductByName(value);
-                products.add(prod);
-            }
+            products=ProductFile.getProductByOrder(order.getId());
                order.setProducts(products);
             orders.add(order);
         }

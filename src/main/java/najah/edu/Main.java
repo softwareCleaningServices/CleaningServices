@@ -22,14 +22,17 @@ public class Main {
     }
 
     public static void main(String[]args){
+
         int option=menu();
-        if(option==1){
-            userLogin();
-        }
-        else {
-            RecordCustomer recordCustomer=new RecordCustomer();
-            recordCustomer.newCustomer();
-        }
+    if(option==1){
+        userLogin();
+    }
+    else {
+        RecordCustomer recordCustomer=new RecordCustomer();
+        recordCustomer.newCustomer();
+        userLogin();
+    }
+
     }
 
 
