@@ -9,6 +9,7 @@ public class Product {
     private Category category;
     private SizeOfCover cover;
     private Double cost;
+    private int orderId;
     public Product() {
 
     }
@@ -22,6 +23,16 @@ public class Product {
         setCategory(builder.category);
         setCover(builder.cover);
         setCost(builder.cost);
+        setOrderId(builder.orderId);
+
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
+    public int getOrderId() {
+        return orderId;
     }
 
     public Integer getNumOfSofa() {
@@ -77,7 +88,7 @@ public class Product {
     @Override
     public String toString() {
 
-        return String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s", name, pictureName, dimension==null?"":dimension,numOfSofa==null?"":numOfSofa,cover==null?"":cover, material, specialTreatment, category, cost);
+        return String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s", name, pictureName, dimension==null?"":dimension,numOfSofa==null?"":numOfSofa,cover==null?"":cover, material, specialTreatment, category, cost, orderId);
     }
     public static double carpetCost(Double dimension){
         return dimension * 8.0;
@@ -107,6 +118,7 @@ public class Product {
      * {@code Product} builder static inner class.
      */
     public static final class Builder {
+        public int orderId;
         private String name;
         private String pictureName;
         private Double dimension;
@@ -137,6 +149,12 @@ public class Product {
             this.name = name;
             return this;
         }
+
+        public Builder setOrderId(int orderId) {
+            this.orderId = orderId;
+            return this;
+        }
+
         /**
          * Sets the {@code pictureName} and returns a reference to this Builder enabling method chaining.
          *
