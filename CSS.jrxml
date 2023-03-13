@@ -10,6 +10,7 @@
 	<parameter name="total" class="java.lang.Double"/>
 	<parameter name="products" class="java.lang.String"/>
 	<parameter name="price" class="java.lang.String"/>
+	<parameter name="tot" class="java.lang.Double"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -67,7 +68,7 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="200" splitType="Stretch">
+		<band height="292" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="0" width="115" height="30" uuid="be3f2f3a-8d7f-4352-8698-8d5c1f72d904"/>
 				<textElement>
@@ -110,22 +111,36 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$P{price}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="15" y="230" width="150" height="50" uuid="e754bb82-676d-43a4-bdb6-0506d5f8aa12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Eras Bold ITC" size="16"/>
+				</textElement>
+				<text><![CDATA[Total Price]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="260" y="252" width="119" height="30" uuid="5dfe66ad-5e7b-40cb-a27a-1515c42181c3"/>
+				<textElement>
+					<font fontName="Eras Bold ITC" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tot}]]></textFieldExpression>
+			</textField>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="135" splitType="Stretch"/>
+		<band height="94" splitType="Stretch"/>
 	</detail>
 	<columnFooter>
-		<band height="55" splitType="Stretch">
+		<band height="60" splitType="Stretch">
 			<staticText>
-				<reportElement x="7" y="10" width="100" height="30" uuid="6a78e6a7-77bd-42bf-aa7b-07ecab9f0e3d"/>
+				<reportElement x="20" y="15" width="100" height="30" uuid="6a78e6a7-77bd-42bf-aa7b-07ecab9f0e3d"/>
 				<textElement>
 					<font fontName="Eras Bold ITC" size="16"/>
 				</textElement>
 				<text><![CDATA[Discount:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="130" y="10" width="100" height="30" uuid="adeef73b-aaf4-495a-931a-9597adc05424"/>
+				<reportElement x="190" y="20" width="100" height="30" uuid="adeef73b-aaf4-495a-931a-9597adc05424"/>
 				<textElement>
 					<font fontName="Britannic Bold" size="16"/>
 				</textElement>
@@ -136,11 +151,11 @@
 	<pageFooter>
 		<band height="70" splitType="Stretch">
 			<staticText>
-				<reportElement x="80" y="10" width="150" height="50" uuid="da59a0e1-4cf3-4e45-853c-dd10668e8be9"/>
+				<reportElement x="7" y="10" width="233" height="50" uuid="da59a0e1-4cf3-4e45-853c-dd10668e8be9"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Eras Bold ITC" size="16"/>
 				</textElement>
-				<text><![CDATA[Total Price]]></text>
+				<text><![CDATA[Total Price After Discount]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="260" y="15" width="110" height="40" uuid="9dc836a7-ee72-4c0d-adf1-a88f95cf3b9a"/>

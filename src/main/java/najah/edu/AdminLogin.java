@@ -249,7 +249,7 @@ public class AdminLogin {
         }
         order.setCustomer(customer);
         logger.info("The total is:"+order.getTotal());
-        logger.info("The new total with discount is:");//TODO
+        logger.info("The new total with discount is:"+ProductFile.totalAfterDiscount(order));
         addOrder(order);
     }
     public void addOrder(Order order) {
@@ -308,7 +308,11 @@ public class AdminLogin {
             parameters.put("name",order.getCustomer().getFullName());
             parameters.put("date",String.valueOf(order.getDate()));
             parameters.put("address",order.getCustomer().getAddress());
-            parameters.put("total", list.get(0).getTotal());
+            System.out.println(order.getTotal());
+            parameters.put("tot", order.getTotal());
+            parameters.put("total", ProductFile.totalAfterDiscount(order));
+
+            parameters.put("discount", (int)(ProductFile.discount(order.getTotal())*100)+"%");
             StringBuilder prod= new StringBuilder();
             StringBuilder coast= new StringBuilder();
             for(int i=0;i<order.getProducts().size();i++){
