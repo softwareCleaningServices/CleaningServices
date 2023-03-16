@@ -1,0 +1,2 @@
+0,Ruba,234567,Awarta,rubaos@gmail.com,2000
+0,Ahmed,123456,sdfg,ahmod@gmail.com,1500
