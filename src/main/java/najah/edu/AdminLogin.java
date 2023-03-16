@@ -4,12 +4,6 @@ import entities.*;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JasperViewer;
-
-import javax.mail.Message;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import java.io.RandomAccessFile;
 import java.util.*;
 import java.util.logging.Logger;
@@ -192,7 +186,7 @@ public class AdminLogin {
 
         }
         else if (option == 4) {
-            takeOrder();
+            takenOrder();
         }
     }
     public void adminPage(){
@@ -215,7 +209,6 @@ public class AdminLogin {
 
         }
     }
-
     public boolean isExistCustomer(int id){
         int flag=0;
         for(Customer customer:Data.getCustomers()){
@@ -226,7 +219,7 @@ public class AdminLogin {
         }
         return flag==1;
     }
-    public void takeOrder(){
+    public Order takeOrder(){
         Scanner in=new Scanner(System.in);
         ArrayList<Product> products = new ArrayList<>();
         Order order;
@@ -240,12 +233,20 @@ public class AdminLogin {
             }
         }
         order=new Order(products,"waiting");
+        for (Product product:products){
+            product.setOrderId(order.getId());
+        }
+        return order;
+    }
+    public void takenOrder(){
+        Order order=takeOrder();
+        Scanner in=new Scanner(System.in);
         logger.info("Enter the customer name or customer email ");
         Customer customer=Data.getCustomerBy(in.nextLine());
         if(customer.getId()==0){
             logger.info("This Customer is new customer, so you have to enter his information ");
             RecordCustomer recordCustomer=new RecordCustomer();
-            recordCustomer.newCustomer();
+           customer= recordCustomer.newCustomer();
         }
         order.setCustomer(customer);
         logger.info("The total is:"+order.getTotal());
@@ -253,14 +254,10 @@ public class AdminLogin {
         addOrder(order);
     }
     public void addOrder(Order order) {
-        ProductFile.storeProducts(order.getProducts());
         try{
             RandomAccessFile raf = new RandomAccessFile("src/main/resources/Back/Orders.txt", "rw");
             raf.seek(raf.length());
-            raf.writeBytes(order.getId()+","+order.getCustomer().getId()+","+order.getDate()+","+order.getTotal()+","+order.getStatus()+ "," );
-            for(Product product:order.getProducts()){
-                raf.writeBytes(product.getName()+" ");
-            }
+            raf.writeBytes(order.getId()+","+order.getCustomer().getId()+","+order.getDate()+","+order.getTotal()+","+order.getStatus());
             raf.writeBytes("\r\n");
             raf.close();
             ProductFile.storeProducts(order.getProducts());
@@ -272,35 +269,11 @@ public class AdminLogin {
     }
 
     public void notifyCustomer(Customer customer) {
-        final String user = "rubasalon5@gmail.com";
-        final String password = "wntxcpwbkocnjjdm";
-        Properties props = new Properties();
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.port", "587");
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.starttls.enable", "true");
-        Session session = Session.getDefaultInstance(props,
-                new javax.mail.Authenticator() {
-                    @Override
-                    protected javax.mail.PasswordAuthentication getPasswordAuthentication(){
-                        return new javax.mail.PasswordAuthentication(user,password);
-                    }
+        customer.sendEmail("Complete Order","Hello Mr/Ms "+customer.getFullName()+", your order is ready you can take it now","");
 
-                });
-        try {
-            Message message1 = new MimeMessage(session);
-            message1.setFrom(new InternetAddress(user));
-            message1.setRecipient(Message.RecipientType.TO, new InternetAddress(customer.getEmail()));
-            message1.setSubject("Complete Order");
-            message1.setText("Hello Mr/Ms "+customer.getFullName()+", your order is ready you can take it now");
-            Transport.send(message1);
-
-        } catch (Exception ignored) {
-
-        }
     }
 
-    public void invoice(Order order) {//TODO
+    public void invoice(Order order) {
         try {
             List<Order> list=Data.getOrders();
             JasperReport report= JasperCompileManager.compileReport("CSS.jrxml");
@@ -308,7 +281,6 @@ public class AdminLogin {
             parameters.put("name",order.getCustomer().getFullName());
             parameters.put("date",String.valueOf(order.getDate()));
             parameters.put("address",order.getCustomer().getAddress());
-            System.out.println(order.getTotal());
             parameters.put("tot", order.getTotal());
             parameters.put("total", ProductFile.totalAfterDiscount(order));
 

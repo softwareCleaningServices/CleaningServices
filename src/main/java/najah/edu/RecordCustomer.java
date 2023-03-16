@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 public class RecordCustomer {
     Logger logger = Logger.getLogger(RecordCustomer.class.getName());
-    public void newCustomer(){
+    public Customer newCustomer(){
         Scanner in=new Scanner(System.in);
         Customer customer = new Customer();
         logger.info("Enter customer Name ");
@@ -30,6 +30,7 @@ public class RecordCustomer {
             customer.setEmail(in.nextLine());
         }
         addNewCustomer(customer);
+        return customer;
     }
     public void addNewCustomer(Customer customer) {
 
