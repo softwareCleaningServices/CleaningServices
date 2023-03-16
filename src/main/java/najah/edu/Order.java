@@ -3,6 +3,7 @@ package najah.edu;
 
 
 import entities.Customer;
+import entities.Data;
 import entities.Product;
 
 import java.time.LocalDate;
@@ -62,7 +63,7 @@ public class Order {
     }
 
     public Order(List<Product> products, String status) {
-        this.id++;
+        this.id= Data.getOrderId();
         this.date=LocalDate.now();
         this.products=products;
         this.status=status;

@@ -45,6 +45,7 @@ public class ProductFile { //Create Read Update Delete
     }
     public static void storeProducts(List<Product> products) {
         try(RandomAccessFile writer = new RandomAccessFile("src/main/resources/Back/product", "rw")){
+            System.out.println(products.size());
             for (Product product:products) {
                 writer.seek(writer.length());
                 writer.write(product.toString().getBytes());
@@ -85,9 +86,9 @@ public static double discount(double total){
 
     if(total>=500){
         disc = 0.2;
-    }else if(total>=150 && total<500){
+    }else if(total>=150){
         disc = 0.15;
-    }else if(total>=100 && total<150){
+    }else if(total>=100){
         disc = 0.07;
     }else{
         disc=0;

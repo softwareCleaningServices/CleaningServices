@@ -65,9 +65,10 @@ public class Data {
             }
         }
         catch (Exception ignored){
+
         }
         for (String s:strings){
-            ArrayList<Product>products=new ArrayList<>();
+            ArrayList<Product>products;
             String[] arr = s.split(",");
             Order order=new Order();
             order.setId(Integer.parseInt(arr[0]));
@@ -84,6 +85,11 @@ public class Data {
     public static int getId(){
         List<Customer>customers=getCustomers();
         int id=customers.get(customers.size()-1).getId();
+        return id+1;
+    }
+    public static int getOrderId(){
+        List<Order>orders=getOrders();
+        int id=orders.get(orders.size()-1).getId();
         return id+1;
     }
     public static Customer getCustomerBy(String email) {
@@ -142,15 +148,14 @@ public class Data {
         }
         return order;
     }
-    public static Order getOrderByCustomer(Customer customer){
-        Order order=new Order();
+    public static List<Order> getOrderByCustomer(Customer customer){
+        List<Order>orders=new ArrayList<>();
         for (Order order1:getOrders()){
             if(order1.getCustomer().equals(customer)){
-                order=order1;
-                break;
+               orders.add(order1);
             }
         }
-        return order;
+        return orders;
     }
 }
 
