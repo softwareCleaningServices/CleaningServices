@@ -21,21 +21,9 @@ public class CustomerLogin {
 
     }
     public void takeOrder(){
-        Scanner in=new Scanner(System.in);
-        List<Product> products = new ArrayList<>();
-        Order order;
-        while (true) {
-            Product product=RecordProduct.addAProduct();
-            products.add(product);
-            logger.info("Do you want to add another product to this order? \"yes or no\"");
-            String ans = in.nextLine();
-            if (ans.equalsIgnoreCase("no")) {
-                break;
-            }
-        }
-        order=new Order(products,"waiting");
-        order.setCustomer(this.customer);
         AdminLogin admin=new AdminLogin();
+        Order order=admin.takeOrder();
+        order.setCustomer(this.customer);
         logger.info("The total is:"+order.getTotal());
         logger.info("The new total with discount is:");//TODO
         admin.addOrder(order);
@@ -50,11 +38,9 @@ public class CustomerLogin {
                 if(option==1){
                     takeOrder();
                 } else if (option==2) {
-                    for (Order order: Data.getOrders()){
-                        if(order.getCustomer().getId()==this.customer.getId()){
-                            String x=order.toString();
-                            logger.info(x);
-                        }
+
+                    for (Order order: Data.getOrderByCustomer(customer)){
+                        System.out.println(order);
                     }
 
                 } else if(option==3){

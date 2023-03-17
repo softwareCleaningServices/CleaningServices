@@ -1,5 +1,6 @@
 package entities;
 
+import najah.edu.DistributeOrder;
 import najah.edu.Order;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
@@ -34,7 +35,6 @@ public class ProductFile { //Create Read Update Delete
                         .setSpecialTreatment(array[6])
                         .setCategory(Category.valueOf(array[7]))
                         .setCost(Double.parseDouble(array[8]))
-                        .setOrderId(Integer.parseInt(array[9]))
                         .build();
                 products.add(product);
             }
@@ -47,6 +47,8 @@ public class ProductFile { //Create Read Update Delete
     public static void storeProducts(List<Product> products) {
         try(RandomAccessFile writer = new RandomAccessFile("src/main/resources/Back/product", "rw")){
             for (Product product:products) {
+              Worker worker= DistributeOrder.getWorker(product);
+                product.setWorkerId(worker.getId());
                 writer.seek(writer.length());
                 writer.write(product.toString().getBytes());
                 writer.write("\n".getBytes());
@@ -81,18 +83,19 @@ public class ProductFile { //Create Read Update Delete
         newTotal=order.getTotal()-(order.getTotal()*disc);
         return newTotal;
     }
-    public static double discount(double total){
+public static double discount(double total){
         double disc;
-        if(total>=500){
-            disc = 0.2;
-        }else if(total>=150){
-            disc = 0.15;
-        }else if(total>=100){
-            disc = 0.07;
-        }else{
-            disc=0;
-        }
-        return disc;
+
+    if(total>=500){
+        disc = 0.2;
+    }else if(total>=150){
+        disc = 0.15;
+    }else if(total>=100){
+        disc = 0.07;
+    }else{
+        disc=0;
     }
+    return disc;
+}
     private ProductFile(){}
 }

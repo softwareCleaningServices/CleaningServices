@@ -56,6 +56,14 @@ public class Login {
         }
         return message;
     }
+
+    @Override
+    public String toString() {
+        return
+                 email +" " + password +" "  + "customer" + "\r\n";
+
+    }
+
     public boolean isCorrectInfo() {
         int flag=0;
         for (Login login: Data.users()){
