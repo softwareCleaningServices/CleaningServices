@@ -98,6 +98,15 @@ public class Customer {
     }
 
 
+    @Override
+    public String toString() {
+        return  id +
+                "," + fullName +
+                ","  +email+
+                "," + phone +
+                "," + address +
+                "," + password +"\r\n";
+    }
 
     public boolean isTakenEmail(){
         List<Customer> customers;
@@ -122,17 +131,7 @@ public class Customer {
         return matcher.find();
     }
 
-    @Override
-    public String toString() {
-        return
-                 id +
-                "\t " + fullName +
-                "\t " + phone +
-                "\t " + address +
-                "\t " + email ;
-    }
-
-    public void sendConfirmationEmail() {
+    public void sendEmail(String title,String message,String msg){
         final String user = "rubasalon5@gmail.com";
         final String password = "wntxcpwbkocnjjdm";
         String to = this.getEmail();
@@ -153,15 +152,16 @@ public class Customer {
             Message message1 = new MimeMessage(session);
             message1.setFrom(new InternetAddress(user));
             message1.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
-            message1.setSubject("Sign Up");
-            message1.setText("Hello You are Signed-Up to Cleaning System Company Welcome to our application");
+            message1.setSubject(title);
+            message1.setText(message);
             Transport.send(message1);
-            logger.info("We send a confirmation message to customer on email");
-
+            logger.info(msg);
         } catch (Exception ignored) {
 
         }
     }
+
+
 
     public Customer getCustomerDetails() {
         return existCustomer;

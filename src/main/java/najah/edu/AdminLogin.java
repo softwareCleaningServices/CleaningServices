@@ -4,13 +4,6 @@ import entities.*;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JasperViewer;
-
-import javax.mail.Message;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import java.io.RandomAccessFile;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -177,12 +170,14 @@ public class AdminLogin {
 
         }
 
-        else if (option == 3) {
+        else if (option==2) {
+            recordWorker();
+
+        } else if (option == 3) {
             logger.info("********************************************************************************************************************************");
             logger.info("Order ID\tCustomer Name\t\tOrder Date\t\t\tTotal Coast\t\tOrder Status\nProducts: ");
             for (Order order:Data.getOrders()){
-                logger.info(order.getId()+"\t\t"+order.getCustomer().getFullName()+getSpaces(order.getCustomer().getFullName())+order.getDate()+getSpaces(String.valueOf(order.getDate()))+order.getTotal()+"\t"+
-                        order.getStatus()+getSpaces(order.getStatus()));
+                logger.info(order.getString());
                 for(Product product:order.getProducts()){
                     logger.info(product.toString());
                 }
@@ -192,9 +187,27 @@ public class AdminLogin {
 
         }
         else if (option == 4) {
-            takeOrder();
+            takenOrder();
         }
     }
+
+    private void recordWorker() {
+        Scanner in=new Scanner(System.in);
+        Worker worker=new Worker();
+        logger.info("Enter worker Name ");
+        worker.setName(in.nextLine());
+        logger.info("Enter worker Email ");
+        worker.setEmail(in.nextLine());
+        logger.info("Enter worker Phone ");
+        worker.setPhone(in.nextLine());
+        logger.info("Enter worker Address ");
+        worker.setAddress(in.nextLine());
+        logger.info("Enter worker salary ");
+        worker.setSalary(in.nextInt());
+        worker.setId(Data.getWorkerId());
+    addWorker(worker);
+    }
+
     public void adminPage(){
         Scanner in=new Scanner(System.in);
         while (true) {
@@ -215,7 +228,6 @@ public class AdminLogin {
 
         }
     }
-
     public boolean isExistCustomer(int id){
         int flag=0;
         for(Customer customer:Data.getCustomers()){
@@ -226,7 +238,7 @@ public class AdminLogin {
         }
         return flag==1;
     }
-    public void takeOrder(){
+    public Order takeOrder(){
         Scanner in=new Scanner(System.in);
         ArrayList<Product> products = new ArrayList<>();
         Order order;
@@ -240,12 +252,20 @@ public class AdminLogin {
             }
         }
         order=new Order(products,"waiting");
+        for (Product product:products){
+            product.setOrderId(order.getId());
+        }
+        return order;
+    }
+    public void takenOrder(){
+        Order order=takeOrder();
+        Scanner in=new Scanner(System.in);
         logger.info("Enter the customer name or customer email ");
         Customer customer=Data.getCustomerBy(in.nextLine());
         if(customer.getId()==0){
             logger.info("This Customer is new customer, so you have to enter his information ");
             RecordCustomer recordCustomer=new RecordCustomer();
-            recordCustomer.newCustomer();
+           customer= recordCustomer.newCustomer();
         }
         order.setCustomer(customer);
         logger.info("The total is:"+order.getTotal());
@@ -253,54 +273,19 @@ public class AdminLogin {
         addOrder(order);
     }
     public void addOrder(Order order) {
-        ProductFile.storeProducts(order.getProducts());
-        try{
-            RandomAccessFile raf = new RandomAccessFile("src/main/resources/Back/Orders.txt", "rw");
-            raf.seek(raf.length());
-            raf.writeBytes(order.getId()+","+order.getCustomer().getId()+","+order.getDate()+","+order.getTotal()+","+order.getStatus()+ "," );
-            for(Product product:order.getProducts()){
-                raf.writeBytes(product.getName()+" ");
-            }
-            raf.writeBytes("\r\n");
-            raf.close();
+
+          Data.storeObject("Orders",order);
             ProductFile.storeProducts(order.getProducts());
             logger.info("The Order Added Successfully");
-        }
-        catch(Exception e){
-            logger.info("Error");
-        }
+
     }
 
     public void notifyCustomer(Customer customer) {
-        final String user = "rubasalon5@gmail.com";
-        final String password = "wntxcpwbkocnjjdm";
-        Properties props = new Properties();
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.port", "587");
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.starttls.enable", "true");
-        Session session = Session.getDefaultInstance(props,
-                new javax.mail.Authenticator() {
-                    @Override
-                    protected javax.mail.PasswordAuthentication getPasswordAuthentication(){
-                        return new javax.mail.PasswordAuthentication(user,password);
-                    }
+        customer.sendEmail("Complete Order","Hello Mr/Ms "+customer.getFullName()+", your order is ready you can take it now","");
 
-                });
-        try {
-            Message message1 = new MimeMessage(session);
-            message1.setFrom(new InternetAddress(user));
-            message1.setRecipient(Message.RecipientType.TO, new InternetAddress(customer.getEmail()));
-            message1.setSubject("Complete Order");
-            message1.setText("Hello Mr/Ms "+customer.getFullName()+", your order is ready you can take it now");
-            Transport.send(message1);
-
-        } catch (Exception ignored) {
-
-        }
     }
 
-    public void invoice(Order order) {//TODO
+    public void invoice(Order order) {
         try {
             List<Order> list=Data.getOrders();
             JasperReport report= JasperCompileManager.compileReport("CSS.jrxml");
@@ -308,7 +293,6 @@ public class AdminLogin {
             parameters.put("name",order.getCustomer().getFullName());
             parameters.put("date",String.valueOf(order.getDate()));
             parameters.put("address",order.getCustomer().getAddress());
-            System.out.println(order.getTotal());
             parameters.put("tot", order.getTotal());
             parameters.put("total", ProductFile.totalAfterDiscount(order));
 
@@ -334,5 +318,10 @@ public class AdminLogin {
     }
     public String getSpaces(String att){
         return " ".repeat(Math.max(0, 35 - att.length()));
+    }
+
+    public void addWorker(Worker worker) {
+        Data.storeObject("Worker",worker);
+        logger.info("The worker added successfully");
     }
 }

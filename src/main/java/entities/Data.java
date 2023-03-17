@@ -2,6 +2,7 @@ package entities;
 
 import najah.edu.Login;
 import najah.edu.Order;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.RandomAccessFile;
@@ -10,20 +11,38 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 public class Data {
-    private Data(){}
-    static Logger logger = Logger.getLogger(Data.class.getName());
-    public static List<Login> users(){
-        List<Login> list = new ArrayList<>();
-        try ( RandomAccessFile raf =new RandomAccessFile("src/main/resources/Back/Login.txt", "rw")){
+
+    public static void storeObject(String fileName,Object object){
+        try ( RandomAccessFile raf =new RandomAccessFile("src/main/resources/Back/"+fileName+".txt", "rw")){
+            raf.seek(raf.length());
+            raf.write(object.toString().getBytes());
+        }
+        catch(Exception e){
+            logger.info("Error");
+        }
+    }
+    public static List<String> getObjects(String fileName){
+        List<String>strings=new ArrayList<>();
+            try ( RandomAccessFile raf =new RandomAccessFile("src/main/resources/Back/"+fileName+".txt", "rw")){
             raf.seek(0);
             String s;
             while ((s = raf.readLine()) != null) {
-                String[] arr = s.split(" ");
+                strings.add(s);
+            }
+
+        }
+        catch(Exception e){
+            logger.info("Error");
+        }
+        return strings;
+    }
+    static Logger logger = Logger.getLogger(Data.class.getName());
+    public static List<Login> users(){
+        List<Login> list = new ArrayList<>();
+        for (String value:getObjects("Login")){
+            String[] arr = value.split(" ");
             Login login=new Login(arr[0],arr[1],arr[2]);
             list.add(login);
-            }
-        }
-        catch (Exception ignored){
         }
 
         return list;
@@ -40,35 +59,18 @@ public class Data {
     }
     public static List<Customer> getCustomers(){
         ArrayList<Customer> customers = new ArrayList<>();
-        try ( RandomAccessFile raf =new RandomAccessFile("src/main/resources/Back/Customer.txt", "rw")){
-            raf.seek(0);
-            String s;
-            while ((s = raf.readLine()) != null) {
-                String[] arr = s.split(",");
-                Customer customer=new Customer(Integer.parseInt(arr[0]),arr[1], arr[2], arr[3], arr[4],arr[5]);
-                customers.add(customer);
-            }
+        for (String value:getObjects("Customer")){
+            String[] arr = value.split(",");
+            Customer customer=new Customer(Integer.parseInt(arr[0]),arr[1], arr[2], arr[3], arr[4],arr[5]);
+            customers.add(customer);
         }
-        catch (Exception ignored){
-        }
-
         return customers;
     }
     public static List<Order> getOrders(){
         List<Order> orders = new ArrayList<>();
-        List<String>strings=new ArrayList<>();
-        try ( RandomAccessFile raf =new RandomAccessFile("src/main/resources/Back/Orders.txt", "rw")){
-            raf.seek(0);
-            String s;
-            while ((s = raf.readLine()) != null) {
-                strings.add(s);
-            }
-        }
-        catch (Exception ignored){
-        }
-        for (String s:strings){
-            ArrayList<Product>products=new ArrayList<>();
-            String[] arr = s.split(",");
+        for (String value:getObjects("Orders")){
+            ArrayList<Product>products;
+            String[] arr = value.split(",");
             Order order=new Order();
             order.setId(Integer.parseInt(arr[0]));
             Customer customer=getCustomerById(Integer.parseInt(arr[1]));
@@ -82,8 +84,19 @@ public class Data {
         return orders;
     }
     public static int getId(){
-        List<Customer>customers=getCustomers();
-        int id=customers.get(customers.size()-1).getId();
+        int id;
+        if(getCustomers().size()==0)
+            id=100;
+        else
+            id=getCustomers().get(getCustomers().size()-1).getId();
+        return id+1;
+    }
+    public static int getOrderId(){
+        int id;
+        if(getOrders().size()==0)
+            id=11;
+        else
+            id=getOrders().get(getOrders().size()-1).getId();
         return id+1;
     }
     public static Customer getCustomerBy(String email) {
@@ -142,15 +155,35 @@ public class Data {
         }
         return order;
     }
-    public static Order getOrderByCustomer(Customer customer){
-        Order order=new Order();
+    public static List<Order> getOrderByCustomer(Customer customer){
+        List<Order>orders=new ArrayList<>();
         for (Order order1:getOrders()){
             if(order1.getCustomer().equals(customer)){
-                order=order1;
-                break;
+               orders.add(order1);
             }
         }
-        return order;
+        return orders;
+    }
+    public static List<Worker>getWorkers(){
+        List<Worker> workers = new ArrayList<>();
+        for (String value:getObjects("Worker")) {
+            String[] arr = value.split(",");
+            Worker worker=new Worker(Integer.parseInt(arr[0]),arr[1],arr[2],arr[3],arr[4],Integer.parseInt(arr[5]),arr[6]);
+            worker.setNumOfProd(Integer.parseInt(arr[7]));
+            workers.add(worker);
+
+        }
+        return workers;
+    }
+    public static int getWorkerId() {
+        int id;
+        if(getWorkers().size()==0){
+           id=110;
+        }
+        else {
+            id=getWorkers().get(getWorkers().size()-1).getId();
+        }
+        return id+1;
     }
 }
 

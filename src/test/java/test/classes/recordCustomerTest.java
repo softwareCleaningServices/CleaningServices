@@ -32,7 +32,7 @@ Customer customer;
     @Then("confirmation email will be sent to customer")
     public void confirmationEmailWillBeSentToCustomer() {
         assertTrue(customer.isValidEmail());
-        customer.sendConfirmationEmail();
+        customer.sendEmail("Signup","Hello You are Signed-Up to Cleaning System Company Welcome to our application","We send a confirmation message to customer on email");
     }
 
 
