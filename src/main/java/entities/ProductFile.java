@@ -1,5 +1,6 @@
 package entities;
 
+import najah.edu.DistributeOrder;
 import najah.edu.Order;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
@@ -45,8 +46,9 @@ public class ProductFile { //Create Read Update Delete
     }
     public static void storeProducts(List<Product> products) {
         try(RandomAccessFile writer = new RandomAccessFile("src/main/resources/Back/product", "rw")){
-            System.out.println(products.size());
             for (Product product:products) {
+              Worker worker= DistributeOrder.getWorker(product);
+                product.setWorkerId(worker.getId());
                 writer.seek(writer.length());
                 writer.write(product.toString().getBytes());
                 writer.write("\n".getBytes());

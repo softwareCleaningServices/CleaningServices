@@ -98,6 +98,15 @@ public class Customer {
     }
 
 
+    @Override
+    public String toString() {
+        return  id +
+                "," + fullName +
+                ","  +email+
+                "," + phone +
+                "," + address +
+                "," + password +"\r\n";
+    }
 
     public boolean isTakenEmail(){
         List<Customer> customers;
@@ -120,16 +129,6 @@ public class Customer {
         Pattern emailPat=Pattern.compile (emailRegex, Pattern.CASE_INSENSITIVE);
         Matcher matcher=emailPat.matcher (this.getEmail());
         return matcher.find();
-    }
-
-    @Override
-    public String toString() {
-        return
-                 id +
-                "\t " + fullName +
-                "\t " + phone +
-                "\t " + address +
-                "\t " + email ;
     }
 
     public void sendEmail(String title,String message,String msg){

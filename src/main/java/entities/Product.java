@@ -10,6 +10,7 @@ public class Product {
     private SizeOfCover cover;
     private Double cost;
     private int orderId;
+    private int workerId;
     public Product() {
 
     }
@@ -24,6 +25,7 @@ public class Product {
         setCover(builder.cover);
         setCost(builder.cost);
         setOrderId(builder.orderId);
+        setWorkerId(builder.workerId);
 
     }
 
@@ -56,6 +58,11 @@ public class Product {
     public String getName() {
         return name;
     }
+
+    public void setWorkerId(int workerId) {
+        this.workerId = workerId;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -88,7 +95,7 @@ public class Product {
     @Override
     public String toString() {
 
-        return String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s", name, pictureName, dimension==null?"":dimension,numOfSofa==null?"":numOfSofa,cover==null?"":cover, material, specialTreatment, category, cost, orderId);
+        return String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s", name, pictureName, dimension==null?"":dimension,numOfSofa==null?"":numOfSofa,cover==null?"":cover, material, specialTreatment, category, cost, orderId,workerId);
     }
     public static double carpetCost(Double dimension){
         return dimension * 8.0;
@@ -128,6 +135,7 @@ public class Product {
         private Category category;
         private SizeOfCover cover;
         private Double cost;
+        private int workerId;
 
         private Builder() {
             name=null;
@@ -138,6 +146,7 @@ public class Product {
             specialTreatment=null;
             category=null;
             cover=null;
+
         }
         /**
          * Sets the {@code name} and returns a reference to this Builder enabling method chaining.
@@ -147,6 +156,10 @@ public class Product {
          */
         public Builder setName(String name) {
             this.name = name;
+            return this;
+        }
+        public Builder setWorkerId(int workerId) {
+            this.workerId = workerId;
             return this;
         }
 

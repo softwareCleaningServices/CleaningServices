@@ -4,7 +4,6 @@ import entities.*;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JasperViewer;
-import java.io.RandomAccessFile;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -171,12 +170,14 @@ public class AdminLogin {
 
         }
 
-        else if (option == 3) {
+        else if (option==2) {
+            recordWorker();
+
+        } else if (option == 3) {
             logger.info("********************************************************************************************************************************");
             logger.info("Order ID\tCustomer Name\t\tOrder Date\t\t\tTotal Coast\t\tOrder Status\nProducts: ");
             for (Order order:Data.getOrders()){
-                logger.info(order.getId()+"\t\t"+order.getCustomer().getFullName()+getSpaces(order.getCustomer().getFullName())+order.getDate()+getSpaces(String.valueOf(order.getDate()))+order.getTotal()+"\t"+
-                        order.getStatus()+getSpaces(order.getStatus()));
+                logger.info(order.getString());
                 for(Product product:order.getProducts()){
                     logger.info(product.toString());
                 }
@@ -189,6 +190,24 @@ public class AdminLogin {
             takenOrder();
         }
     }
+
+    private void recordWorker() {
+        Scanner in=new Scanner(System.in);
+        Worker worker=new Worker();
+        logger.info("Enter worker Name ");
+        worker.setName(in.nextLine());
+        logger.info("Enter worker Email ");
+        worker.setEmail(in.nextLine());
+        logger.info("Enter worker Phone ");
+        worker.setPhone(in.nextLine());
+        logger.info("Enter worker Address ");
+        worker.setAddress(in.nextLine());
+        logger.info("Enter worker salary ");
+        worker.setSalary(in.nextInt());
+        worker.setId(Data.getWorkerId());
+    addWorker(worker);
+    }
+
     public void adminPage(){
         Scanner in=new Scanner(System.in);
         while (true) {
@@ -254,18 +273,11 @@ public class AdminLogin {
         addOrder(order);
     }
     public void addOrder(Order order) {
-        try{
-            RandomAccessFile raf = new RandomAccessFile("src/main/resources/Back/Orders.txt", "rw");
-            raf.seek(raf.length());
-            raf.writeBytes(order.getId()+","+order.getCustomer().getId()+","+order.getDate()+","+order.getTotal()+","+order.getStatus());
-            raf.writeBytes("\r\n");
-            raf.close();
+
+          Data.storeObject("Orders",order);
             ProductFile.storeProducts(order.getProducts());
             logger.info("The Order Added Successfully");
-        }
-        catch(Exception e){
-            logger.info("Error");
-        }
+
     }
 
     public void notifyCustomer(Customer customer) {
@@ -306,5 +318,10 @@ public class AdminLogin {
     }
     public String getSpaces(String att){
         return " ".repeat(Math.max(0, 35 - att.length()));
+    }
+
+    public void addWorker(Worker worker) {
+        Data.storeObject("Worker",worker);
+        logger.info("The worker added successfully");
     }
 }
