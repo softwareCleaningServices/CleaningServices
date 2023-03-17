@@ -19,7 +19,7 @@ Worker worker;
 
     @When("the admin enter all the required data about worker")
     public void the_admin_enter_all_the_required_data_about_worker() {
-    worker=new Worker(120,"Ali sami","059812345","Nablus","alisam@gmail.com",1500);
+        worker=new Worker(120,"Ali sami","059812345","Nablus","alisam@gmail.com",1500,"CARPET");
     }
 
     @Then("the worker added successfully")
