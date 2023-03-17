@@ -11,14 +11,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 public class Data {
-
+    private Data(){
+    }
+    static String msg= "Error";
     public static void storeObject(String fileName,Object object){
         try ( RandomAccessFile raf =new RandomAccessFile("src/main/resources/Back/"+fileName+".txt", "rw")){
             raf.seek(raf.length());
             raf.write(object.toString().getBytes());
         }
         catch(Exception e){
-            logger.info("Error");
+            logger.info(msg);
         }
     }
     public static List<String> getObjects(String fileName){
@@ -32,7 +34,7 @@ public class Data {
 
         }
         catch(Exception e){
-            logger.info("Error");
+            logger.info(msg);
         }
         return strings;
     }
@@ -69,7 +71,7 @@ public class Data {
     public static List<Order> getOrders(){
         List<Order> orders = new ArrayList<>();
         for (String value:getObjects("Orders")){
-            ArrayList<Product>products;
+            List<Product>products;
             String[] arr = value.split(",");
             Order order=new Order();
             order.setId(Integer.parseInt(arr[0]));
@@ -85,7 +87,7 @@ public class Data {
     }
     public static int getId(){
         int id;
-        if(getCustomers().size()==0)
+        if(getCustomers().isEmpty())
             id=100;
         else
             id=getCustomers().get(getCustomers().size()-1).getId();
@@ -93,7 +95,7 @@ public class Data {
     }
     public static int getOrderId(){
         int id;
-        if(getOrders().size()==0)
+        if(getOrders().isEmpty())
             id=11;
         else
             id=getOrders().get(getOrders().size()-1).getId();
@@ -123,7 +125,7 @@ public class Data {
             }
         }
         catch(Exception e){
-            logger.info("Error");
+            logger.info(msg);
         }
     }
     public static void updateOrders(List<Order> orders) {
@@ -142,7 +144,7 @@ public class Data {
             }
         }
         catch(Exception e){
-            logger.info("Error");
+            logger.info(msg);
         }
     }
     public static Order getOrderByID(int id){
@@ -168,7 +170,7 @@ public class Data {
         List<Worker> workers = new ArrayList<>();
         for (String value:getObjects("Worker")) {
             String[] arr = value.split(",");
-            Worker worker=new Worker(Integer.parseInt(arr[0]),arr[1],arr[2],arr[3],arr[4],Integer.parseInt(arr[5]),arr[6]);
+            Worker worker=new Worker(Integer.parseInt(arr[0]),arr[1],arr[2],arr[3],arr[4],Integer.parseInt(arr[5]),Category.valueOf(arr[6]));
             worker.setNumOfProd(Integer.parseInt(arr[7]));
             workers.add(worker);
 
@@ -177,7 +179,7 @@ public class Data {
     }
     public static int getWorkerId() {
         int id;
-        if(getWorkers().size()==0){
+        if(getWorkers().isEmpty()){
            id=110;
         }
         else {
