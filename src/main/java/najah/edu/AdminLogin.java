@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 public class AdminLogin {
     Admin admin=new Admin();
     Logger logger = Logger.getLogger(AdminLogin.class.getName());
+    String msg="Enter valid number";
     public void setEmail(String email) {
         this.admin.setEmail(email);
     }
@@ -32,14 +33,14 @@ public class AdminLogin {
             try {
                 x = in.nextInt();
                 if (x < 1 || x > 4) {
-                    logger.info("Enter valid number");
+                    logger.info(msg);
                     customerMenu();
                 }
                 if(x==4){
                     break;
                 }
             } catch (Exception ignored) {
-                logger.info("Enter valid number");
+                logger.info(msg);
                 customerMenu();
             }
             customerOptions(x);
@@ -98,14 +99,14 @@ public class AdminLogin {
             try {
                 x = in.nextInt();
                 if (x < 1 || x > 3) {
-                    logger.info("Enter valid number");
+                    logger.info(msg);
                     orderMenu();
                 }
                 if(x==3){
                     break;
                 }
             } catch (Exception ignored) {
-                logger.info("Enter valid number");
+                logger.info(msg);
                 orderMenu();
             }
             orderOptions(x);
@@ -179,7 +180,7 @@ public class AdminLogin {
             for (Order order:Data.getOrders()){
                 logger.info(order.getString());
                 for(Product product:order.getProducts()){
-                    logger.info(product.toString());
+                    logger.info(()-> String.valueOf(product));
                 }
                 logger.info("********************************************************************************************************************************");
             }
@@ -243,7 +244,7 @@ public class AdminLogin {
         ArrayList<Product> products = new ArrayList<>();
         Order order;
         while (true) {
-            Product product=RecordProduct.NewProduct();
+            Product product=RecordProduct.addAProduct();
             products.add(product);
             logger.info("Do you want to add another product to this order? \"yes or no\"");
             String ans = in.nextLine();
@@ -269,7 +270,7 @@ public class AdminLogin {
         }
         order.setCustomer(customer);
         logger.info("The total is:"+order.getTotal());
-        logger.info("The new total with discount is:"+ProductFile.totalAfterDiscount(order));
+        logger.info("The new total with discount is:" + ProductFile.totalAfterDiscount(order));
         addOrder(order);
     }
     public void addOrder(Order order) {

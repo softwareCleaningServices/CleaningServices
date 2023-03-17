@@ -1,5 +1,7 @@
 package najah.edu;
 
+import entities.ProductFile;
+
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -26,7 +28,6 @@ public class Main {
     }
 
     public static void main(String[]args){
-        logger.info(()->Arrays.toString(numberOfCoverInThisMonth()));
         int option=menu();
         if(option==1){
             userLogin();

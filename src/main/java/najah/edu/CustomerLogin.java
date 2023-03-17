@@ -2,10 +2,7 @@ package najah.edu;
 
 import entities.Customer;
 import entities.Data;
-import entities.Product;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
@@ -40,12 +37,11 @@ public class CustomerLogin {
                 } else if (option==2) {
 
                     for (Order order: Data.getOrderByCustomer(customer)){
-                        System.out.println(order);
+                        logger.info(()->String.valueOf(order));
                     }
 
                 } else if(option==3){
-                    String y=customer.toString();
-                    logger.info(y);
+                    logger.info(()->String.valueOf(customer));
                 }
                 else if(option==4){
                     break;
