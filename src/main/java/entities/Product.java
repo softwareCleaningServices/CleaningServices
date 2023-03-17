@@ -26,7 +26,6 @@ public class Product {
         setOrderId(builder.orderId);
 
     }
-
     public void setOrderId(int orderId) {
         this.orderId = orderId;
     }

@@ -184,7 +184,7 @@ public class AdminLogin {
                 logger.info(order.getId()+"\t\t"+order.getCustomer().getFullName()+getSpaces(order.getCustomer().getFullName())+order.getDate()+getSpaces(String.valueOf(order.getDate()))+order.getTotal()+"\t"+
                         order.getStatus()+getSpaces(order.getStatus()));
                 for(Product product:order.getProducts()){
-                    logger.info(product.toString());
+                    logger.info(()->String.valueOf(product));
                 }
                 logger.info("********************************************************************************************************************************");
             }
@@ -228,10 +228,11 @@ public class AdminLogin {
     }
     public void takeOrder(){
         Scanner in=new Scanner(System.in);
-        ArrayList<Product> products = new ArrayList<>();
+        List<Product> products = new ArrayList<>();
         Order order;
+        int id;
         while (true) {
-            Product product=RecordProduct.NewProduct();
+            Product product=RecordProduct.addAProduct();
             products.add(product);
             logger.info("Do you want to add another product to this order? \"yes or no\"");
             String ans = in.nextLine();
@@ -253,7 +254,7 @@ public class AdminLogin {
         addOrder(order);
     }
     public void addOrder(Order order) {
-        ProductFile.storeProducts(order.getProducts());
+        //ProductFile.storeProducts(order.getProducts());
         try{
             RandomAccessFile raf = new RandomAccessFile("src/main/resources/Back/Orders.txt", "rw");
             raf.seek(raf.length());
@@ -308,7 +309,7 @@ public class AdminLogin {
             parameters.put("name",order.getCustomer().getFullName());
             parameters.put("date",String.valueOf(order.getDate()));
             parameters.put("address",order.getCustomer().getAddress());
-            System.out.println(order.getTotal());
+            logger.info(()->String.valueOf(order.getTotal()));
             parameters.put("tot", order.getTotal());
             parameters.put("total", ProductFile.totalAfterDiscount(order));
 

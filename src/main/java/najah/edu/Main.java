@@ -1,8 +1,12 @@
 package najah.edu;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.logging.Logger;
+
+import static najah.edu.BusinessReport.numberOfCoverInThisMonth;
+
 public class Main {
     static Logger logger = Logger.getLogger(Main.class.getName());
     public static int menu(){
@@ -22,16 +26,16 @@ public class Main {
     }
 
     public static void main(String[]args){
-
+        logger.info(()->Arrays.toString(numberOfCoverInThisMonth()));
         int option=menu();
-    if(option==1){
-        userLogin();
-    }
-    else {
-        RecordCustomer recordCustomer=new RecordCustomer();
-        recordCustomer.newCustomer();
-        userLogin();
-    }
+        if(option==1){
+            userLogin();
+        }
+        else {
+            RecordCustomer recordCustomer=new RecordCustomer();
+            recordCustomer.newCustomer();
+            userLogin();
+        }
 
     }
 

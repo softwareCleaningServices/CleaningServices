@@ -12,6 +12,8 @@ import java.util.logging.Logger;
 public class Data {
     private Data(){}
     static Logger logger = Logger.getLogger(Data.class.getName());
+    static String pathCustomer="src/main/resources/Back/Customer.txt";
+    static String pathOrder="src/main/resources/Back/Orders.txt";
     public static List<Login> users(){
         List<Login> list = new ArrayList<>();
         try ( RandomAccessFile raf =new RandomAccessFile("src/main/resources/Back/Login.txt", "rw")){
@@ -40,7 +42,7 @@ public class Data {
     }
     public static List<Customer> getCustomers(){
         ArrayList<Customer> customers = new ArrayList<>();
-        try ( RandomAccessFile raf =new RandomAccessFile("src/main/resources/Back/Customer.txt", "rw")){
+        try ( RandomAccessFile raf =new RandomAccessFile(pathCustomer, "rw")){
             raf.seek(0);
             String s;
             while ((s = raf.readLine()) != null) {
@@ -57,7 +59,7 @@ public class Data {
     public static List<Order> getOrders(){
         List<Order> orders = new ArrayList<>();
         List<String>strings=new ArrayList<>();
-        try ( RandomAccessFile raf =new RandomAccessFile("src/main/resources/Back/Orders.txt", "rw")){
+        try ( RandomAccessFile raf =new RandomAccessFile(pathOrder, "rw")){
             raf.seek(0);
             String s;
             while ((s = raf.readLine()) != null) {
@@ -67,7 +69,7 @@ public class Data {
         catch (Exception ignored){
         }
         for (String s:strings){
-            ArrayList<Product>products=new ArrayList<>();
+            List<Product>products;
             String[] arr = s.split(",");
             Order order=new Order();
             order.setId(Integer.parseInt(arr[0]));
@@ -97,8 +99,8 @@ public class Data {
         return foundCustomer;
     }
     public static void updateCustomers(List<Customer>customers){
-        try (RandomAccessFile raf = new RandomAccessFile("src/main/resources/Back/Customer.txt", "rw");
-             BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/Back/Customer.txt"))
+        try (RandomAccessFile raf = new RandomAccessFile(pathCustomer, "rw");
+             BufferedWriter writer = new BufferedWriter(new FileWriter(pathCustomer))
         ){
             writer.write("");
             writer.flush();
@@ -114,8 +116,8 @@ public class Data {
         }
     }
     public static void updateOrders(List<Order> orders) {
-        try (RandomAccessFile raf = new RandomAccessFile("src/main/resources/Back/Orders.txt", "rw");
-             BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/Back/Orders.txt"))
+        try (RandomAccessFile raf = new RandomAccessFile(pathOrder, "rw");
+             BufferedWriter writer = new BufferedWriter(new FileWriter(pathOrder))
         ){
             writer.write("");
             writer.flush();

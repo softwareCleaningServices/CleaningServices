@@ -3,14 +3,13 @@ package najah.edu;
 import entities.Category;
 import entities.Product;
 import entities.SizeOfCover;
-
 import java.util.Scanner;
 import java.util.logging.Logger;
 
 public class RecordProduct {
     private RecordProduct(){}
     static Logger logger = Logger.getLogger(RecordProduct.class.getName());
-    public static Product NewProduct() {
+    public static Product addAProduct() {
         Scanner input = new Scanner(System.in);
         logger.info("Enter your product category (CARPET,COVER,SOFA)");
         String category=checkCategory();

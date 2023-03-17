@@ -5,6 +5,7 @@ import entities.Data;
 import entities.Product;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
@@ -21,10 +22,10 @@ public class CustomerLogin {
     }
     public void takeOrder(){
         Scanner in=new Scanner(System.in);
-        ArrayList<Product> products = new ArrayList<>();
+        List<Product> products = new ArrayList<>();
         Order order;
         while (true) {
-            Product product=RecordProduct.NewProduct();
+            Product product=RecordProduct.addAProduct();
             products.add(product);
             logger.info("Do you want to add another product to this order? \"yes or no\"");
             String ans = in.nextLine();
@@ -51,12 +52,14 @@ public class CustomerLogin {
                 } else if (option==2) {
                     for (Order order: Data.getOrders()){
                         if(order.getCustomer().getId()==this.customer.getId()){
-                            System.out.println(order);
+                            String x=order.toString();
+                            logger.info(x);
                         }
                     }
 
                 } else if(option==3){
-                    System.out.println(customer);
+                    String y=customer.toString();
+                    logger.info(y);
                 }
                 else if(option==4){
                     break;

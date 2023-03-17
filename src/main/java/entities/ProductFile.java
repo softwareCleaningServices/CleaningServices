@@ -34,6 +34,7 @@ public class ProductFile { //Create Read Update Delete
                         .setSpecialTreatment(array[6])
                         .setCategory(Category.valueOf(array[7]))
                         .setCost(Double.parseDouble(array[8]))
+                        .setOrderId(Integer.parseInt(array[9]))
                         .build();
                 products.add(product);
             }
@@ -55,8 +56,8 @@ public class ProductFile { //Create Read Update Delete
             logger.info("Error");
         }
     }
-    public static ArrayList<Product> getProductByOrder(int id){
-       ArrayList<Product> products=new ArrayList<>();
+    public static List<Product> getProductByOrder(int id){
+        List<Product> products=new ArrayList<>();
         for (Product product1:getProduct()){
             if(product1.getOrderId()==id){
                 products.add(product1);
@@ -80,19 +81,18 @@ public class ProductFile { //Create Read Update Delete
         newTotal=order.getTotal()-(order.getTotal()*disc);
         return newTotal;
     }
-public static double discount(double total){
+    public static double discount(double total){
         double disc;
-
-    if(total>=500){
-        disc = 0.2;
-    }else if(total>=150 && total<500){
-        disc = 0.15;
-    }else if(total>=100 && total<150){
-        disc = 0.07;
-    }else{
-        disc=0;
+        if(total>=500){
+            disc = 0.2;
+        }else if(total>=150){
+            disc = 0.15;
+        }else if(total>=100){
+            disc = 0.07;
+        }else{
+            disc=0;
+        }
+        return disc;
     }
-    return disc;
-}
     private ProductFile(){}
 }

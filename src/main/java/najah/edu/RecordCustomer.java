@@ -2,7 +2,6 @@ package najah.edu;
 
 import entities.Customer;
 import entities.Data;
-
 import java.io.RandomAccessFile;
 import java.util.Scanner;
 import java.util.logging.Logger;
