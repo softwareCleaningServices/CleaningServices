@@ -10,7 +10,7 @@ public class Worker {
     private String address;
     private String email;
     private int salary;
-    String category;
+    Category category;
     private int numOfProd;
     public int getId() {
         return id;
@@ -27,27 +27,33 @@ public class Worker {
     public void setName(String name) {
         this.name = name;
     }
-
-    public String getPhone() {
-        return phone;
-    }
-
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
-    public String getAddress() {
-        return address;
-    }
-
     public void setAddress(String address) {
         this.address = address;
     }
-
+    public String getEmail() {
+        return email;
+    }
     public void setEmail(String email) {
         this.email = email;
     }
-
+    public void setSalary(int salary) {
+        this.salary = salary;
+    }
+    public int getNumOfProd() {
+        return numOfProd;
+    }
+    public void setNumOfProd(int numOfProd) {
+        this.numOfProd = numOfProd;
+    }
+    public void setNumOfProd(){
+        numOfProd++;
+    }
+    public Category getCategory() {
+        return category;
+    }
     @Override
     public String toString() {
         return
@@ -62,23 +68,7 @@ public class Worker {
                 "\r\n";
     }
 
-    public int getSalary() {
-        return salary;
-    }
-
-    public void setSalary(int salary) {
-        this.salary = salary;
-    }
-
-    public void setNumOfProd(int numOfProd) {
-        this.numOfProd = numOfProd;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public Worker(int id, String name, String phone, String address, String email, int salary, String category)
+    public Worker(int id, String name, String phone, String address, String email, int salary, Category category)
     {
         this.id = id;
         this.name = name;
@@ -89,21 +79,9 @@ public class Worker {
         this.category=category;
         this.numOfProd=0;
     }
-    public void setNumOfProd(){
-        numOfProd++;
-    }
-
-    public int getNumOfProd() {
-        return numOfProd;
-    }
-
-    public String getEmail() {
-        return email;
-    }
 
     public Worker() {
     }
-
     public boolean isValidEmail() {
         String emailRegex= "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
         Pattern emailPat=Pattern.compile (emailRegex, Pattern.CASE_INSENSITIVE);

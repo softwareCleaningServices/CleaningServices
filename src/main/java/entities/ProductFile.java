@@ -22,11 +22,9 @@ public class ProductFile { //Create Read Update Delete
                 Double dimension=array[2].equals("")?null:Double.parseDouble(array[2]);
                 Integer numOfSofa=array[3].equals("")?null:Integer.parseInt(array[3]);
                 SizeOfCover sizeOfCover=array[4].equals("")?null:SizeOfCover.valueOf(array[4]);
-                int orderId=Integer.parseInt(array[9]);
                 product=Product
                         .builder()
                         .setName(array[0])
-                        .setOrderId(orderId)
                         .setPictureName(array[1])
                         .setDimension(dimension)
                         .setNumOfSofa(numOfSofa)
@@ -35,6 +33,8 @@ public class ProductFile { //Create Read Update Delete
                         .setSpecialTreatment(array[6])
                         .setCategory(Category.valueOf(array[7]))
                         .setCost(Double.parseDouble(array[8]))
+                        .setOrderId(Integer.parseInt(array[9]))
+                        .setWorkerId(Integer.parseInt(array[10]))
                         .build();
                 products.add(product);
             }
@@ -58,21 +58,11 @@ public class ProductFile { //Create Read Update Delete
             logger.info("Error");
         }
     }
-    public static ArrayList<Product> getProductByOrder(int id){
-       ArrayList<Product> products=new ArrayList<>();
+    public static List<Product> getProductByOrder(int id){
+        List<Product> products=new ArrayList<>();
         for (Product product1:getProduct()){
             if(product1.getOrderId()==id){
                 products.add(product1);
-            }
-        }
-        return products;
-    }
-    public static List<Product> getAllProductByCategory(Category category){
-        List<Product> products = new ArrayList<>();
-        for (Product product1:getProduct()){
-            if(product1.getCategory()==category){
-                products.add(product1);
-                break;
             }
         }
         return products;
@@ -83,7 +73,7 @@ public class ProductFile { //Create Read Update Delete
         newTotal=order.getTotal()-(order.getTotal()*disc);
         return newTotal;
     }
-public static double discount(double total){
+    public static double discount(double total){
         double disc;
 
     if(total>=500){

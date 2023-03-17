@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DiscountOptionTest {
     Order order;
     Product product1;
-    ArrayList <Product> product=new ArrayList<Product>();
+    ArrayList <Product> product=new ArrayList<>();
     double discountFifty ;
     double discountOneHunFifty;
     double discountOneHun ;

@@ -28,7 +28,6 @@ public class Product {
         setWorkerId(builder.workerId);
 
     }
-
     public void setOrderId(int orderId) {
         this.orderId = orderId;
     }
