@@ -1,7 +1,5 @@
 package entities;
 
-import java.io.RandomAccessFile;
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,7 +10,8 @@ public class Worker {
     private String address;
     private String email;
     private int salary;
-
+    String category;
+    private int numOfProd;
     public int getId() {
         return id;
     }
@@ -58,6 +57,8 @@ public class Worker {
                 "," + address +
                 "," + email +
                 "," + salary +
+                "," + category+
+                "," + numOfProd +
                 "\r\n";
     }
 
@@ -69,13 +70,31 @@ public class Worker {
         this.salary = salary;
     }
 
-    public Worker(int id, String name, String phone, String address, String email, int salary) {
+    public void setNumOfProd(int numOfProd) {
+        this.numOfProd = numOfProd;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public Worker(int id, String name, String phone, String address, String email, int salary, String category)
+    {
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.address = address;
         this.email=email;
         this.salary=salary;
+        this.category=category;
+        this.numOfProd=0;
+    }
+    public void setNumOfProd(){
+        numOfProd++;
+    }
+
+    public int getNumOfProd() {
+        return numOfProd;
     }
 
     public String getEmail() {
