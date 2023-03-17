@@ -1,23 +1,36 @@
 package najah.edu;
 
-import entities.Category;
-import entities.Customer;
-import entities.Product;
-import entities.SizeOfCover;
+import entities.*;
+
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
-import static entities.Data.getCustomers;
-import static entities.Data.getOrders;
+
+import static entities.Data.*;
 
 public class BusinessReport {
-    public BusinessReport(){
+    private BusinessReport(){
 
     }
     public static int numberOfAllCustomers(){
         List<Customer>customers=getCustomers();
         return customers.size();
+    }
+    public static int[] numberOfAllWorker(){
+        List<Worker> workers=getWorkers();
+        int []numWorker=new int[4];
+        for (Worker worker:workers) {
+            numWorker[0]++;
+            if(worker.getCategory() == Category.SOFA){
+                numWorker[1]++;
+            } else if (worker.getCategory() == Category.CARPET) {
+                numWorker[2]++;
+            }else if (worker.getCategory() == Category.COVER) {
+                numWorker[3]++;
+            }
+        }
+        return numWorker;
     }
     public static List<Order> allOrdersInThisMonth(){
         LocalDate currentDate = LocalDate.now();
@@ -47,6 +60,18 @@ public class BusinessReport {
         }
         return numSofa;
     }
+    public static int numberOfCarpetInThisMonth(){
+        List<Order> orders=allOrdersInThisMonth();
+        int numCarpet = 0;
+        for(Order order:orders) {
+            for (Product product : order.getProducts()) {
+                if (product.getCategory() == Category.CARPET) {
+                    numCarpet += product.getDimension();
+                }
+            }
+        }
+        return numCarpet;
+    }
     public static int[] numberOfCoverInThisMonth(){
         List<Order> orders=allOrdersInThisMonth();
         int []numCover=new int[6];
@@ -70,17 +95,5 @@ public class BusinessReport {
             }
         }
         return numCover;
-    } //TODO:Not correct
-    public static int numberOfCarpetInThisMonth(){
-        List<Order> orders=allOrdersInThisMonth();
-        int numCarpet = 0;
-        for(Order order:orders) {
-            for (Product product : order.getProducts()) {
-                if (product.getCategory() == Category.CARPET) {
-                    numCarpet += product.getNumOfSofa();
-                }
-            }
-        }
-        return numCarpet;
-    }//TODO:test it
+    }
 }

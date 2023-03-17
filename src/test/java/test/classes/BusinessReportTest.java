@@ -11,6 +11,7 @@ import java.util.List;
 public class BusinessReportTest {
     List<Customer> customer;
     int numCustomer;
+    int[] numWorker;
     int numOrders;
     int numSofa;
     int numCarpet;
@@ -32,11 +33,34 @@ public class BusinessReportTest {
     @Given("that needs the number of all business worker")
     public void thatNeedsTheNumberOfAllBusinessWorker() {
     }
-
     @Then("calculate number of all business worker")
     public void calculateNumberOfAllBusinessWorker() {
+        numWorker=BusinessReport.numberOfAllWorker();
     }
 
+    @Given("that needs the number of all business worker in category sofa")
+    public void thatNeedsTheNumberOfAllBusinessWorkerInCategorySofa() {
+    }
+
+    @Then("calculate number of all business worker in category sofa")
+    public void calculateNumberOfAllBusinessWorkerInCategorySofa() {
+    }
+
+    @Given("that needs the number of all business worker in category carpet")
+    public void thatNeedsTheNumberOfAllBusinessWorkerInCategoryCarpet() {
+    }
+
+    @Then("calculate number of all business worker in category carpet")
+    public void calculateNumberOfAllBusinessWorkerInCategoryCarpet() {
+    }
+
+    @Given("that needs the number of all business worker in category cover")
+    public void thatNeedsTheNumberOfAllBusinessWorkerInCategoryCover() {
+    }
+
+    @Then("calculate number of all business worker in category cover")
+    public void calculateNumberOfAllBusinessWorkerInCategoryCover() {
+    }
     @Given("that needs the number of all orders in this month")
     public void thatNeedsTheNumberOfAllOrdersInThisMonth() {
     }
@@ -46,15 +70,6 @@ public class BusinessReportTest {
         numOrders=BusinessReport.numberOfAllOrdersInThisMonth();
     }
 
-    @Given("that needs the number of carpets in all orders in this month")
-    public void thatNeedsTheNumberOfCarpetsInAllOrdersInThisMonth() {
-    }
-
-    @Then("calculate number of carpets in all orders in this month")
-    public void calculateNumberOfCarpetsInAllOrdersInThisMonth() {
-        numCarpet=BusinessReport.numberOfCarpetInThisMonth();
-    }
-
     @Given("that needs the number of sofas in all orders in this month")
     public void thatNeedsTheNumberOfSofasInAllOrdersInThisMonth() {
     }
@@ -62,6 +77,15 @@ public class BusinessReportTest {
     @Then("calculate number of sofas in all orders in this month")
     public void calculateNumberOfSofasInAllOrdersInThisMonth() {
         numSofa=BusinessReport.numberOfSofaInThisMonth();
+    }
+
+    @Given("that needs the number of carpets in all orders in this month")
+    public void thatNeedsTheNumberOfCarpetsInAllOrdersInThisMonth() {
+    }
+
+    @Then("calculate number of carpets in all orders in this month")
+    public void calculateNumberOfCarpetsInAllOrdersInThisMonth() {
+        numCarpet=BusinessReport.numberOfCarpetInThisMonth();
     }
 
     @Given("that needs the number of covers in all orders in this month")
