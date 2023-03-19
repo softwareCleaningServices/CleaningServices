@@ -1,3 +1,4 @@
 110,Ruba,234567,Awarta,rubaos@gmail.com,2000,CARPET,8
-120,Ahmed,123456,sdfg,ahmod@gmail.com,1500,CARPET,2
-130,Hadi,059813245,Nablus,hadi@gmail.com,200,CARPET,2
+120,Ahmed,123456,sdfg,ahmod@gmail.com,1500,CARPET,3
+130,Hadi,059813245,Nablus,hadi@gmail.com,200,CARPET,3
+131,Salem,23456,dfg,salem@gmail.com,1234,COVER,0
