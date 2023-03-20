@@ -10,7 +10,7 @@ import najah.edu.RecordCustomer;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class recordCustomerTest {
+public class RecordCustomerTest {
    RecordCustomer recordCustomer;
 Customer customer;
     @Given("that I choose to record new customer")
@@ -19,7 +19,7 @@ Customer customer;
     }
     @When("I enter the correct required customer information")
     public void iEnterTheCorrectRequiredCustomerInformation() {
-        customer=new Customer("Ibrahim Ahmed","ibrahim@gmail.com","059823135","Nablus","ruba12");
+        customer=new Customer("Ibrahim Ahmed","ibrahim@gmail.com","059823135","Nablus","ibrahim");
     }
     @Then("the customer will recorded successfully")
     public void theCustomerWillRecordedSuccessfully() {
