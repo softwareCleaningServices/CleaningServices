@@ -11,16 +11,15 @@ import java.util.logging.Logger;
 
 public class DistributeOrder {
     static Logger logger = Logger.getLogger(DistributeOrder.class.getName());
-    private DistributeOrder(){}
+    public DistributeOrder(){}
+
     public static Worker getWorker(Product product){
         List<Worker>workers=Data.getWorkers();
-        logger.info(()->String.valueOf(workers.size()));
         int min=workers.get(0).getNumOfProd();
         Worker worker=workers.get(0);
         int ind=0;
         for (Worker worker1:workers){
             if(worker1.getCategory()==product.getCategory()){
-                logger.info(()->String.valueOf(worker1));
                 if(min>worker1.getNumOfProd()) {
                     worker = worker1;
                     ind=workers.indexOf(worker1);
