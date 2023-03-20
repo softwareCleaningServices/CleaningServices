@@ -6,7 +6,8 @@ Feature: record customer information
   Scenario: record done successfully
     Given that I choose to record new customer
     When I enter the correct required customer information
-    Then the customer will recorded successfully
+    Then a unique customer ID will be generated for the customer
+    And the customer will recorded successfully
     And confirmation email will be sent to customer
 
   Scenario: record with taken email

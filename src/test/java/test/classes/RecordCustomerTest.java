@@ -1,14 +1,13 @@
 package test.classes;
 
 import entities.Customer;
+import entities.Data;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import najah.edu.RecordCustomer;
 
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class RecordCustomerTest {
    RecordCustomer recordCustomer;
@@ -20,6 +19,12 @@ Customer customer;
     @When("I enter the correct required customer information")
     public void iEnterTheCorrectRequiredCustomerInformation() {
         customer=new Customer("Ibrahim Ahmed","ibrahim@gmail.com","059823135","Nablus","ibrahim");
+    }
+
+    @Then("a unique customer ID will be generated for the customer")
+    public void a_unique_customer_id_will_be_generated_for_the_customer() {
+        assertNotNull(customer);
+        customer.setId(Data.getId());
     }
     @Then("the customer will recorded successfully")
     public void theCustomerWillRecordedSuccessfully() {
