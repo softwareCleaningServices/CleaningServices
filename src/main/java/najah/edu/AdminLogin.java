@@ -126,7 +126,16 @@ public class AdminLogin {
             logger.info("Enter the order ID you want to invoice ");
             int id=in.nextInt();
             if(isExistOrder(id)){
-                invoice(Data.getOrderByID(id));
+                Order order=Data.getOrderByID(id);
+                List<Order>orders=Data.getOrders();
+                for (Order order1:orders){
+                    if(order1.getId()==id) {
+                        order1.setPaid(true);
+                    break;
+                    }
+                }
+                Data.updateOrders(orders);
+                invoice(order);
             }
             else {
                 logger.info("This Id is not exist try again");
@@ -174,7 +183,8 @@ public class AdminLogin {
         else if (option==2) {
             recordWorker();
 
-        } else if (option == 3) {
+        }
+        else if (option == 3) {
             logger.info("********************************************************************************************************************************");
             logger.info("Order ID\tCustomer Name\t\tOrder Date\t\t\tTotal Coast\t\tOrder Status\nProducts: ");
             for (Order order:Data.getOrders()){
@@ -192,7 +202,7 @@ public class AdminLogin {
         }
     }
 
-    private void recordWorker() {
+    public void recordWorker() {
         Scanner in=new Scanner(System.in);
         Worker worker=new Worker();
         logger.info("Enter worker Name ");
@@ -203,9 +213,12 @@ public class AdminLogin {
         worker.setPhone(in.nextLine());
         logger.info("Enter worker Address ");
         worker.setAddress(in.nextLine());
+        logger.info("Enter worker Category ");
+        worker.setCategory(Category.valueOf(in.nextLine().toUpperCase()));
         logger.info("Enter worker salary ");
         worker.setSalary(in.nextInt());
         worker.setId(Data.getWorkerId());
+        System.out.println("Ok");
     addWorker(worker);
     }
 
@@ -296,7 +309,6 @@ public class AdminLogin {
             parameters.put("address",order.getCustomer().getAddress());
             parameters.put("tot", order.getTotal());
             parameters.put("total", ProductFile.totalAfterDiscount(order));
-
             parameters.put("discount", (int)(ProductFile.discount(order.getTotal())*100)+"%");
             StringBuilder prod= new StringBuilder();
             StringBuilder coast= new StringBuilder();
@@ -310,7 +322,6 @@ public class AdminLogin {
 
             JasperPrint print= JasperFillManager.fillReport(report,parameters,dataSource);
             JasperViewer.viewReport(print, false);
-
             JasperExportManager.exportReportToPdfFile(print,"C:\\Users\\Administrator\\JaspersoftWorkspace\\out.pdf");
 
         } catch (Exception e) {

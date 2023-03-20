@@ -24,6 +24,7 @@ public class DistributeOrder {
                 if(min>worker1.getNumOfProd()) {
                     worker = worker1;
                     ind=workers.indexOf(worker1);
+                    min=worker1.getNumOfProd();
                 }            }
         }
         workers.get(ind).setNumOfProd();
