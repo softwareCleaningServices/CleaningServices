@@ -20,7 +20,8 @@ public class AdminLogin {
         logger.info("To see all workers details enter number 2 ");
         logger.info("To see all orders details enter number 3 ");
         logger.info("To add new order enter number 4");
-        logger.info("To logout enter number 5");
+        logger.info("To see reports about business enter number 5");
+        logger.info("To logout enter number 6");
     }
     public void customerMenu() {
         while (true) {
@@ -170,7 +171,6 @@ public class AdminLogin {
             customerMenu();
 
         }
-
         else if (option==2) {
             recordWorker();
 
@@ -189,6 +189,9 @@ public class AdminLogin {
         }
         else if (option == 4) {
             takenOrder();
+        }
+        else if (option == 5){
+            BusinessReport.businessReport();
         }
     }
 
@@ -215,7 +218,7 @@ public class AdminLogin {
             try {
                 adminMenu();
                 int option = in.nextInt();
-                if(option==5){
+                if(option==6){
                     logger.info("Goodbye");
                     break;
                 }
