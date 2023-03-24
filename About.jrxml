@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="About" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="72906a61-f8f1-42a8-ac48-f30718f35409">
+	<parameter name="ordersNum" class="java.lang.Integer"/>
+	<parameter name="compOrders" class="java.lang.Integer"/>
+	<parameter name="waiting" class="java.lang.Integer"/>
+	<parameter name="cash" class="java.lang.Integer"/>
+	<parameter name="paid" class="java.lang.Integer"/>
+	<parameter name="debt" class="java.lang.Integer"/>
+	<parameter name="p" class="java.lang.Integer"/>
+	<parameter name="d" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="90" y="16" width="330" height="49" uuid="8452927c-356f-4fca-bb0a-5958d7a8f04b"/>
+				<textElement>
+					<font fontName="Algerian" size="20"/>
+				</textElement>
+				<text><![CDATA[AR-Cleaning Services System]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="440" y="0" width="132" height="34" uuid="67681ccc-7582-4bc4-be31-5d52bd93b15a"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm">
+				<reportElement x="450" y="40" width="100" height="30" uuid="1a3aaf2d-2bab-44fd-bd6d-7451a52eb2ab"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="367" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="5" width="240" height="30" uuid="e9171c04-5180-48dc-b2cb-897536852ef7"/>
+				<textElement>
+					<font fontName="Franklin Gothic Demi" size="18"/>
+				</textElement>
+				<text><![CDATA[Total Numbers Of Orders:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="310" y="0" width="160" height="30" uuid="43dd5eaf-5feb-4f7c-ad36-b4aeddd1bbd2"/>
+				<textElement>
+					<font fontName="Britannic Bold" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ordersNum}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="70" width="280" height="30" uuid="a4e718de-579d-4b8f-9847-4530a96a383f"/>
+				<textElement>
+					<font fontName="Franklin Gothic Demi" size="18"/>
+				</textElement>
+				<text><![CDATA[Total Numbers Of Complete Orders:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="310" y="70" width="160" height="30" uuid="08708201-ecb2-413e-aaf8-b1470caadc89"/>
+				<textElement>
+					<font fontName="Arial Black" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{compOrders}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="120" width="280" height="30" uuid="5e9e447d-5eb1-4055-b774-ce7cba78506e"/>
+				<textElement>
+					<font fontName="Franklin Gothic Demi" size="18"/>
+				</textElement>
+				<text><![CDATA[Total Numbers Of waiting Orders:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="310" y="120" width="160" height="30" uuid="6f35484f-48d6-45d9-b366-30e5a36085db"/>
+				<textElement>
+					<font fontName="Britannic Bold" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{waiting}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="170" width="280" height="30" uuid="58b64688-eb85-4b6b-9c09-9823f0154c1e"/>
+				<textElement>
+					<font fontName="Franklin Gothic Demi" size="18"/>
+				</textElement>
+				<text><![CDATA[Total Cash:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="310" y="170" width="100" height="30" uuid="8dc0b0f2-da17-499c-b37c-37e72c5a9c2e"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cash}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="280" width="280" height="30" uuid="13590f9e-8219-444a-b2db-04412dd1c986"/>
+				<textElement>
+					<font fontName="Franklin Gothic Demi" size="18"/>
+				</textElement>
+				<text><![CDATA[Total Debt]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="230" width="280" height="30" uuid="c2d254cf-4c0c-4705-b343-c4804a78e989"/>
+				<textElement>
+					<font fontName="Franklin Gothic Demi" size="18"/>
+				</textElement>
+				<text><![CDATA[Total Paid]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="320" y="230" width="100" height="30" uuid="e46ea9c2-b67d-49f0-bfde-80d0186bb45c"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{p}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="268" width="100" height="30" uuid="fd64e566-6dc1-445e-82ce-2f3998da317d"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{d}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
