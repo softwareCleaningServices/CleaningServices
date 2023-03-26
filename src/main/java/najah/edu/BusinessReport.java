@@ -2,6 +2,7 @@ package najah.edu;
 
 import entities.*;
 import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JasperViewer;
 
 import java.time.LocalDate;
@@ -104,6 +105,7 @@ public class BusinessReport {
     }
     public static void businessReport() {
         try {
+            List<Order> list=Data.getOrders();
             JasperReport report= JasperCompileManager.compileReport("report.jrxml");
             Map<String,Object> parameters=new HashMap<>();
             parameters.put("all_customers",numberOfAllCustomers());
@@ -122,7 +124,8 @@ public class BusinessReport {
             parameters.put("twin_xl_order",cover[3]);
             parameters.put("twin_order",cover[4]);
             parameters.put("crib_order",cover[5]);
-            JasperPrint print= JasperFillManager.fillReport(report,parameters);
+            JRBeanCollectionDataSource dataSource=new JRBeanCollectionDataSource(list);
+            JasperPrint print= JasperFillManager.fillReport(report,parameters,dataSource);
             JasperViewer.viewReport(print, false);
             JasperExportManager.exportReportToPdfFile(print,"C:\\Users\\Administrator\\JaspersoftWorkspace\\rep.pdf");
         } catch (JRException ignored) {
