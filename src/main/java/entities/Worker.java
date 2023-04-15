@@ -85,6 +85,18 @@ public class Worker {
         this.numOfProd=0;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public int getSalary() {
+        return salary;
+    }
+
     public Worker() {
     }
     public boolean isValidEmail() {
@@ -92,5 +104,16 @@ public class Worker {
         Pattern emailPat=Pattern.compile (emailRegex, Pattern.CASE_INSENSITIVE);
         Matcher matcher=emailPat.matcher (this.getEmail());
         return matcher.find();
+    }
+
+    public boolean isExistWorker() {
+        boolean flag=false;
+        for(Worker worker:Data.getWorkers()){
+            if(worker.getId()==this.id) {
+                flag = true;
+                break;
+            }
+        }
+        return flag;
     }
 }

@@ -1,13 +1,8 @@
 package najah.edu;
 
-import entities.ProductFile;
-
-import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.logging.Logger;
-
-import static najah.edu.BusinessReport.numberOfCoverInThisMonth;
 
 public class Main {
     static Logger logger = Logger.getLogger(Main.class.getName());
@@ -40,7 +35,6 @@ public class Main {
 
     }
 
-
     public static void userLogin(){
 
         Scanner in=new Scanner(System.in);
@@ -54,6 +48,7 @@ public class Main {
             login.setEmail(email);
             login.setPassword(password);
             if(login.isCorrectInfo()){
+                login.login();
                 break;
             }
             else {
