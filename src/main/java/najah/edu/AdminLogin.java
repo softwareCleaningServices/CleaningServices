@@ -258,6 +258,67 @@ public class AdminLogin {
     }
 
     private void updateWorker() {
+        logger.info("Enter the ID of the worker you want to update his information ");
+        Scanner in=new Scanner(System.in);
+       Worker worker=new Worker();
+       boolean flag=false;
+       int id=0;
+        try {
+             id=in.nextInt();
+            worker.setId(id);
+            flag=worker.isExistWorker();
+
+        }
+        catch (InputMismatchException e){
+            logger.info("Invalid Input, try again");
+            updateWorker();
+        }
+        if(!flag){
+            logger.info("This worker doesn't exist");
+        }
+        else {
+            worker=Data.getWorkerById(id);
+            updateWorker(worker);
+        }
+
+    }
+
+    private void updateWorker(Worker worker) {
+        logger.info("Enter The Attribute You Want to Update \" Phone, Address, Email, Salary \" ");
+        Scanner in =new Scanner(System.in);
+        String attribute=in.nextLine();
+        if(!(attribute.equalsIgnoreCase("Phone")||attribute.equalsIgnoreCase("Email")||
+                attribute.equalsIgnoreCase("Salary")||attribute.equalsIgnoreCase("Address"))){
+            logger.info("This Attribute not allowed try again");
+        }
+        else{
+            logger.info("Enter The New Value ");
+            String value=in.nextLine();
+            updateWorker(attribute,value,worker);
+        }
+    }
+
+    public void updateWorker(String attribute, String value, Worker worker) {
+        if(attribute.equalsIgnoreCase("Address")){
+            worker.setAddress(value);
+        } else if (attribute.equalsIgnoreCase("Phone")) {
+            worker.setPhone(value);
+        } else if (attribute.equalsIgnoreCase("Email")) {
+            worker.setEmail(value);
+        } else if (attribute.equalsIgnoreCase("Salary")) {
+           worker.setSalary(Integer.parseInt(value));
+        }
+        List<Worker>workers=Data.getWorkers();
+        for (Worker worker1:workers){
+          int ind=  workers.indexOf(worker1);
+            if(worker1.getId()==worker.getId()){
+              workers.remove(ind);
+              workers.add(ind,worker);
+                break;
+            }
+        }
+
+       Data.updateWorkers(workers);
     }
 
     public void deleteWorker() {
@@ -273,7 +334,7 @@ public class AdminLogin {
         }
         catch (InputMismatchException e){
             logger.info("Invalid Input, try again");
-            deleteCustomer();
+            deleteWorker();
         }
         if(flag){
           deleteWorker(worker);
@@ -471,4 +532,6 @@ public class AdminLogin {
     public String msg() {
         return "This worker doesn't exist";
     }
+
+
 }
