@@ -2,9 +2,12 @@ package entities;
 
 import najah.edu.DistributeOrder;
 import najah.edu.Order;
+
+import java.io.FileNotFoundException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.logging.Logger;
 
 public class ProductFile { //Create Read Update Delete
@@ -74,19 +77,89 @@ public class ProductFile { //Create Read Update Delete
         newTotal=order.getTotal()-(order.getTotal()*disc);
         return newTotal;
     }
-public static double discount(double total){
+    public static double discount(double total){
         double disc;
-
-    if(total>=500){
-        disc = 0.2;
-    }else if(total>=150){
-        disc = 0.15;
-    }else if(total>=100){
-        disc = 0.07;
-    }else{
-        disc=0;
+        if(total>=500){
+            disc = 0.2;
+        }else if(total>=150){
+            disc = 0.15;
+        }else if(total>=100){
+            disc = 0.07;
+        }else{
+            disc=0;
+        }
+        return disc;
     }
-    return disc;
-}
+    public static void updateCostOfCategory(){
+        Scanner input = new Scanner(System.in);
+        double []costCat = getCostOfCategory();
+        while (true) {
+            logger.info("To change cost of carpet enter 1");
+            logger.info("To change cost of sofa enter 2");
+            logger.info("To change cost of KING cover enter 3");
+            logger.info("To change cost of QUEEN cover enter 4");
+            logger.info("To change cost of TWIN_XL cover enter 5");
+            logger.info("To change cost of TWIN cover enter 6");
+            logger.info("To change cost of CRIB cover enter 7");
+            int num = input.nextInt();
+            logger.info("Enter the new Cost");
+            switch (num) {
+                case 1:
+                    costCat[0] = input.nextDouble();
+                    break;
+                case 2:
+                    costCat[1] = input.nextDouble();
+                    break;
+                case 3:
+                    costCat[2] = input.nextDouble();
+                    break;
+                case 4:
+                    costCat[3] = input.nextDouble();
+                    break;
+                case 5:
+                    costCat[4] = input.nextDouble();
+                    break;
+                case 6:
+                    costCat[5] = input.nextDouble();
+                    break;
+                case 7:
+                    costCat[7] = input.nextDouble();
+                    break;
+            }
+            logger.info("Do you need to change the cost of another category?\"yes or no\"");
+            String ans = input.nextLine();
+            if (ans.equalsIgnoreCase("no")) {
+                break;
+            }
+        }
+        storeCostOfCategory(costCat);
+    }
+    public static double[] getCostOfCategory(){
+        double []costCat=new double[7];
+        try {
+            fromFile=new RandomAccessFile("src/main/resources/Back/Cost.txt", "rw");
+            fromFile.seek(0);
+            String costSplit=fromFile.readLine();
+            String[] array=costSplit.split(",");
+            for (int i=0;i<array.length;i++){
+                costCat[i]=Double.parseDouble(array[i]);
+            }
+            fromFile.close();
+        }catch (Exception e){
+            logger.info(e.getMessage());
+        }
+        return costCat;
+    }
+    public static void storeCostOfCategory(double []costCat){
+        try(RandomAccessFile writer = new RandomAccessFile("src/main/resources/Back/Cost.txt", "rw")){
+            writer.seek(0);
+            String cost=String.format("%s,%s,%s,%s,%s,%s,%s", costCat[0],costCat[1],costCat[2],costCat[3],costCat[4],costCat[5],costCat[6]);
+            writer.write(cost.getBytes());
+            writer.write("\n".getBytes());
+        }
+        catch(Exception e){
+            logger.info("Error");
+        }
+    }
     private ProductFile(){}
 }
