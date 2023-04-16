@@ -17,13 +17,25 @@ public class Order {
     private LocalDate date;
     private double total;
     private boolean paid;
+
+    public boolean isPaid() {
+        return paid;
+    }
+
     @Override
     public String toString() {
         return id+","+customer.getId()+","+date+","+total+","+status+","+paid+"\r\n";
     }
     public  String getString(){
-        return this.getId()+"\t\t"+this.getCustomer().getFullName()+"\t\t\t"+
-                this.getDate()+"\t\t\t"+this.getStatus()+(paid?"Yes":"No")+"\t\t\n";
+        StringBuilder str;
+        str = new StringBuilder(this.getId() + "\t\t" + this.getCustomer().getFullName() + "\t\t\t" +
+                this.getDate() + "\t\t\t"+this.getTotal()+"\t\t\t" + this.getStatus() + "\t\t\t" + (paid ? "Yes" : "No") +
+                "\n");
+        for (Product product:this.getProducts()){
+            str.append(product.toString());
+        }
+             str.append("\t\t\n");
+        return str.toString();
     }
     public LocalDate getDate() {
         return date;

@@ -161,7 +161,18 @@ public class Customer {
         }
     }
 
-
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (fullName != null ? fullName.hashCode() : 0);
+        result = 31 * result + (existCustomer != null ? existCustomer.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + (phone != null ? phone.hashCode() : 0);
+        result = 31 * result + (logger != null ? logger.hashCode() : 0);
+        return result;
+    }
 
     public Customer getCustomerDetails() {
         return existCustomer;

@@ -27,6 +27,7 @@ public class Admin {
         return result;
     }
 
+
     public String getEmail() {
         return email;
     }
