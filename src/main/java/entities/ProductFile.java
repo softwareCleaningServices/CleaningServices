@@ -33,6 +33,7 @@ public class ProductFile { //Create Read Update Delete
                         .setSpecialTreatment(array[6])
                         .setCategory(Category.valueOf(array[7]))
                         .setCost(Double.parseDouble(array[8]))
+                        .setWorkerId(Integer.parseInt(array[10]))
                         .setOrderId(Integer.parseInt(array[9]))
                         .setWorkerId(Integer.parseInt(array[10]))
                         .build();
@@ -73,7 +74,7 @@ public class ProductFile { //Create Read Update Delete
         newTotal=order.getTotal()-(order.getTotal()*disc);
         return newTotal;
     }
-    public static double discount(double total){
+public static double discount(double total){
         double disc;
 
     if(total>=500){

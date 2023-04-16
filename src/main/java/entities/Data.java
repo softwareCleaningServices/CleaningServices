@@ -136,6 +136,20 @@ public class Data {
             logger.info(msg);
         }
     }
+    public static void updateWorkers(List<Worker>workers){
+        try (RandomAccessFile raf = new RandomAccessFile("src/main/resources/Back/Worker.txt", "rw")
+        ){
+            removeFileContent("Worker");
+            raf.seek(0);
+            for (Worker worker:workers) {
+                raf.writeBytes(worker.toString());
+
+            }
+        }
+        catch(Exception e){
+            logger.info(msg);
+        }
+    }
     public static void updateOrders(List<Order> orders) {
         try (RandomAccessFile raf = new RandomAccessFile("src/main/resources/Back/Orders.txt", "rw")
         ){
@@ -206,6 +220,31 @@ public class Data {
             }
         }
         return sum;
+    }
+    public static Worker getWorkerById(int id){
+        Worker worker=new Worker();
+        for (Worker worker1:getWorkers()){
+            if(worker1.getId()==id){
+                worker=worker1;
+                break;
+            }
+        }
+        return worker;
+    }
+
+    public static void updateLogin(List<Login> loginList) {
+        try (RandomAccessFile raf = new RandomAccessFile("src/main/resources/Back/Login.txt", "rw")
+        ){
+            removeFileContent("Login");
+            raf.seek(0);
+            for (Login login:loginList) {
+                raf.write(login.toString().getBytes());
+            }
+        }
+
+        catch(Exception e){
+            logger.info(msg);
+        }
     }
 }
 
