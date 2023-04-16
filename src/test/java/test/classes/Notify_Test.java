@@ -17,7 +17,6 @@ public class Notify_Test {
     @Given("the admin choose to change the order status")
     public void the_admin_choose_to_change_the_order_status() {
         admin=new AdminLogin();
-       // admin.adminOptions(2);
     }
 
     @When("the admin set order status to {string}")
