@@ -15,11 +15,11 @@ Customer customer;
     @Given("that the admin choose to delete customer")
     public void that_the_admin_choose_to_delete_customer() {
        admin=new AdminLogin();
+        customer=new Customer();
     }
 
-    @When("the entered id is exist")
-    public void the_entered_id_is_exist() {
-        customer=new Customer();
+    @When("the entered customer id is exist")
+    public void theEnteredCustomerIdIsExist() {
         customer.setId(103);
     }
 
@@ -29,8 +29,8 @@ Customer customer;
       admin.deleteCustomer(customer);
     }
 
-    @When("the entered id is not exist int the recorded customer")
-    public void the_entered_id_is_not_exist_int_the_recorded_customer() {
+    @When("the entered customer id is not exist int the recorded customer")
+    public void theEnteredCustomerIdIsNotExistIntTheRecordedCustomer() {
         customer=new Customer();
         customer.setId(100);
     }

@@ -38,6 +38,15 @@ public class Data {
         }
         return strings;
     }
+    public static void removeFileContent(String fileName){
+        try (
+             BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/Back/"+fileName+".txt"))
+        ){
+            writer.write("");
+            writer.flush();
+    }catch (Exception ignored) {
+        }
+        }
     static Logger logger = Logger.getLogger(Data.class.getName());
     public static List<Login> users(){
         List<Login> list = new ArrayList<>();
@@ -79,6 +88,7 @@ public class Data {
                 order.setDate(LocalDate.parse(arr[2]));
                 order.setCustomer(customer);
                 order.setStatus(arr[4]);
+                order.setPaid(Boolean.parseBoolean(arr[5]));
             products=ProductFile.getProductByOrder(order.getId());
                order.setProducts(products);
             orders.add(order);
@@ -112,11 +122,9 @@ public class Data {
         return foundCustomer;
     }
     public static void updateCustomers(List<Customer>customers){
-        try (RandomAccessFile raf = new RandomAccessFile("src/main/resources/Back/Customer.txt", "rw");
-             BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/Back/Customer.txt"))
+        try (RandomAccessFile raf = new RandomAccessFile("src/main/resources/Back/Customer.txt", "rw")
         ){
-            writer.write("");
-            writer.flush();
+            removeFileContent("Customer");
             raf.seek(0);
             for (Customer customer : customers) {
                 raf.writeBytes(customer.getId() + "," +customer.getFullName() + "," + customer.getEmail() + "," + customer.getPhone() + "," +
@@ -129,18 +137,12 @@ public class Data {
         }
     }
     public static void updateOrders(List<Order> orders) {
-        try (RandomAccessFile raf = new RandomAccessFile("src/main/resources/Back/Orders.txt", "rw");
-             BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/Back/Orders.txt"))
+        try (RandomAccessFile raf = new RandomAccessFile("src/main/resources/Back/Orders.txt", "rw")
         ){
-            writer.write("");
-            writer.flush();
+            removeFileContent("Orders");
             raf.seek(0);
             for (Order order : orders) {
-                raf.writeBytes(order.getId()+","+order.getCustomer().getId()+","+order.getDate()+","+order.getTotal()+","+order.getStatus()+ "," );
-                for(Product product:order.getProducts()){
-                    raf.writeBytes(product.getName()+" ");
-                }
-                raf.writeBytes("\r\n");
+                raf.write(order.toString().getBytes());
             }
         }
         catch(Exception e){
@@ -186,6 +188,24 @@ public class Data {
             id=getWorkers().get(getWorkers().size()-1).getId();
         }
         return id+1;
+    }
+    public static int getCountOrders(String status){
+        int count=0;
+        for (Order order:getOrders()){
+            if(order.getStatus().equalsIgnoreCase(status)){
+                count++;
+            }
+        }
+        return count;
+    }
+    public static int getPaid(boolean b){
+        int sum=0;
+        for (Order order:getOrders()){
+            if(order.isPaid()==b){
+                sum+=order.getTotal();
+            }
+        }
+        return sum;
     }
 }
 

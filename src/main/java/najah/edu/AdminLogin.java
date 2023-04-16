@@ -11,6 +11,8 @@ public class AdminLogin {
     Admin admin=new Admin();
     Logger logger = Logger.getLogger(AdminLogin.class.getName());
     String msg="Enter valid number";
+    private boolean logged;
+
     public void setEmail(String email) {
         this.admin.setEmail(email);
     }
@@ -20,7 +22,8 @@ public class AdminLogin {
         logger.info("To see all workers details enter number 2 ");
         logger.info("To see all orders details enter number 3 ");
         logger.info("To add new order enter number 4");
-        logger.info("To logout enter number 5");
+        logger.info("To generate report about financial information  enter number 5");
+        logger.info("To logout enter number 6");
     }
     public void customerMenu() {
         while (true) {
@@ -126,7 +129,16 @@ public class AdminLogin {
             logger.info("Enter the order ID you want to invoice ");
             int id=in.nextInt();
             if(isExistOrder(id)){
-                invoice(Data.getOrderByID(id));
+                Order order=Data.getOrderByID(id);
+                List<Order>orders=Data.getOrders();
+                for (Order order1:orders){
+                    if(order1.getId()==id) {
+                        order1.setPaid(true);
+                    break;
+                    }
+                }
+                Data.updateOrders(orders);
+                invoice(order);
             }
             else {
                 logger.info("This Id is not exist try again");
@@ -172,9 +184,9 @@ public class AdminLogin {
         }
 
         else if (option==2) {
-            recordWorker();
-
-        } else if (option == 3) {
+            printWorkers();
+        }
+        else if (option == 3) {
             logger.info("********************************************************************************************************************************");
             logger.info("Order ID\tCustomer Name\t\tOrder Date\t\t\tTotal Coast\t\tOrder Status\nProducts: ");
             for (Order order:Data.getOrders()){
@@ -189,10 +201,163 @@ public class AdminLogin {
         }
         else if (option == 4) {
             takenOrder();
+        } else if (option==5) {
+            generateAbout();
+        }
+    }
+    public void printWorkers(){
+        List<Worker> workers = Data.getWorkers();
+        logger.info("****************************************************Customers**********************************************************");
+        logger.info("ID               Name                                Email                           Mobile Number" +
+                "                        Address  \t\t Category \t\tSalary\t\t Number of total product " +
+                "");
+        for (Worker worker:workers) {
+            logger.info(worker.getId() + "\t\t\t\t" +worker.getName() + getSpaces(worker.getName()) + worker.getEmail() + getSpaces(worker.getEmail())
+                    + worker.getPhone() + getSpaces(worker.getPhone()) + worker.getAddress()+getSpaces(worker.getAddress())+worker.getSalary()+
+                    "\t\t"+worker.getNumOfProd()
+            );
+        }
+        workerMenu();
+    }
+
+    private void workerMenu() {
+        while (true) {
+            logger.info("If you want to add new worker enter number 1");
+            logger.info("If you want to delete worker enter number 2");
+            logger.info("If you want to update worker information enter number 3");
+            logger.info("If you want to back enter number 4");
+            Scanner in = new Scanner(System.in);
+            int x = 0;
+            try {
+                x = in.nextInt();
+                if (x < 1 || x > 4) {
+                    logger.info(msg);
+                    workerMenu();
+                }
+                if (x == 4) {
+                    break;
+                }
+
+            } catch (Exception ignored) {
+                logger.info(msg);
+                customerMenu();
+            }
+
+            workerOptions(x);
         }
     }
 
-    private void recordWorker() {
+    public void workerOptions(int x) {
+        if(x==1){
+            recordWorker();
+        } else if (x==2) {
+            deleteWorker();
+        } else if (x==3) {
+            updateWorker();
+        }
+    }
+
+    private void updateWorker() {
+        logger.info("Enter the ID of the worker you want to update his information ");
+        Scanner in=new Scanner(System.in);
+       Worker worker=new Worker();
+       boolean flag=false;
+       int id=0;
+        try {
+             id=in.nextInt();
+            worker.setId(id);
+            flag=worker.isExistWorker();
+
+        }
+        catch (InputMismatchException e){
+            logger.info("Invalid Input, try again");
+            updateWorker();
+        }
+        if(!flag){
+            logger.info("This worker doesn't exist");
+        }
+        else {
+            worker=Data.getWorkerById(id);
+            updateWorker(worker);
+        }
+
+    }
+
+    private void updateWorker(Worker worker) {
+        logger.info("Enter The Attribute You Want to Update \" Phone, Address, Email, Salary \" ");
+        Scanner in =new Scanner(System.in);
+        String attribute=in.nextLine();
+        if(!(attribute.equalsIgnoreCase("Phone")||attribute.equalsIgnoreCase("Email")||
+                attribute.equalsIgnoreCase("Salary")||attribute.equalsIgnoreCase("Address"))){
+            logger.info("This Attribute not allowed try again");
+        }
+        else{
+            logger.info("Enter The New Value ");
+            String value=in.nextLine();
+            updateWorker(attribute,value,worker);
+        }
+    }
+
+    public void updateWorker(String attribute, String value, Worker worker) {
+        if(attribute.equalsIgnoreCase("Address")){
+            worker.setAddress(value);
+        } else if (attribute.equalsIgnoreCase("Phone")) {
+            worker.setPhone(value);
+        } else if (attribute.equalsIgnoreCase("Email")) {
+            worker.setEmail(value);
+        } else if (attribute.equalsIgnoreCase("Salary")) {
+           worker.setSalary(Integer.parseInt(value));
+        }
+        List<Worker>workers=Data.getWorkers();
+        for (Worker worker1:workers){
+          int ind=  workers.indexOf(worker1);
+            if(worker1.getId()==worker.getId()){
+              workers.remove(ind);
+              workers.add(ind,worker);
+                break;
+            }
+        }
+
+       Data.updateWorkers(workers);
+    }
+
+    public void deleteWorker() {
+        logger.info("Enter the ID of the worker you want to delete ");
+        Scanner in=new Scanner(System.in);
+       Worker worker=new Worker();
+       boolean flag=false;
+        try {
+            int id=in.nextInt();
+            worker.setId(id);
+             flag=worker.isExistWorker();
+
+        }
+        catch (InputMismatchException e){
+            logger.info("Invalid Input, try again");
+            deleteWorker();
+        }
+        if(flag){
+          deleteWorker(worker);
+        }
+        else {
+            logger.info(msg());
+        }
+
+
+    }
+    public void deleteWorker(Worker worker) {
+        List<Worker>workers=Data.getWorkers();
+        for(Worker worker1:workers){
+            if(worker1.getId()==worker.getId()){
+               workers.remove(worker1);
+               break;
+            }
+        }
+        Data.updateWorkers(workers);
+    }
+
+
+    public void recordWorker() {
         Scanner in=new Scanner(System.in);
         Worker worker=new Worker();
         logger.info("Enter worker Name ");
@@ -203,9 +368,12 @@ public class AdminLogin {
         worker.setPhone(in.nextLine());
         logger.info("Enter worker Address ");
         worker.setAddress(in.nextLine());
+        logger.info("Enter worker Category ");
+        worker.setCategory(Category.valueOf(in.nextLine().toUpperCase()));
         logger.info("Enter worker salary ");
         worker.setSalary(in.nextInt());
         worker.setId(Data.getWorkerId());
+        System.out.println("Ok");
     addWorker(worker);
     }
 
@@ -215,7 +383,7 @@ public class AdminLogin {
             try {
                 adminMenu();
                 int option = in.nextInt();
-                if(option==5){
+                if(option==6){
                     logger.info("Goodbye");
                     break;
                 }
@@ -296,7 +464,6 @@ public class AdminLogin {
             parameters.put("address",order.getCustomer().getAddress());
             parameters.put("tot", order.getTotal());
             parameters.put("total", ProductFile.totalAfterDiscount(order));
-
             parameters.put("discount", (int)(ProductFile.discount(order.getTotal())*100)+"%");
             StringBuilder prod= new StringBuilder();
             StringBuilder coast= new StringBuilder();
@@ -310,7 +477,6 @@ public class AdminLogin {
 
             JasperPrint print= JasperFillManager.fillReport(report,parameters,dataSource);
             JasperViewer.viewReport(print, false);
-
             JasperExportManager.exportReportToPdfFile(print,"C:\\Users\\Administrator\\JaspersoftWorkspace\\out.pdf");
 
         } catch (Exception e) {
@@ -325,4 +491,47 @@ public class AdminLogin {
         Data.storeObject("Worker",worker);
         logger.info("The worker added successfully");
     }
+
+    public void notExistMsg() {
+       logger.info("This Order is not exist on our orders");
+    }
+
+    public void setLogged(boolean b) {
+        this.logged=b;
+    }
+
+    public void generateAbout() {
+        try {
+            List<Order> list=Data.getOrders();
+            JasperReport report= JasperCompileManager.compileReport("About.jrxml");
+            Map<String,Object> parameters=new HashMap<>();
+            parameters.put("ordersNum",Data.getOrders().size());
+            int complete=Data.getCountOrders("complete");
+            int waiting=Data.getCountOrders("waiting");
+            int paid=Data.getPaid(true);
+            int debt=Data.getPaid(false);
+            int cash=paid+debt;
+            parameters.put("compOrders",complete);
+            parameters.put("waiting",waiting);
+            parameters.put("p",paid);
+            parameters.put("d",debt);
+            parameters.put("cash",cash);
+            JRBeanCollectionDataSource dataSource=new JRBeanCollectionDataSource(list);
+            JasperPrint print= JasperFillManager.fillReport(report,parameters,dataSource);
+            JasperViewer.viewReport(print, false);
+        } catch (Exception e) {
+            logger.info("Can't generate report");
+        }
+    }
+
+    public boolean isLogged() {
+        return logged;
+    }
+
+
+    public String msg() {
+        return "This worker doesn't exist";
+    }
+
+
 }

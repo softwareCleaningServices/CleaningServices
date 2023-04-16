@@ -11,22 +11,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
-    @Override
-    public String toString() {
-        return id+","+customer.getId()+","+date+","+total+","+status+"\r\n";
 
-
-
-    }
-    public  String getString(){
-       return this.getId()+"\t\t"+this.getCustomer().getFullName()+"\t\t\t"+
-                this.getDate()+"\t\t\t"+this.getStatus()+"\t\t\n";
-    }
     private int id=13;
     private Customer customer;
     private LocalDate date;
     private double total;
-
+    private boolean paid;
+    @Override
+    public String toString() {
+        return id+","+customer.getId()+","+date+","+total+","+status+","+paid+"\r\n";
+    }
+    public  String getString(){
+        return this.getId()+"\t\t"+this.getCustomer().getFullName()+"\t\t\t"+
+                this.getDate()+"\t\t\t"+this.getStatus()+(paid?"Yes":"No")+"\t\t\n";
+    }
     public LocalDate getDate() {
         return date;
     }
@@ -69,6 +67,7 @@ public class Order {
         this.date=LocalDate.now();
         this.products=products;
         this.status=status;
+        this.paid=false;
         calcTotal();
     }
     void calcTotal(){
@@ -77,6 +76,10 @@ public class Order {
             out+=product.getCost();
         }
         total=out;
+    }
+
+    public void setPaid(boolean paid) {
+        this.paid = paid;
     }
 
     public int getId() {
