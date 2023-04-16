@@ -35,7 +35,6 @@ public class Main {
 
     }
 
-
     public static void userLogin(){
 
         Scanner in=new Scanner(System.in);
@@ -49,6 +48,7 @@ public class Main {
             login.setEmail(email);
             login.setPassword(password);
             if(login.isCorrectInfo()){
+                login.login();
                 break;
             }
             else {

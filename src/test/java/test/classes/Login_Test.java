@@ -10,6 +10,7 @@ import static org.junit.Assert.assertEquals;
 public class Login_Test {
 boolean logged;
 Login login=new Login();
+
     @Given("that the user is not logged in")
     public void that_the_user_is_not_logged_in() {
         logged=false;

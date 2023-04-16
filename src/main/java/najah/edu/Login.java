@@ -42,15 +42,14 @@ public class Login {
     }
 
     public String msg(){
-        String message;
-
-            if (rul.equals("admin")){
-                message="Admin login success";
+        String message="";
+        if(isCorrectInfo()) {
+            if (rul.equals("admin")) {
+                message = "Admin login success";
+            } else if (rul.equals("customer")) {
+                message = "Customer login success";
             }
-            else if (rul.equals("customer")) {
-                message="Customer login success";
-            }
-
+        }
              else {
             message="login fail";
         }
@@ -68,19 +67,24 @@ public class Login {
         int flag=0;
         for (Login login: Data.users()){
             if(login.getEmail().equals(email)&&login.getPassword().equals(password)){
-                if(login.getRul().equals("admin")){
-                    AdminLogin admin=new AdminLogin();
-                    admin.adminPage();
-                } else if (login.getRul().equals("customer")) {
-                    CustomerLogin customerLogin=new CustomerLogin();
-                    customerLogin.setCustomer(Data.getCustomerBy(email));
-                    customerLogin.customerPage();
-                }
+            this.login=login;
                 flag=1;
                 break;
             }
         }
         return flag==1;
     }
-
+    Login login;
+    public void login() {
+        if (isCorrectInfo()) {
+            if (login.getRul().equals("admin")) {
+                AdminLogin admin = new AdminLogin();
+                admin.adminPage();
+            } else if (login.getRul().equals("customer")) {
+                CustomerLogin customerLogin = new CustomerLogin();
+                customerLogin.setCustomer(Data.getCustomerBy(email));
+                customerLogin.customerPage();
+            }
+        }
+    }
 }

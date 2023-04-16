@@ -29,7 +29,7 @@ public class OrderTest {
     public void i_enter_the_correct_order_details() {
         ArrayList<Product>products=new ArrayList<>();
         products.add(ProductFile.getProduct().get(0));
-    order=new Order(products,"waiting");
+        order=new Order(products,"waiting");
 
     }
     @When("the customer is already exist in our customers")
@@ -37,20 +37,17 @@ public class OrderTest {
          customer= Data.getCustomerBy("Ali Mohammed");
         assertNotEquals(customer.getId(), 0);
         order.setCustomer(customer);
-        System.out.println(customer);
     }
 
     @Then("the order added successfully")
     public void the_order_added_successfully() {
-        assertNotEquals(customer.getId(),0);
+        assertNotEquals(0,customer.getId());
         admin.addOrder(order);
         System.out.println("The Order added successfully");
     }
     @When("the customer is new customer")
     public void the_customer_is_new_customer() {
         customer= Data.getCustomerBy("Alaa Hasan");
-
-
     }
 
     @Then("I should add the customer details")
@@ -60,10 +57,10 @@ public class OrderTest {
         RecordCustomer recordCustomer=new RecordCustomer();
         recordCustomer.addNewCustomer(customer);
     }
-
     @Then("the order added")
     public void the_order_added() {
     order.setCustomer(customer);
     admin.addOrder(order);
+    System.out.println("The Order added successfully");
     }
 }
