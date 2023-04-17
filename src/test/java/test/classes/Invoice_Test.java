@@ -20,37 +20,37 @@ public class Invoice_Test {
        admin.setLogged(true);
     }
 
-    @When("the admin enter the order Id ={string}")
-    public void the_admin_enter_the_order_id(String orderId) {
+    @When("the admin enter the order Id ={int}")
+    public void the_admin_enter_the_order_id(Integer orderId) {
     InvoiceOrder invoice =new InvoiceOrder();
-    order= Data.getOrderByID(Integer.parseInt(orderId));
+    order= Data.getOrderByID(orderId);
     invoice.setOrder(order);
     }
 
-    @When("the first product coast ={string}")
-    public void the_first_product_coast(String cost) {
-        total+=Double.parseDouble(cost);
+    @When("the first product coast ={double}")
+    public void the_first_product_coast(Double cost) {
+        total+=(cost);
     }
 
-    @When("the second product cost ={string}")
-    public void the_second_product_cost(String cost) {
-        total+=Double.parseDouble(cost);
+    @When("the second product cost ={double}")
+    public void the_second_product_cost(Double cost) {
+        total+=(cost);
     }
 
-    @When("the third product cost={string}")
-    public void the_third_product_cost(String cost) {
-        total+=Double.parseDouble(cost);
+    @When("the third product cost={double}")
+    public void the_third_product_cost(Double cost) {
+        total+=(cost);
 
     }
 
-    @Then("the total order cost ={string}")
-    public void the_total_order_cost(String cost) {
-        total+=Double.parseDouble(cost);
+    @Then("the total order cost ={double}")
+    public void the_total_order_cost(Double cost) {
+        total+=(cost);
     }
 
-    @Then("the customer id ={string}")
-    public void the_customer_id(String customerId) {
-        assertEquals(order.getCustomer().getId(), Integer.parseInt(customerId));
+    @Then("the customer id ={int}")
+    public void the_customer_id(Integer customerId) {
+        assertEquals(order.getCustomer().getId(),(customerId));
 
     }
     @Then("the invoice will be generated")
