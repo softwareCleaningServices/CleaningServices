@@ -13,7 +13,7 @@ import najah.edu.Order;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DistributeOrderTest {
 
@@ -34,19 +34,18 @@ public class DistributeOrderTest {
 
     @Then("I get the worker who works on {string} category")
     public void i_get_the_worker_who_works_on_category(String category) {
-        assertTrue(this.category.equals(category));
+        assertEquals(this.category, category);
     }
 
     @Then("has the minimum number of waiting orders")
     public void has_the_minimum_number_of_waiting_orders() {
-        DistributeOrder distributeOrder=new DistributeOrder();
-       worker= distributeOrder.getWorker(order.getProducts().get(0));
+       worker= DistributeOrder.getWorker(order.getProducts().get(0));
     }
 
     @Then("the worker ID set to {int}")
     public void the_worker_id_set_to(Integer id) {
         System.out.println(worker.getId());
-    assertTrue(worker.getId()==id);
+        assertEquals(worker.getId(), (int) id);
         AdminLogin admin=new AdminLogin();
         admin.addOrder(order);
 
