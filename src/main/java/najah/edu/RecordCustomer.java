@@ -35,7 +35,10 @@ public class RecordCustomer {
     Login login=new Login();
     login.setEmail(customer.getEmail());
     login.setPassword(customer.getPassword());
+    login.setRul("customer");
     Data.storeObject("Login",login);
+    logger.info("You have been one of our Customer, Thank you!");
+        login.customerLogin();
 
     }
     public void takenMsg() {

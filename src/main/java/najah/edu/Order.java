@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Order {
 
-    private int id=13;
+    private int id;
     private Customer customer;
     private LocalDate date;
     private double total;
@@ -32,7 +32,7 @@ public class Order {
                 this.getDate() + "\t\t\t"+this.getTotal()+"\t\t\t" + this.getStatus() + "\t\t\t" + (paid ? "Yes" : "No") +
                 "\n");
         for (Product product:this.getProducts()){
-            str.append(product.toString());
+            str.append(product.toString()).append("  ").append(Data.getWorkerById(product.getWorkerId()).getName()).append("\n");
         }
              str.append("\t\t\n");
         return str.toString();
