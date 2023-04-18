@@ -1,27 +1,57 @@
 package test.classes;
 
-import entities.ProductFile;
+import entities.Category;
+import entities.Product;
+import entities.Worker;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import najah.edu.AdminLogin;
+import najah.edu.DistributeOrder;
 import najah.edu.Order;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DistributeOrderTest {
 
     Order order;
-    @Given("that the order is not recorder yet")
-    public void that_the_order_is_not_recorder_yet() {
-        order=new Order();
+    String category;
+    Worker worker;
+    @Given("that add order contains product with category ={string}")
+    public void that_add_order_contains_product_with_category(String category) {
+        List<Product> productList=new ArrayList<>();
+        productList.add(new Product("carpet","SDFG",4.0,"","DFGH", Category.valueOf(category),320.0,12,110)) ;
+        order=new Order(productList,"waiting");
+        this.category=category;
     }
-    @When("the order is added")
-    public void the_order_is_added() {
-    order=new Order(ProductFile.getProduct(),"waiting");
+
+    @When("select to add order")
+    public void select_to_add_order() {
     }
-    @Then("the worker who has less number of products is take the product")
-    public void the_worker_who_has_less_number_of_products_is_take_the_product() {
+
+    @Then("I get the worker who works on {string} category")
+    public void i_get_the_worker_who_works_on_category(String category) {
+        assertTrue(this.category.equals(category));
+    }
+
+    @Then("has the minimum number of waiting orders")
+    public void has_the_minimum_number_of_waiting_orders() {
+        DistributeOrder distributeOrder=new DistributeOrder();
+       worker= distributeOrder.getWorker(order.getProducts().get(0));
+    }
+
+    @Then("the worker ID set to {int}")
+    public void the_worker_id_set_to(Integer id) {
+        System.out.println(worker.getId());
+    assertTrue(worker.getId()==id);
         AdminLogin admin=new AdminLogin();
         admin.addOrder(order);
+
+
     }
+
 
 }
