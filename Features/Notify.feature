@@ -1,3 +1,4 @@
+
 Feature: Notify customer when the order complete
   Scenario: notify customer successfully
     Given the admin choose to change the order status

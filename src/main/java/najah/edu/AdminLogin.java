@@ -192,9 +192,6 @@ public class AdminLogin {
             logger.info("Order ID\tCustomer Name\t\tOrder Date\t\t\tTotal Coast\t\tOrder Status\nProducts: ");
             for (Order order:Data.getOrders()){
                 logger.info(order.getString());
-                for(Product product:order.getProducts()){
-                    logger.info(()-> String.valueOf(product));
-                }
                 logger.info("********************************************************************************************************************************");
             }
             orderMenu();
@@ -212,11 +209,11 @@ public class AdminLogin {
         List<Worker> workers = Data.getWorkers();
         logger.info("****************************************************Customers**********************************************************");
         logger.info("ID               Name                                Email                           Mobile Number" +
-                "                        Address  \t\t Category \t\tSalary\t\t Number of total product " +
+                "                        Address  \t\t\t\t\t Category \t\tSalary\t\t Number of total product " +
                 "");
         for (Worker worker:workers) {
             logger.info(worker.getId() + "\t\t\t\t" +worker.getName() + getSpaces(worker.getName()) + worker.getEmail() + getSpaces(worker.getEmail())
-                    + worker.getPhone() + getSpaces(worker.getPhone()) + worker.getAddress()+getSpaces(worker.getAddress())+worker.getSalary()+
+                    + worker.getPhone() + getSpaces(worker.getPhone()) + worker.getAddress()+getSpaces(worker.getAddress())+worker.getCategory()+getSpaces(String.valueOf(worker.getCategory()))+worker.getSalary()+
                     "\t\t"+worker.getNumOfProd()
             );
         }
@@ -458,33 +455,7 @@ public class AdminLogin {
     }
 
     public void invoice(Order order) {
-        try {
-            List<Order> list=Data.getOrders();
-            JasperReport report= JasperCompileManager.compileReport("CSS.jrxml");
-            Map<String,Object> parameters=new HashMap<>();
-            parameters.put("name",order.getCustomer().getFullName());
-            parameters.put("date",String.valueOf(order.getDate()));
-            parameters.put("address",order.getCustomer().getAddress());
-            parameters.put("tot", order.getTotal());
-            parameters.put("total", ProductFile.totalAfterDiscount(order));
-            parameters.put("discount", (int)(ProductFile.discount(order.getTotal())*100)+"%");
-            StringBuilder prod= new StringBuilder();
-            StringBuilder coast= new StringBuilder();
-            for(int i=0;i<order.getProducts().size();i++){
-                prod.append(order.getProducts().get(i).getName()).append("\n\n");
-                coast.append(order.getProducts().get(i).getCost()).append("\n\n");
-            }
-            parameters.put("product", prod.toString());
-            parameters.put("price", coast.toString());
-            JRBeanCollectionDataSource dataSource=new JRBeanCollectionDataSource(list);
-
-            JasperPrint print= JasperFillManager.fillReport(report,parameters,dataSource);
-            JasperViewer.viewReport(print, false);
-            JasperExportManager.exportReportToPdfFile(print,"C:\\Users\\Administrator\\JaspersoftWorkspace\\out.pdf");
-
-        } catch (Exception e) {
-            logger.info("Can't generate report");
-        }
+      InvoiceOrder.invoice(order,order.getTotal());
     }
     public String getSpaces(String att){
         return " ".repeat(Math.max(0, 35 - att.length()));

@@ -11,7 +11,23 @@ public class Product {
     private Double cost;
     private int orderId;
     private int workerId;
-    private double oneCarpetCoast=8.0;
+
+    public Product(String name, String pictureName, Double dimension, String material, String specialTreatment, Category category, Double cost, int orderId, int workerId) {
+        this.name = name;
+        this.pictureName = pictureName;
+        this.dimension = dimension;
+        this.material = material;
+        this.specialTreatment = specialTreatment;
+        this.category = category;
+        this.cost = cost;
+        this.orderId = orderId;
+        this.workerId = workerId;
+    }
+
+    public int getWorkerId() {
+        return workerId;
+    }
+
     public Product() {
 
     }

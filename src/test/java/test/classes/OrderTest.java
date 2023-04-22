@@ -7,52 +7,63 @@ import entities.ProductFile;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import najah.edu.Order;
 import najah.edu.AdminLogin;
+import najah.edu.Order;
 import najah.edu.RecordCustomer;
-
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class OrderTest {
-    Order order=new Order();
-    AdminLogin admin=new AdminLogin();
+    Order order;
+    AdminLogin admin;
     Customer customer;
     boolean added;
-    @Given("that the order is not added yet")
+    boolean exist;
+        @Given("that the order is not added yet")
     public void that_the_order_is_not_added_yet() {
         added=false;
+        order=new Order();
+        admin=new AdminLogin();
     }
-    @When("I enter the correct order details")
-    public void i_enter_the_correct_order_details() {
-        ArrayList<Product>products=new ArrayList<>();
+    @When("I enter the correct order details and the product details")
+    public void i_enter_the_correct_order_details_and_the_product_details() {
+        ArrayList<Product> products=new ArrayList<>();
         products.add(ProductFile.getProduct().get(0));
+        products.add(ProductFile.getProduct().get(1));
         order=new Order(products,"waiting");
-
-    }
-    @When("the customer is already exist in our customers")
-    public void the_customer_is_already_exist_in_our_customers() {
-         customer= Data.getCustomerBy("Ali Mohammed");
-        assertNotEquals(customer.getId(), 0);
-        order.setCustomer(customer);
     }
 
-    @Then("the order added successfully")
+    @When("the customer is already exist in our customers and his name={string}")
+    public void the_customer_is_already_exist_in_our_customers_and_his_name(String name) {
+       customer=Data.getCustomerBy(name);
+      exist= admin.isExistCustomer(customer.getId());
+    }
+
+    @Then("a unique order Id will generated to the order")
+    public void a_unique_order_id_will_generated_to_the_order() {
+       assertTrue(exist);
+       assertEquals(2,order.getProducts().size());
+       order.setId(Data.getOrderId());
+    }
+        @Then("the order added successfully")
     public void the_order_added_successfully() {
-        assertNotEquals(0,customer.getId());
-        admin.addOrder(order);
+            assertTrue(exist);
+            assertEquals(2,order.getProducts().size());
         System.out.println("The Order added successfully");
     }
-    @When("the customer is new customer")
-    public void the_customer_is_new_customer() {
-        customer= Data.getCustomerBy("Alaa Hasan");
-    }
 
-    @Then("I should add the customer details")
+
+    @When("the customer is new customer and his name={string}")
+    public void the_customer_is_new_customer_and_his_name(String name) {
+        customer=Data.getCustomerBy(name);
+        exist= admin.isExistCustomer(customer.getId());
+
+    }
+        @Then("I should add the customer details")
     public void i_should_add_the_customer_details() {
-        assertEquals(0, customer.getId());
+        assertFalse(exist);
         customer=new Customer("Alaa Hasan","alaa@gmail.com","056932146","Tulkarem","alaa20");
         RecordCustomer recordCustomer=new RecordCustomer();
         recordCustomer.addNewCustomer(customer);
@@ -60,7 +71,9 @@ public class OrderTest {
     @Then("the order added")
     public void the_order_added() {
     order.setCustomer(customer);
+        assertEquals(2, order.getProducts().size());
     admin.addOrder(order);
     System.out.println("The Order added successfully");
     }
+
 }

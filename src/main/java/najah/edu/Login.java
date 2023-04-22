@@ -59,9 +59,10 @@ public class Login {
     @Override
     public String toString() {
         return
-                 email +" " + password +" "  + "customer" + "\r\n";
-
+                 email +" " + password +" "  + rul + "\r\n";
     }
+
+
 
     public boolean isCorrectInfo() {
         int flag=0;
@@ -86,5 +87,20 @@ public class Login {
                 customerLogin.customerPage();
             }
         }
+    }
+
+    public void adminLogin() {
+        AdminLogin admin = new AdminLogin();
+        admin.adminMenu();
+    }
+
+    public void customerLogin() {
+        CustomerLogin customerLogin = new CustomerLogin();
+        customerLogin.setCustomer(Data.getCustomerBy(email));
+        customerLogin.menu();
+    }
+
+    public void loginPage() {
+        Main.menu();
     }
 }

@@ -3,6 +3,7 @@ package najah.edu;
 import entities.Data;
 import entities.Product;
 import entities.Worker;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.RandomAccessFile;
@@ -19,12 +20,14 @@ public class DistributeOrder {
         Worker worker=workers.get(0);
         int ind=0;
         for (Worker worker1:workers){
-            if(worker1.getCategory()==product.getCategory()){
-                if(min>worker1.getNumOfProd()) {
+            if(worker1.getCategory().equals(product.getCategory())){
+
+                if(min>worker1.getNumOfProd() ) {
                     worker = worker1;
                     ind=workers.indexOf(worker1);
                     min=worker1.getNumOfProd();
-                }            }
+                }
+            }
         }
         workers.get(ind).setNumOfProd();
         updateWorkerFile(workers);
@@ -45,5 +48,16 @@ public class DistributeOrder {
         catch(Exception e){
             logger.info("Error");
         }
+    }
+    public static int waitingOrdersForWorker(Worker worker){
+        int count=0;
+        for (Order order:Data.getOrders()){
+           for (Product product:order.getProducts()){
+               if(product.getWorkerId()==worker.getId() && order.getStatus().equalsIgnoreCase("waiting")){
+                   count++;
+               }
+           }
+        }
+        return count;
     }
 }

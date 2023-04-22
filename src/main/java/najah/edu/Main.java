@@ -6,32 +6,31 @@ import java.util.logging.Logger;
 
 public class Main {
     static Logger logger = Logger.getLogger(Main.class.getName());
-    public static int menu(){
+    public static void menu(){
         logger.info("Welcome to AR-Cleaning Services System");
-        Scanner in=new Scanner(System.in);
-        int option;
-        try {
             logger.info("If you want to login enter number 1");
             logger.info("If you are new customer enter number 2");
-            option = in.nextInt();
-        }
-        catch (InputMismatchException e){
-            logger.info("please enter a valid number");
-            option= menu();
-        }
-        return option;
+
     }
 
-    public static void main(String[]args){
-        int option=menu();
-        if(option==1){
-            userLogin();
-        }
-        else {
-            RecordCustomer recordCustomer=new RecordCustomer();
-            recordCustomer.newCustomer();
-            userLogin();
-        }
+    public static void main(String[]args) {
+
+        Scanner in = new Scanner(System.in);
+        int option = 0;
+
+            try {
+                menu();
+                option = in.nextInt();
+            } catch (InputMismatchException e) {
+                logger.info("please enter a valid number");
+                main(new String[5]);
+            }
+            if (option == 1) {
+                userLogin();
+            } else if(option==2) {
+                RecordCustomer recordCustomer = new RecordCustomer();
+                recordCustomer.newCustomer();
+            }
 
     }
 
