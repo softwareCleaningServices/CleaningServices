@@ -15,6 +15,7 @@ Customer customer;
     @Given("that I choose to record new customer")
     public void thatIChooseToRecordNewCustomer() {
       recordCustomer=new RecordCustomer();
+      customer=new Customer();
     }
     @When("I enter the correct required customer information")
     public void iEnterTheCorrectRequiredCustomerInformation() {
@@ -37,6 +38,7 @@ Customer customer;
     @Then("confirmation email will be sent to customer")
     public void confirmationEmailWillBeSentToCustomer() {
         assertTrue(customer.isValidEmail());
+        assertTrue(Data.getCustomers().contains(customer));
         customer.sendEmail("Signup","Hello You are Signed-Up to Cleaning System Company Welcome to our application","We send a confirmation message to customer on email");
     }
 

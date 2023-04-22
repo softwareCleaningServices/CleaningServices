@@ -18,6 +18,7 @@ AdminLogin admin;
     public void that_the_worker_is_not_added_yet() {
         worker=new Worker();
         admin=new AdminLogin();
+
     }
     @When("the admin enter the worker Name {string}")
     public void the_admin_enter_the_worker_name(String name) {
