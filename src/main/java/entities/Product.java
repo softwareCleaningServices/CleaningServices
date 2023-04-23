@@ -114,23 +114,26 @@ public class Product {
         return String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s", name, pictureName, dimension==null?"":dimension,numOfSofa==null?"":numOfSofa,cover==null?"":cover, material, specialTreatment, category, cost, orderId,workerId);
     }
     public static double carpetCost(Double dimension){
-        return dimension * 8.0;
+        double []costCat = ProductFile.getCostOfCategory();
+        return dimension * costCat[0];
     }
     public static double sofaCost(Integer numOfSofa){
-        return numOfSofa * 25.0;
+        double []costCat = ProductFile.getCostOfCategory();
+        return numOfSofa * costCat[1];
     }
     public static double coverCost(String sizeOfCover){
         double costOfProduct = 0.0;
+        double []costCat = ProductFile.getCostOfCategory();
         if(sizeOfCover.equalsIgnoreCase("KING")){
-            costOfProduct=20.0;
+            costOfProduct=costCat[2];
         }else if (sizeOfCover.equalsIgnoreCase("QUEEN")) {
-            costOfProduct=18.0;
+            costOfProduct=costCat[3];
         }else if (sizeOfCover.equalsIgnoreCase("TWIN_XL")) {
-            costOfProduct=12.0;
+            costOfProduct=costCat[4];
         }else if (sizeOfCover.equalsIgnoreCase("TWIN")) {
-            costOfProduct=10.0;
+            costOfProduct=costCat[5];
         }else if (sizeOfCover.equalsIgnoreCase("CRIB")) {
-            costOfProduct=8.0;
+            costOfProduct=costCat[6];
         }
         return costOfProduct;
     }

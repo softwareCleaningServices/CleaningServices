@@ -1,15 +1,22 @@
 package najah.edu;
 
 import entities.*;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Logger;
 
 import static entities.Data.*;
 
 public class BusinessReport {
+    static Logger logger = Logger.getLogger(BusinessReport.class.getName());
     private BusinessReport(){
 
     }
@@ -95,5 +102,34 @@ public class BusinessReport {
             }
         }
         return numCover;
+    }
+    public static void businessReport() {
+        try {
+            List<Order> list=Data.getOrders();
+            JasperReport report= JasperCompileManager.compileReport("report.jrxml");
+            Map<String,Object> parameters=new HashMap<>();
+            parameters.put("all_customers",numberOfAllCustomers());
+            int []peopleWork=numberOfAllWorker();
+            parameters.put("all_workers",peopleWork[0]);
+            parameters.put("sofas_worker",peopleWork[1]);
+            parameters.put("carpet_worker",peopleWork[2]);
+            parameters.put("cover_worker",peopleWork[3]);
+            parameters.put("all_order",numberOfAllOrdersInThisMonth());
+            parameters.put("sofa_order",numberOfSofaInThisMonth());
+            parameters.put("carpet_order",numberOfCarpetInThisMonth());
+            int[]cover=numberOfCoverInThisMonth();
+            parameters.put("cover_order",cover[0]);
+            parameters.put("king_order",cover[1]);
+            parameters.put("queen_order",cover[2]);
+            parameters.put("twin_xl_order",cover[3]);
+            parameters.put("twin_order",cover[4]);
+            parameters.put("crib_order",cover[5]);
+            JRBeanCollectionDataSource dataSource=new JRBeanCollectionDataSource(list);
+            JasperPrint print= JasperFillManager.fillReport(report,parameters,dataSource);
+            JasperViewer.viewReport(print, false);
+            JasperExportManager.exportReportToPdfFile(print,"C:\\Users\\Administrator\\JaspersoftWorkspace\\rep.pdf");
+        } catch (JRException ignored) {
+            logger.info("Can't generate report");
+        }
     }
 }

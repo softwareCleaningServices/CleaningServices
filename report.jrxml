@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="637856b5-46f8-4459-b2dc-a01ed47a8cbb">
+	<parameter name="all_customers" class="java.lang.Integer"/>
+	<parameter name="all_workers" class="java.lang.Integer"/>
+	<parameter name="sofas_worker" class="java.lang.Integer"/>
+	<parameter name="carpet_worker" class="java.lang.Integer"/>
+	<parameter name="cover_worker" class="java.lang.Integer"/>
+	<parameter name="all_order" class="java.lang.Integer"/>
+	<parameter name="sofa_order" class="java.lang.Integer"/>
+	<parameter name="carpet_order" class="java.lang.Integer"/>
+	<parameter name="cover_order" class="java.lang.Integer"/>
+	<parameter name="king_order" class="java.lang.Integer"/>
+	<parameter name="queen_order" class="java.lang.Integer"/>
+	<parameter name="twin_xl_order" class="java.lang.Integer"/>
+	<parameter name="twin_order" class="java.lang.Integer"/>
+	<parameter name="crib_order" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="157" y="-1" width="240" height="50" uuid="935ee4d0-e65f-4b76-8edc-b7dc557927f1"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif" size="30"/>
+				</textElement>
+				<text><![CDATA[Business Report]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="485" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="10" width="300" height="30" uuid="948fbbd7-2e8c-49e4-834a-64533c719802"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="16"/>
+				</textElement>
+				<text><![CDATA[Number of all customers:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="50" width="300" height="30" uuid="62bacecb-a44c-4d65-b3f3-3aadcdcb5a3c"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="16"/>
+				</textElement>
+				<text><![CDATA[Number of all workers:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="80" width="300" height="30" uuid="9e6f2086-181e-4e92-8ee4-9fffe09d08a8"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="16"/>
+				</textElement>
+				<text><![CDATA[Number of sofa worker:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="110" width="300" height="30" uuid="f2a629d1-fc95-4ab3-bec5-3665e70f470e"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="16"/>
+				</textElement>
+				<text><![CDATA[Number of carpet worker:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="140" width="300" height="30" uuid="6ecf83b3-deef-4142-a4a7-94ba068529fa"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="16"/>
+				</textElement>
+				<text><![CDATA[Number of cover worker:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="180" width="300" height="30" uuid="77cd344a-ac6e-4f34-a61b-7d6b147adcff"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="16"/>
+				</textElement>
+				<text><![CDATA[Number of all order in this month:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="210" width="300" height="30" uuid="01f23dd2-19ec-4e41-ac45-5bf2c7f98805"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="16"/>
+				</textElement>
+				<text><![CDATA[Number of sofa order in this month:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="240" width="300" height="30" uuid="b4893e27-d271-4613-bae1-00a24399bcc2"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="16"/>
+				</textElement>
+				<text><![CDATA[Number of carpet order in this month:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="280" width="300" height="30" uuid="ff332ab6-2b16-4ff7-9075-4500af2b7051"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="16"/>
+				</textElement>
+				<text><![CDATA[Number of cover order in this month:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="310" width="300" height="30" uuid="0ef54084-7b30-4ff0-be3e-bf276e2178a6"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="16"/>
+				</textElement>
+				<text><![CDATA[Number of king cover order in this month:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="340" width="300" height="30" uuid="14c394d7-9c5e-4f99-bee2-c843e8e8aa9a"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="16"/>
+				</textElement>
+				<text><![CDATA[Number of queen cover order in this month:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="370" width="300" height="30" uuid="332197fb-b5b2-4b6b-a94b-135462339290"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="16"/>
+				</textElement>
+				<text><![CDATA[Number of Twin_xl cover order in this month:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="400" width="300" height="30" uuid="2498d265-12bd-4329-87a6-d5bea903eff7"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="16"/>
+				</textElement>
+				<text><![CDATA[Number of Twin cover order in this month:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="430" width="300" height="30" uuid="4db3650e-75b7-4637-8cf0-eaaac5d217e8"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="16"/>
+				</textElement>
+				<text><![CDATA[Number of crib cover order in this month:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="310" y="10" width="210" height="30" uuid="4eedad24-faf6-4a77-b328-f6455612366f"/>
+				<textElement>
+					<font fontName="Serif" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{all_customers}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="50" width="210" height="30" uuid="b6bf5c4f-08a3-4297-8e00-2ca552becd0b"/>
+				<textElement>
+					<font fontName="Serif" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{all_workers}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="80" width="210" height="30" uuid="8b797362-db2b-4f9d-a7fb-aa29f8bc3c75"/>
+				<textElement>
+					<font fontName="Serif" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{sofas_worker}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="110" width="210" height="30" uuid="c1626ec9-a074-4d3a-97aa-6586922577a5"/>
+				<textElement>
+					<font fontName="Serif" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{carpet_worker}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="140" width="210" height="30" uuid="31e5f19c-3357-4fe8-92a1-e60dcfeb60ea"/>
+				<textElement>
+					<font fontName="Serif" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cover_worker}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="180" width="210" height="30" uuid="b37fd46f-3de2-48d3-b867-7decfabeff87"/>
+				<textElement>
+					<font fontName="Serif" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{all_order}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="210" width="210" height="30" uuid="6d03c7dd-1567-4031-8efa-5e7114151373"/>
+				<textElement>
+					<font fontName="Serif" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{sofa_order}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="240" width="210" height="30" uuid="06c246f4-0d55-4ec5-a18f-2d832ed734ce"/>
+				<textElement>
+					<font fontName="Serif" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{carpet_order}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="280" width="210" height="30" uuid="9fb393e1-9d30-44f9-a897-304ac5a019be"/>
+				<textElement>
+					<font fontName="Serif" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cover_order}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="310" width="210" height="30" uuid="44f6cb9f-fc9d-458b-9f0d-c0c0ec0c592f"/>
+				<textElement>
+					<font fontName="Serif" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{king_order}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="340" width="210" height="30" uuid="a79adfe3-50d8-447f-a337-939a42cfb1cc"/>
+				<textElement>
+					<font fontName="Serif" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{queen_order}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="370" width="210" height="30" uuid="46f00014-caf6-4e36-9ea1-c881c5bfdfef"/>
+				<textElement>
+					<font fontName="Serif" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{twin_xl_order}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="400" width="210" height="30" uuid="b12fa768-ff57-4152-bc91-b0de17f33383"/>
+				<textElement>
+					<font fontName="Serif" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{twin_order}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="430" width="210" height="30" uuid="db499d44-0212-4084-aaa3-e2fcd74b2325"/>
+				<textElement>
+					<font fontName="Serif" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{crib_order}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+</jasperReport>

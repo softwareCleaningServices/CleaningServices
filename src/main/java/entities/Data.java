@@ -44,9 +44,10 @@ public class Data {
         ){
             writer.write("");
             writer.flush();
-    }catch (Exception ignored) {
+        }catch (Exception ignored) {
+
         }
-        }
+    }
     static Logger logger = Logger.getLogger(Data.class.getName());
     public static List<Login> users(){
         List<Login> list = new ArrayList<>();
