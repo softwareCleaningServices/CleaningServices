@@ -127,6 +127,7 @@ public class ProductFile { //Create Read Update Delete
                     break;
             }
             logger.info("Do you need to change the cost of another category?\"yes or no\"");
+            input.nextLine();//to throw away the \n
             String ans = input.nextLine();
             if (ans.equalsIgnoreCase("no")) {
                 break;
