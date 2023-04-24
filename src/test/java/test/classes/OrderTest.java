@@ -1,17 +1,15 @@
 package test.classes;
 
-import entities.Customer;
-import entities.Data;
-import entities.Product;
-import entities.ProductFile;
+import entities.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import najah.edu.AdminLogin;
 import najah.edu.Order;
-import najah.edu.RecordCustomer;
+import org.junit.Before;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,61 +17,75 @@ public class OrderTest {
     Order order;
     AdminLogin admin;
     Customer customer;
-    boolean added;
+
     boolean exist;
-        @Given("that the order is not added yet")
-    public void that_the_order_is_not_added_yet() {
-        added=false;
+    List<Product>products;
+    List<Customer>customers=new ArrayList<>();
+    @Before
+    public void setUp(){
+        customers=new ArrayList<>();
+        customers.add(new Customer("Khalid","khalid@gmail.com","059823135","Nablus","khall"));
+        customers.add(new Customer("Ali Mohammed","ali@gmail.com","059872345","Tulkarem","ali"));
+    }
+    @Given("a customer with name {string} and id={int}")
+    public void a_customer_with_name_and_id(String name, Integer id) {
+        customer=Data.getCustomerBy(name);
+        customer=Data.getCustomerById(id);
+    }
+
+    @Given("a product with name {string} and category={string} and dimension={double} and material={string} and specialTerminate={string} and coast= {double}")
+    public void a_product_with_name_and_category_and_dimension_and_material_and_special_terminate_and_coast(String name, String category, Double dimension, String material, String sp, Double coast) {
+        products=new ArrayList<>();
+        products.add(new Product(name,"pic",dimension,material,sp, Category.valueOf(category),coast));
+    }
+
+    @Given("a product with name {string} and category={string} and size={string} and material={string} and specialTerminate={string} and coast= {double}")
+    public void a_product_with_name_and_category_and_size_and_material_and_special_terminate_and_coast(String name, String category, String size, String material, String sp, Double coast) {
+        products.add(new Product(name,"pic",SizeOfCover.valueOf(size),material,sp, Category.valueOf(category),coast));
+    }
+
+    @When("the customer orders the two products")
+    public void the_customer_orders_the_two_products() {
         order=new Order();
-        admin=new AdminLogin();
-    }
-    @When("I enter the correct order details and the product details")
-    public void i_enter_the_correct_order_details_and_the_product_details() {
-        ArrayList<Product> products=new ArrayList<>();
-        products.add(ProductFile.getProduct().get(0));
-        products.add(ProductFile.getProduct().get(1));
-        order=new Order(products,"waiting");
+        order.setProducts(products);
     }
 
-    @When("the customer is already exist in our customers and his name={string}")
-    public void the_customer_is_already_exist_in_our_customers_and_his_name(String name) {
-       customer=Data.getCustomerBy(name);
-      exist= admin.isExistCustomer(customer.getId());
+    @Then("a new order should be created with status={string}")
+    public void a_new_order_should_be_created_with_status(String status) {
+        assertTrue(customer.getId()!=0);
+        assertNotNull(customer);
+        order=new Order(products,status);
     }
 
+    @Then("the order should have a total price of {double}")
+    public void the_order_should_have_a_total_price_of(Double total) {
+        assertEquals(total,order.getTotal());
+        assertTrue(customer.getId()!=0);
+        exist=true;
+        order.setCustomer(customer);
+    }
     @Then("a unique order Id will generated to the order")
     public void a_unique_order_id_will_generated_to_the_order() {
-       assertTrue(exist);
-       assertEquals(2,order.getProducts().size());
-       order.setId(Data.getOrderId());
+        assertTrue(exist);
+        assertEquals(2,order.getProducts().size());
+        order.setId(Data.getOrderId());
+        admin=new AdminLogin();
     }
-        @Then("the order added successfully")
+    @Then("the order added successfully")
     public void the_order_added_successfully() {
-            assertTrue(exist);
-            assertEquals(2,order.getProducts().size());
+        assertTrue(exist);
+        assertEquals(2,order.getProducts().size());
+        admin.addOrder(order);
         System.out.println("The Order added successfully");
     }
-
-
-    @When("the customer is new customer and his name={string}")
-    public void the_customer_is_new_customer_and_his_name(String name) {
-        customer=Data.getCustomerBy(name);
-        exist= admin.isExistCustomer(customer.getId());
-
-    }
-        @Then("I should add the customer details")
+    @Then("I should add the customer details")
     public void i_should_add_the_customer_details() {
         assertFalse(exist);
         customer=new Customer("Alaa Hasan","alaa@gmail.com","056932146","Tulkarem","alaa20");
-        RecordCustomer recordCustomer=new RecordCustomer();
-        recordCustomer.addNewCustomer(customer);
+        customers.add(customer);
     }
-    @Then("the order added")
-    public void the_order_added() {
-    order.setCustomer(customer);
-        assertEquals(2, order.getProducts().size());
-    admin.addOrder(order);
-    System.out.println("The Order added successfully");
-    }
+
+
+
 
 }
