@@ -16,17 +16,16 @@ public class Invoice_Test {
     double total=0;
     @Given("that the admin is logged in")
     public void that_the_admin_is_logged_in() {
-       admin=new AdminLogin();
-       admin.setLogged(true);
+        admin=new AdminLogin();
+        admin.setLogged(true);
     }
 
     @When("the admin enter the order Id ={int}")
     public void the_admin_enter_the_order_id(Integer orderId) {
-    InvoiceOrder invoice =new InvoiceOrder();
-    order= Data.getOrderByID(orderId);
-    invoice.setOrder(order);
+        InvoiceOrder invoice =new InvoiceOrder();
+        order= Data.getOrderByID(orderId);
+        invoice.setOrder(order);
     }
-
     @When("the first product coast ={double}")
     public void the_first_product_coast(Double cost) {
         total+=(cost);
@@ -45,7 +44,7 @@ public class Invoice_Test {
 
     @Then("the total order cost ={double}")
     public void the_total_order_cost(Double cost) {
-        total+=(cost);
+        assertEquals(total,cost);
     }
 
     @Then("the customer id ={int}")
@@ -61,13 +60,13 @@ public class Invoice_Test {
     @Then("the order will set to paid")
     public void theOrderWillSetToPaid() {
         assertTrue(admin.isExistOrder(order.getId()));
-       order.setPaid(true);
+        order.setPaid(true);
     }
 
 
-    @When("the admin enter not exist order Id to invoiced")
-    public void the_admin_enter_not_exist_order_id_to_invoiced() {
-       order.setId(9);
+    @When("the admin enter not exist order Id={int} to invoiced")
+    public void theAdminEnterNotExistOrderIdToInvoiced(Integer orderId) {
+        order.setId(orderId);
     }
     @Then("the order Id is not exist on the recorded ordered")
     public void the_order_id_is_not_exist_on_the_recorded_ordered() {
