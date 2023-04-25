@@ -1,18 +1,19 @@
-Feature: Distribute order products on the available workers based on product category and the available worker
+Feature: Distribute Orders on Available Workers
+
+  Scenario: Distribute orders on available workers
+    Given a list of available workers
+    And a list of orders to be distributed with status="waiting"
+    When the admin select the distribution process
+    Then the orders should be evenly distributed among the available workers
+    And the orders status should change to "in terminate"
+
+  Scenario: there is no available workers
+    Given no workers are available
+    And a list of orders to be distributed with status="waiting"
+    When the admin select the distribution process
+    Then the system should show that there are no available workers
 
 
-  Scenario: add order product with Carpet category
-    Given that add order contains product with category ="CARPET"
-    When select to add order
-    Then I get the worker who works on "CARPET" category
-    And has the minimum number of waiting orders
-    And the worker ID set to 110
 
-  Scenario: add order product with Cover category
-    Given that add order contains product with category ="COVER"
-    When select to add order
-    Then I get the worker who works on "COVER" category
-    And has the minimum number of waiting orders
-    And the worker ID set to 120
 
 
