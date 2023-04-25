@@ -10,9 +10,8 @@ public class Product {
     private SizeOfCover cover;
     private Double cost;
     private int orderId;
-    private int workerId;
 
-    public Product(String name, String pictureName, Double dimension, String material, String specialTreatment, Category category, Double cost, int orderId, int workerId) {
+    public Product(String name, String pictureName, Double dimension, String material, String specialTreatment, Category category, Double cost, int orderId) {
         this.name = name;
         this.pictureName = pictureName;
         this.dimension = dimension;
@@ -21,11 +20,28 @@ public class Product {
         this.category = category;
         this.cost = cost;
         this.orderId = orderId;
-        this.workerId = workerId;
     }
 
-    public int getWorkerId() {
-        return workerId;
+    public Product(String name, String picName, double dimension, String material, String specialTreatment, Category category, double cost) {
+        this.name = name;
+        this.pictureName = picName;
+        this.dimension = dimension;
+        this.material = material;
+        this.specialTreatment = specialTreatment;
+        this.category = category;
+        this.cost = cost;
+
+    }
+
+    public Product(String name, String picName, SizeOfCover sizeOfCover, String material, String specialTreatment, Category category, double cost) {
+        this.name = name;
+        this.pictureName = picName;
+        this.setCover(sizeOfCover);
+        this.material = material;
+        this.specialTreatment = specialTreatment;
+        this.category = category;
+        this.cost = cost;
+
     }
 
     public Product() {
@@ -42,7 +58,6 @@ public class Product {
         setCover(builder.cover);
         setCost(builder.cost);
         setOrderId(builder.orderId);
-        setWorkerId(builder.workerId);
 
     }
     public void setOrderId(int orderId) {
@@ -75,9 +90,6 @@ public class Product {
         return name;
     }
 
-    public void setWorkerId(int workerId) {
-        this.workerId = workerId;
-    }
 
     public void setName(String name) {
         this.name = name;
@@ -111,7 +123,7 @@ public class Product {
     @Override
     public String toString() {
 
-        return String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s", name, pictureName, dimension==null?"":dimension,numOfSofa==null?"":numOfSofa,cover==null?"":cover, material, specialTreatment, category, cost, orderId,workerId);
+        return String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s", name, pictureName, dimension==null?"":dimension,numOfSofa==null?"":numOfSofa,cover==null?"":cover, material, specialTreatment, category, cost, orderId);
     }
     public static double carpetCost(Double dimension){
         double []costCat = ProductFile.getCostOfCategory();
@@ -154,7 +166,6 @@ public class Product {
         private Category category;
         private SizeOfCover cover;
         private Double cost;
-        private int workerId;
         private Builder() {
             name=null;
             pictureName=null;
@@ -176,10 +187,7 @@ public class Product {
             this.name = name;
             return this;
         }
-        public Builder setWorkerId(int workerId) {
-            this.workerId = workerId;
-            return this;
-        }
+
 
         public Builder setOrderId(int orderId) {
             this.orderId = orderId;

@@ -1,9 +1,7 @@
 package entities;
 
-import najah.edu.DistributeOrder;
 import najah.edu.Order;
 
-import java.io.FileNotFoundException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,9 +34,7 @@ public class ProductFile { //Create Read Update Delete
                         .setSpecialTreatment(array[6])
                         .setCategory(Category.valueOf(array[7]))
                         .setCost(Double.parseDouble(array[8]))
-                        .setWorkerId(Integer.parseInt(array[10]))
                         .setOrderId(Integer.parseInt(array[9]))
-                        .setWorkerId(Integer.parseInt(array[10]))
                         .build();
                 products.add(product);
             }
@@ -51,8 +47,6 @@ public class ProductFile { //Create Read Update Delete
     public static void storeProducts(List<Product> products) {
         try(RandomAccessFile writer = new RandomAccessFile("src/main/resources/Back/product", "rw")){
             for (Product product:products) {
-              Worker worker= DistributeOrder.getWorker(product);
-                product.setWorkerId(worker.getId());
                 writer.seek(writer.length());
                 writer.write(product.toString().getBytes());
                 writer.write("\n".getBytes());
