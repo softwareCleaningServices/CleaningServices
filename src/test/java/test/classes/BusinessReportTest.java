@@ -62,7 +62,7 @@ public class BusinessReportTest {
 
     @Given("that needs the number of all business worker in category sofa")
     public void thatNeedsTheNumberOfAllBusinessWorkerInCategorySofa() {
-        workers=new ArrayList<>();
+        workers=getWorkers();
     }
 
     @Then("calculate number of all business worker in category sofa")
@@ -78,13 +78,13 @@ public class BusinessReportTest {
 
     @Given("that needs the number of all business worker in category carpet")
     public void thatNeedsTheNumberOfAllBusinessWorkerInCategoryCarpet() {
-        workers=new ArrayList<>();
+        workers=getWorkers();
     }
 
     @Then("calculate number of all business worker in category carpet")
     public void calculateNumberOfAllBusinessWorkerInCategoryCarpet() {
         for (Worker worker:workers) {
-            if(worker.getCategory() == Category.SOFA){
+            if(worker.getCategory() == Category.CARPET){
                 numCarpetWorker++;
             }
         }
@@ -94,13 +94,13 @@ public class BusinessReportTest {
 
     @Given("that needs the number of all business worker in category cover")
     public void thatNeedsTheNumberOfAllBusinessWorkerInCategoryCover() {
-        workers=new ArrayList<>();
+        workers=getWorkers();
     }
 
     @Then("calculate number of all business worker in category cover")
     public void calculateNumberOfAllBusinessWorkerInCategoryCover() {
         for (Worker worker:workers) {
-            if(worker.getCategory() == Category.SOFA){
+            if(worker.getCategory() == Category.COVER){
                 numCoverWorker++;
             }
         }

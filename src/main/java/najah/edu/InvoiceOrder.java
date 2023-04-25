@@ -15,9 +15,8 @@ import static najah.edu.Main.logger;
 public class InvoiceOrder {
     Order order;
     public InvoiceOrder(){
-
+        //not used
     }
-
     public static void invoice(Order order, double total) {
         try {
             List<Order> list= Data.getOrders();
@@ -47,7 +46,6 @@ public class InvoiceOrder {
             logger.info("Can't generate report");
         }
     }
-
     public void setOrder(Order order) {
         this.order=order;
     }

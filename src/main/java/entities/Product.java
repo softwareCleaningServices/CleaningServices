@@ -10,7 +10,6 @@ public class Product {
     private SizeOfCover cover;
     private Double cost;
     private int orderId;
-
     public Product(String name, String pictureName, Double dimension, String material, String specialTreatment, Category category, Double cost, int orderId) {
         this.name = name;
         this.pictureName = pictureName;

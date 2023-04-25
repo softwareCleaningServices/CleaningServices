@@ -15,17 +15,68 @@ import java.util.regex.Pattern;
 public class Customer {
     private int id;
     private String fullName;
-    private Customer existCustomer;
     private String password;
     private String email;
     private String address;
     private String phone;
+    private Customer existCustomer;
     Logger logger = Logger.getLogger(Customer.class.getName());
+    public Customer() {
+    }
+    public Customer(int id,String fullName, String email, String phone, String address,String password) {
+        this.id =id;
+        this.fullName=fullName;
+        this.address=address;
+        this.phone = phone;
+        this.email = email;
+        this.password=password;
+    }
+    public Customer(String fullName, String email, String phone, String address, String password){
+        this.id =Data.getId();
+        this.fullName=fullName;
+        this.address=address;
+        this.phone = phone;
+        this.email = email;
+        this.password=password;
+    }
     public int getId() {
         return id;
     }
+    public void setId(int id) {
+        this.id = id;
+    }
+    public String getFullName() {
+        return fullName;
+    }
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public String getAddress() {
+        return address;
+    }
+    public void setAddress(String address) {
+        this.address = address;
+    }
     public String getPhone() {
         return phone;
+    }
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+    public Customer getCustomerDetails() {
+        return existCustomer;
     }
     @Override
     public boolean equals(Object o) {
@@ -36,68 +87,18 @@ public class Customer {
 
         return Objects.equals(id, customer.id);
     }
-    public void setPhone(String phone) {
-        this.phone = phone;
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (fullName != null ? fullName.hashCode() : 0);
+        result = 31 * result + (existCustomer != null ? existCustomer.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + (phone != null ? phone.hashCode() : 0);
+        result = 31 * result + (logger != null ? logger.hashCode() : 0);
+        return result;
     }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    public Customer(int id,String fullName, String email, String phone, String address,String password) {
-        this.id =id;
-        this.fullName=fullName;
-        this.address=address;
-        this.phone = phone;
-        this.email = email;
-        this.password=password;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public Customer(String fullName, String email, String phone, String address, String password){
-        this.id =Data.getId();
-        this.fullName=fullName;
-        this.address=address;
-        this.phone = phone;
-        this.email = email;
-        this.password=password;
-    }
-
-
-    public Customer() {
-    }
-
-
     @Override
     public String toString() {
         return  id +
@@ -107,7 +108,6 @@ public class Customer {
                 "," + address +
                 "," + password +"\r\n";
     }
-
     public boolean isTakenEmail(){
         List<Customer> customers;
         customers= Data.getCustomers();
@@ -122,15 +122,12 @@ public class Customer {
         return flag == 1;
 
     }
-
-
     public boolean isValidEmail() {
         String emailRegex= "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
         Pattern emailPat=Pattern.compile (emailRegex, Pattern.CASE_INSENSITIVE);
         Matcher matcher=emailPat.matcher (this.getEmail());
         return matcher.find();
     }
-
     public void sendEmail(String title,String message,String msg){
         final String user = "rubasalon5@gmail.com";
         final String password = "wntxcpwbkocnjjdm";
@@ -157,25 +154,8 @@ public class Customer {
             Transport.send(message1);
             logger.info(msg);
         } catch (Exception ignored) {
-
+            //ignored
         }
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (fullName != null ? fullName.hashCode() : 0);
-        result = 31 * result + (existCustomer != null ? existCustomer.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (address != null ? address.hashCode() : 0);
-        result = 31 * result + (phone != null ? phone.hashCode() : 0);
-        result = 31 * result + (logger != null ? logger.hashCode() : 0);
-        return result;
-    }
-
-    public Customer getCustomerDetails() {
-        return existCustomer;
     }
 
 }

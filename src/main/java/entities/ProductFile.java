@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
-public class ProductFile { //Create Read Update Delete
+public class ProductFile {
     static RandomAccessFile fromFile;
     static Logger logger = Logger.getLogger(ProductFile.class.getName());
     public static List<Product> getProduct() {
@@ -84,9 +84,10 @@ public class ProductFile { //Create Read Update Delete
         }
         return disc;
     }
-    public static void updateCostOfCategory(){
+    public static void updateCostOfCategory() {
         Scanner input = new Scanner(System.in);
-        double []costCat = getCostOfCategory();
+        double[] costCat;
+        double cost=0;
         while (true) {
             logger.info("To change cost of carpet enter 1");
             logger.info("To change cost of sofa enter 2");
@@ -96,30 +97,11 @@ public class ProductFile { //Create Read Update Delete
             logger.info("To change cost of TWIN cover enter 6");
             logger.info("To change cost of CRIB cover enter 7");
             int num = input.nextInt();
-            logger.info("Enter the new Cost");
-            switch (num) {
-                case 1:
-                    costCat[0] = input.nextDouble();
-                    break;
-                case 2:
-                    costCat[1] = input.nextDouble();
-                    break;
-                case 3:
-                    costCat[2] = input.nextDouble();
-                    break;
-                case 4:
-                    costCat[3] = input.nextDouble();
-                    break;
-                case 5:
-                    costCat[4] = input.nextDouble();
-                    break;
-                case 6:
-                    costCat[5] = input.nextDouble();
-                    break;
-                case 7:
-                    costCat[7] = input.nextDouble();
-                    break;
+            if(num >=0 && num <=7){
+                logger.info("Enter the new Cost");
+                cost = input.nextDouble();
             }
+            costCat = switchInUpdateCostOfCategory(num, cost);
             logger.info("Do you need to change the cost of another category?\"yes or no\"");
             input.nextLine();//to throw away the \n
             String ans = input.nextLine();
@@ -128,6 +110,35 @@ public class ProductFile { //Create Read Update Delete
             }
         }
         storeCostOfCategory(costCat);
+    }
+    public static double [] switchInUpdateCostOfCategory(int num,double cost){
+        double []costCat = getCostOfCategory();
+        switch (num) {
+            case 1:
+                costCat[0] = cost;
+                break;
+            case 2:
+                costCat[1] = cost;
+                break;
+            case 3:
+                costCat[2] = cost;
+                break;
+            case 4:
+                costCat[3] = cost;
+                break;
+            case 5:
+                costCat[4] = cost;
+                break;
+            case 6:
+                costCat[5] = cost;
+                break;
+            case 7:
+                costCat[7] = cost;
+                break;
+            default:
+                logger.info("error!no category in this number");
+        }
+        return costCat;
     }
     public static double[] getCostOfCategory(){
         double []costCat=new double[7];

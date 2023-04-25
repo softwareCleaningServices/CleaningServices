@@ -7,8 +7,14 @@ public class Admin {
     private String password;
 
     public Admin() {
+        //don't use it
     }
-
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String name) {
+        this.email = name;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -19,20 +25,10 @@ public class Admin {
         if (!Objects.equals(email, admin.email)) return false;
         return Objects.equals(password, admin.password);
     }
-
     @Override
     public int hashCode() {
         int result = email != null ? email.hashCode() : 0;
         result = 31 * result + (password != null ? password.hashCode() : 0);
         return result;
-    }
-
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String name) {
-        this.email = name;
     }
 }
