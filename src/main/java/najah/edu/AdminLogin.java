@@ -11,12 +11,12 @@ public class AdminLogin {
     Admin admin=new Admin();
     Logger logger = Logger.getLogger(AdminLogin.class.getName());
     String msg="Enter valid number";
+    String msgInv="Invalid Input, try again";
+    String statusString ="waiting";
     private boolean logged;
-
     public void setEmail(String email) {
         this.admin.setEmail(email);
     }
-
     public void adminMenu() {
         logger.info("To see all customers details enter number 1 ");
         logger.info("To see all workers details enter number 2 ");
@@ -70,7 +70,7 @@ public class AdminLogin {
 
         }
         catch (InputMismatchException e){
-            logger.info("Invalid Input, try again");
+            logger.info(msgInv);
             deleteCustomer();
         }
         deleteCustomer(customer);
@@ -117,7 +117,6 @@ public class AdminLogin {
             orderOptions(x);
         }
     }
-
     public void orderOptions(int x) {
         Scanner in=new Scanner(System.in);
         if(x==1){
@@ -148,12 +147,10 @@ public class AdminLogin {
         }
 
     }
-
     public boolean isExistOrder(int id) {
         Order order=Data.getOrderByID(id);
         return order.getId()==id;
     }
-
     public void changeStatus(int orderId,String status){
         List<Order>orders=Data.getOrders();
         Customer customer=new Customer();
@@ -168,7 +165,6 @@ public class AdminLogin {
         notifyCustomer(customer);
 
     }
-
     public void adminOptions(int option){
         if (option == 1) {
             List<Customer> customers = Data.getCustomers();
@@ -224,7 +220,6 @@ public class AdminLogin {
         }
         workerMenu();
     }
-
     private void workerMenu() {
         while (true) {
             logger.info("If you want to add new worker enter number 1");
@@ -251,7 +246,6 @@ public class AdminLogin {
             workerOptions(x);
         }
     }
-
     public void workerOptions(int x) {
         if(x==1){
             recordWorker();
@@ -261,7 +255,6 @@ public class AdminLogin {
             updateWorker();
         }
     }
-
     private void updateWorker() {
         logger.info("Enter the ID of the worker you want to update his information ");
         Scanner in=new Scanner(System.in);
@@ -275,7 +268,7 @@ public class AdminLogin {
 
         }
         catch (InputMismatchException e){
-            logger.info("Invalid Input, try again");
+            logger.info(msgInv);
             updateWorker();
         }
         if(!flag){
@@ -287,7 +280,6 @@ public class AdminLogin {
         }
 
     }
-
     private void updateWorker(Worker worker) {
         logger.info("Enter The Attribute You Want to Update \" Phone, Address, Email, Salary \" ");
         Scanner in =new Scanner(System.in);
@@ -302,7 +294,6 @@ public class AdminLogin {
             updateWorker(attribute,value,worker);
         }
     }
-
     public void updateWorker(String attribute, String value, Worker worker) {
         if(attribute.equalsIgnoreCase("Address")){
             worker.setAddress(value);
@@ -325,7 +316,6 @@ public class AdminLogin {
 
        Data.updateWorkers(workers);
     }
-
     public void deleteWorker() {
         logger.info("Enter the ID of the worker you want to delete ");
         Scanner in=new Scanner(System.in);
@@ -338,7 +328,7 @@ public class AdminLogin {
 
         }
         catch (InputMismatchException e){
-            logger.info("Invalid Input, try again");
+            logger.info(msgInv);
             deleteWorker();
         }
         if(flag){
@@ -360,8 +350,6 @@ public class AdminLogin {
         }
         Data.updateWorkers(workers);
     }
-
-
     public void recordWorker() {
         Scanner in=new Scanner(System.in);
         Worker worker=new Worker();
@@ -378,10 +366,9 @@ public class AdminLogin {
         logger.info("Enter worker salary ");
         worker.setSalary(in.nextInt());
         worker.setId(Data.getWorkerId());
-        System.out.println("Ok");
+        logger.info("Ok");
     addWorker(worker);
     }
-
     public void adminPage(){
         Scanner in=new Scanner(System.in);
         while (true) {
@@ -425,7 +412,7 @@ public class AdminLogin {
                 break;
             }
         }
-        order=new Order(products,"waiting");
+        order=new Order(products, statusString);
         for (Product product:products){
             product.setOrderId(order.getId());
         }
@@ -443,7 +430,8 @@ public class AdminLogin {
         }
         order.setCustomer(customer);
         logger.info("The total is:"+order.getTotal());
-        logger.info("The new total with discount is:" + ProductFile.totalAfterDiscount(order));
+        String tmp= "The new total with discount is:" + ProductFile.totalAfterDiscount(order);
+        logger.info(tmp);
         addOrder(order);
     }
     public void addOrder(Order order) {
@@ -453,32 +441,28 @@ public class AdminLogin {
             logger.info("The Order Added Successfully");
 
     }
-
     public void notifyCustomer(Customer customer) {
-        customer.sendEmail("Complete Order","Hello Mr/Ms "+customer.getFullName()+", your order is ready you can take it now","");
+        customer.sendEmail("Complete Order",
+                "Hello Mr/Ms "+customer.getFullName()+", your order is ready you can take it now",
+                "");
 
     }
-
     public void invoice(Order order) {
       InvoiceOrder.invoice(order,order.getTotal());
     }
     public String getSpaces(String att){
         return " ".repeat(Math.max(0, 35 - att.length()));
     }
-
     public void addWorker(Worker worker) {
         Data.storeObject("Worker",worker);
         logger.info("The worker added successfully");
     }
-
     public void notExistMsg() {
        logger.info("This Order is not exist on our orders");
     }
-
     public void setLogged(boolean b) {
         this.logged=b;
     }
-
     public void generateAbout() {
         try {
             List<Order> list=Data.getOrders();
@@ -486,12 +470,12 @@ public class AdminLogin {
             Map<String,Object> parameters=new HashMap<>();
             parameters.put("ordersNum",Data.getOrders().size());
             int complete=Data.getCountOrders("complete");
-            int waiting=Data.getCountOrders("waiting");
+            int waiting=Data.getCountOrders(statusString);
             int paid=Data.getPaid(true);
             int debt=Data.getPaid(false);
             int cash=paid+debt;
             parameters.put("compOrders",complete);
-            parameters.put("waiting",waiting);
+            parameters.put(statusString,waiting);
             parameters.put("p",paid);
             parameters.put("d",debt);
             parameters.put("cash",cash);
@@ -502,15 +486,10 @@ public class AdminLogin {
             logger.info("Can't generate report");
         }
     }
-
     public boolean isLogged() {
         return logged;
     }
-
-
     public String msg() {
         return "This worker doesn't exist";
     }
-
-
 }

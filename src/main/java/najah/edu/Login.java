@@ -7,40 +7,37 @@ public class Login {
     private String email;
     private String password;
     private String rul;
-
-    public void setEmail(String email) {
-        this.email = email;
+    Login loginVar;
+    public Login() {
     }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setRul(String rul) {
-        this.rul = rul;
-    }
-
     public Login(String email, String password, String rul) {
         this.email = email;
         this.password = password;
         this.rul = rul;
     }
-
-    public Login() {
-    }
-
     public String getEmail() {
         return email;
     }
-
+    public void setEmail(String email) {
+        this.email = email;
+    }
     public String getPassword() {
         return password;
     }
-
+    public void setPassword(String password) {
+        this.password = password;
+    }
     public String getRul() {
         return rul;
     }
-
+    public void setRul(String rul) {
+        this.rul = rul;
+    }
+    @Override
+    public String toString() {
+        return
+                 email +" " + password +" "  + rul + "\r\n";
+    }
     public String msg(){
         String message="";
         if(isCorrectInfo()) {
@@ -50,56 +47,43 @@ public class Login {
                 message = "Customer login success";
             }
         }
-             else {
+        else {
             message="login fail";
         }
         return message;
     }
-
-    @Override
-    public String toString() {
-        return
-                 email +" " + password +" "  + rul + "\r\n";
-    }
-
-
-
     public boolean isCorrectInfo() {
         int flag=0;
-        for (Login login: Data.users()){
-            if(login.getEmail().equals(email)&&login.getPassword().equals(password)){
-            this.login=login;
+        for (Login logins: Data.users()){
+            if(logins.getEmail().equals(email)&&logins.getPassword().equals(password)){
+            this.loginVar =logins;
                 flag=1;
                 break;
             }
         }
         return flag==1;
     }
-    Login login;
     public void login() {
         if (isCorrectInfo()) {
-            if (login.getRul().equals("admin")) {
+            if (loginVar.getRul().equals("admin")) {
                 AdminLogin admin = new AdminLogin();
                 admin.adminPage();
-            } else if (login.getRul().equals("customer")) {
+            } else if (loginVar.getRul().equals("customer")) {
                 CustomerLogin customerLogin = new CustomerLogin();
                 customerLogin.setCustomer(Data.getCustomerBy(email));
                 customerLogin.customerPage();
             }
         }
     }
-
     public void adminLogin() {
         AdminLogin admin = new AdminLogin();
         admin.adminMenu();
     }
-
     public void customerLogin() {
         CustomerLogin customerLogin = new CustomerLogin();
         customerLogin.setCustomer(Data.getCustomerBy(email));
         customerLogin.menu();
     }
-
     public void loginPage() {
         Main.menu();
     }

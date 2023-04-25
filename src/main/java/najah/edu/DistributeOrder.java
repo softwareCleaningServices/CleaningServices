@@ -7,9 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DistributeOrder {
-    public DistributeOrder(){}
-
-public static Worker getWorker(Order order){
+    public DistributeOrder(){
+        //not used
+    }
+    public static Worker getWorker(Order order){
         List<Order>orders=Data.getOrders();
         orders.add(order);
         Worker worker=new Worker();
@@ -21,7 +22,7 @@ public static Worker getWorker(Order order){
             }
         }
         return worker;
-}
+    }
     public static List<Integer> distributeOrder(List<Order> orders, List<Worker> workers) {
         List<Integer>workersId=new ArrayList<>();
         int numOrders=orders.size();
