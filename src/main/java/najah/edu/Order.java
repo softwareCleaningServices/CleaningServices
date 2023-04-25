@@ -5,10 +5,13 @@ package najah.edu;
 import entities.Customer;
 import entities.Data;
 import entities.Product;
+import entities.Worker;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import static najah.edu.Main.logger;
 
 public class Order {
 
@@ -17,6 +20,15 @@ public class Order {
     private LocalDate date;
     private double total;
     private boolean paid;
+    private Worker worker;
+
+    public Worker getWorker() {
+        return worker;
+    }
+
+    public void setWorker(Worker worker) {
+        this.worker = worker;
+    }
 
     public boolean isPaid() {
         return paid;
@@ -24,15 +36,15 @@ public class Order {
 
     @Override
     public String toString() {
-        return id+","+customer.getId()+","+date+","+total+","+status+","+paid+"\r\n";
+        return id+","+customer.getId()+","+date+","+total+","+status+","+paid+","+worker.getId()+"\r\n";
     }
     public  String getString(){
         StringBuilder str;
         str = new StringBuilder(this.getId() + "\t\t" + this.getCustomer().getFullName() + "\t\t\t" +
                 this.getDate() + "\t\t\t"+this.getTotal()+"\t\t\t" + this.getStatus() + "\t\t\t" + (paid ? "Yes" : "No") +
-                "\n");
+               this.getWorker().getName()+ "\n");
         for (Product product:this.getProducts()){
-            str.append(product.toString()).append("  ").append(Data.getWorkerById(product.getWorkerId()).getName()).append("\n");
+            str.append(product.toString()).append("  ").append("\n");
         }
              str.append("\t\t\n");
         return str.toString();
@@ -107,5 +119,12 @@ public class Order {
     }
     public double getTotal(){
         return total;
+    }
+    public void dispStatus() {
+        logger.info("The Order Status is: "+this.getStatus());
+    }
+
+    public void dispDetails() {
+        logger.info("The Order Id ="+id+"The Order Date: "+date+"The Order Total Coast: "+total);
     }
 }

@@ -21,7 +21,7 @@ Feature: generate invoice for order
     And the order will set to paid
 
 
-    Scenario: invoice will not generated
-      Given that the admin is logged in
-      When the admin enter not exist order Id to invoiced
-      Then the order Id is not exist on the recorded ordered
+  Scenario: invoice will not generated
+    Given that the admin is logged in
+    When the admin enter not exist order Id=9 to invoiced
+    Then the order Id is not exist on the recorded ordered

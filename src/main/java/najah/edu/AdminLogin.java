@@ -23,8 +23,9 @@ public class AdminLogin {
         logger.info("To see all orders details enter number 3 ");
         logger.info("To add new order enter number 4");
         logger.info("To generate report about financial information  enter number 5");
-        logger.info("To update the cost of category enter 6");
-        logger.info("To logout enter number 7");
+        logger.info("To generate report about Business enter number 6");
+        logger.info("To update the cost of category enter 7");
+        logger.info("To logout enter number 8");
     }
     public void customerMenu() {
         while (true) {
@@ -202,6 +203,10 @@ public class AdminLogin {
         } else if (option==5) {
             generateAbout();
         } else if (option==6) {
+            BusinessReport.businessReport();
+
+        } else if (option==7) {
+
             ProductFile.updateCostOfCategory();
         }
     }
@@ -383,7 +388,7 @@ public class AdminLogin {
             try {
                 adminMenu();
                 int option = in.nextInt();
-                if(option==7){
+                if(option==8){
                     logger.info("Goodbye");
                     break;
                 }
