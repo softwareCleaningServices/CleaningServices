@@ -36,12 +36,12 @@ public class OrderTest {
     @Given("a product with name {string} and category={string} and dimension={double} and material={string} and specialTerminate={string} and coast= {double}")
     public void a_product_with_name_and_category_and_dimension_and_material_and_special_terminate_and_coast(String name, String category, Double dimension, String material, String sp, Double coast) {
         products=new ArrayList<>();
-        products.add(new Product(name,"pic",dimension,material,sp, Category.valueOf(category),coast));
+        products.add(Product.builder().setName(name).setDimension(dimension).setMaterial(material).setSpecialTreatment(sp).setCategory(Category.valueOf(category)).setCost(coast).build());
     }
 
     @Given("a product with name {string} and category={string} and size={string} and material={string} and specialTerminate={string} and coast= {double}")
     public void a_product_with_name_and_category_and_size_and_material_and_special_terminate_and_coast(String name, String category, String size, String material, String sp, Double coast) {
-        products.add(new Product(name,"pic",SizeOfCover.valueOf(size),material,sp, Category.valueOf(category),coast));
+        products.add(Product.builder().setName(name).setPictureName("pic").setCover(SizeOfCover.valueOf(size)).setMaterial(material).setSpecialTreatment(sp).setCategory(Category.valueOf(category)).setCost(coast).build());
     }
 
     @When("the customer orders the two products")
@@ -52,7 +52,7 @@ public class OrderTest {
 
     @Then("a new order should be created with status={string}")
     public void a_new_order_should_be_created_with_status(String status) {
-        assertTrue(customer.getId()!=0);
+        assertNotEquals(0,customer.getId());
         assertNotNull(customer);
         order=new Order(products,status);
     }
@@ -60,7 +60,7 @@ public class OrderTest {
     @Then("the order should have a total price of {double}")
     public void the_order_should_have_a_total_price_of(Double total) {
         assertEquals(total,order.getTotal());
-        assertTrue(customer.getId()!=0);
+        assertNotEquals(0,customer.getId());
         exist=true;
         order.setCustomer(customer);
     }
