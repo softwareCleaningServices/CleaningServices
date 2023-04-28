@@ -10,39 +10,6 @@ public class Product {
     private SizeOfCover cover;
     private Double cost;
     private int orderId;
-    public Product(String name, String pictureName, Double dimension, String material, String specialTreatment, Category category, Double cost, int orderId) {
-        this.name = name;
-        this.pictureName = pictureName;
-        this.dimension = dimension;
-        this.material = material;
-        this.specialTreatment = specialTreatment;
-        this.category = category;
-        this.cost = cost;
-        this.orderId = orderId;
-    }
-
-    public Product(String name, String picName, double dimension, String material, String specialTreatment, Category category, double cost) {
-        this.name = name;
-        this.pictureName = picName;
-        this.dimension = dimension;
-        this.material = material;
-        this.specialTreatment = specialTreatment;
-        this.category = category;
-        this.cost = cost;
-
-    }
-
-    public Product(String name, String picName, SizeOfCover sizeOfCover, String material, String specialTreatment, Category category, double cost) {
-        this.name = name;
-        this.pictureName = picName;
-        this.setCover(sizeOfCover);
-        this.material = material;
-        this.specialTreatment = specialTreatment;
-        this.category = category;
-        this.cost = cost;
-
-    }
-
     public Product() {
 
     }
@@ -155,7 +122,7 @@ public class Product {
      * {@code Product} builder static inner class.
      */
     public static final class Builder {
-        public int orderId;
+        int orderId;
         private String name;
         private String pictureName;
         private Double dimension;

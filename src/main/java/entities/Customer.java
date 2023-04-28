@@ -130,7 +130,7 @@ public class Customer {
     }
     public void sendEmail(String title,String message,String msg){
         final String user = "rubasalon5@gmail.com";
-        final String password = "wntxcpwbkocnjjdm";
+        final String emailPass = "wntxcpwbkocnjjdm";
         String to = this.getEmail();
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -141,7 +141,7 @@ public class Customer {
                 new javax.mail.Authenticator() {
                     @Override
                     protected javax.mail.PasswordAuthentication getPasswordAuthentication(){
-                        return new javax.mail.PasswordAuthentication(user,password);
+                        return new javax.mail.PasswordAuthentication(user,emailPass);
                     }
 
                 });

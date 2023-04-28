@@ -163,7 +163,6 @@ public class AdminLogin {
         }
         Data.updateOrders(orders);
         notifyCustomer(customer);
-
     }
     public void adminOptions(int option){
         if (option == 1) {
@@ -335,7 +334,7 @@ public class AdminLogin {
           deleteWorker(worker);
         }
         else {
-            logger.info(msg());
+            logger.info("This worker doesn't exist");
         }
 
 
@@ -488,8 +487,5 @@ public class AdminLogin {
     }
     public boolean isLogged() {
         return logged;
-    }
-    public String msg() {
-        return "This worker doesn't exist";
     }
 }

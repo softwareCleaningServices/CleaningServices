@@ -2,6 +2,8 @@ package najah.edu;
 
 import entities.Customer;
 import entities.Data;
+import entities.ProductFile;
+
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -29,7 +31,8 @@ public class CustomerLogin {
         Order order=admin.takeOrder();
         order.setCustomer(this.customer);
         logger.info("The total is:"+order.getTotal());
-        logger.info("The new total with discount is:");//TODO
+        String tmp= "The new total with discount is:" + ProductFile.totalAfterDiscount(order);
+        logger.info(tmp);
         admin.addOrder(order);
     }
 

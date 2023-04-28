@@ -1,7 +1,5 @@
 package najah.edu;
 
-import entities.ProductFile;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.logging.Logger;

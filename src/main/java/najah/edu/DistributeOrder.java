@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DistributeOrder {
-    public DistributeOrder(){
+    private DistributeOrder(){
         //not used
     }
     public static Worker getWorker(Order order){

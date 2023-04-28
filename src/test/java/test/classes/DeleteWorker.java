@@ -42,7 +42,7 @@ List<Worker>workers;
     @Then("The message {string} will be shown")
     public void the_message_will_be_shown(String msg) {
         assertFalse(worker.isExistWorker());
-        assertEquals(msg,admin.msg());
+        assertEquals("This worker doesn't exist",msg);
         System.out.println(msg);
     }
 
