@@ -155,7 +155,7 @@ public class Product {
      * {@code Product} builder static inner class.
      */
     public static final class Builder {
-        public int orderId;
+        int orderId;
         private String name;
         private String pictureName;
         private Double dimension;
