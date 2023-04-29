@@ -30,7 +30,16 @@ public class DistributeOrderTest {
     public void a_list_of_orders_to_be_distributed_with_status(String status) {
         List<Product> products = new ArrayList<>();
         orders = new ArrayList<>();
-        products.add(new Product("prod", "pic", 4, "material", "sp", Category.valueOf("COVER"), 120));
+        products.add(Product
+                .builder()
+                .setName("prod")
+                .setPictureName("pic")
+                .setCover(SizeOfCover.KING)
+                .setMaterial("material")
+                .setSpecialTreatment("sp")
+                .setCategory(Category.COVER)
+                .setCost(120.0)
+                .build());
         Order order = new Order();
         order.setCustomer(new Customer("Khalid", "khalid@gmail.com", "059823135", "Nablus", "khall"));
         order = new Order(products, status);
