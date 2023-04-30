@@ -4,7 +4,6 @@ import entities.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import najah.edu.DistributeOrder;
 import najah.edu.Order;
 
 import java.util.ArrayList;
@@ -12,7 +11,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class DistributeOrderTest {
+public class DistributeOrder {
     List<Integer> distribution;
     List<Order> orders;
     List<Worker> workers;
@@ -52,7 +51,7 @@ public class DistributeOrderTest {
 
     @When("the admin select the distribution process")
     public void the_admin_select_the_distribution_process() {
-        distribution = DistributeOrder.distributeOrder(orders, workers);
+        distribution = najah.edu.DistributeOrder.distributeOrder(orders, workers);
     }
 
     @Then("the orders should be evenly distributed among the available workers")

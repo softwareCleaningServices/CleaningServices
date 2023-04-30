@@ -10,7 +10,7 @@ import najah.edu.Order;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class Invoice_Test {
+public class Invoice {
     AdminLogin admin;
     Order order=new Order();
     double total=0;
@@ -22,9 +22,9 @@ public class Invoice_Test {
 
     @When("the admin enter the order Id ={int}")
     public void the_admin_enter_the_order_id(Integer orderId) {
-        InvoiceOrder invoice =new InvoiceOrder();
+        InvoiceOrder invoiceOrder =new InvoiceOrder();
         order= Data.getOrderByID(orderId);
-        invoice.setOrder(order);
+        invoiceOrder.setOrder(order);
     }
     @When("the first product coast ={double}")
     public void the_first_product_coast(Double cost) {

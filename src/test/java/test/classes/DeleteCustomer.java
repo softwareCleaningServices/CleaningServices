@@ -9,9 +9,9 @@ import entities.Customer;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class DeleteCustomer_Test {
-AdminLogin admin;
-Customer customer;
+public class DeleteCustomer {
+    AdminLogin admin;
+    Customer customer;
     @Given("that the admin choose to delete customer")
     public void that_the_admin_choose_to_delete_customer() {
        admin=new AdminLogin();
@@ -34,7 +34,6 @@ Customer customer;
         customer=new Customer();
         customer.setId(100);
     }
-
     @Then("the message that the customer not exist will be shown")
     public void the_message_that_the_customer_not_exist_will_be_shown() {
         assertFalse(admin.isExistCustomer(100));

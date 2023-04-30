@@ -3,17 +3,16 @@ package test.classes;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import najah.edu.Login;
 
 import static org.junit.Assert.assertEquals;
 
-public class Login_Test {
-boolean logged;
-Login login;
+public class Login {
+    boolean logged;
+    najah.edu.Login login;
 
     @Given("that the user is not logged in")
     public void that_the_user_is_not_logged_in() {
-        login=new Login();
+        login=new najah.edu.Login();
         logged=false;
     }
 

@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class DeleteWorker {
     AdminLogin admin;
     Worker worker;
-List<Worker>workers;
+    List<Worker>workers;
     @Given("I choose to delete worker")
     public void i_choose_to_delete_worker() {
        admin=new AdminLogin();
@@ -26,7 +26,6 @@ List<Worker>workers;
     public void i_enter_the_worker_id(String id) {
       worker.setId(Integer.parseInt(id));
     }
-
     @Then("the worker deleted successfully")
     public void the_worker_deleted_successfully() {
         assertTrue(worker.isExistWorker());

@@ -1,14 +1,11 @@
 package test.classes;
 
 import entities.*;
-import najah.edu.BusinessReport;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import najah.edu.Login;
 import najah.edu.Order;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -16,8 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static entities.Data.*;
+import static org.junit.Assert.*;
 
-class BusinessReportTest {
+public class BusinessReport {
     List<Customer> customer;
     List<Worker> workers;
     List<Order> orders;
@@ -42,12 +40,12 @@ class BusinessReportTest {
         login.setPassword("adminCSS");
         login.setRul("admin");
     }
-    @Test
+
     @Then("calculate number of all business customers")
-     void calculateNumberOfAllBusinessCustomers() {
+    public void calculateNumberOfAllBusinessCustomers() {
         customer=getCustomers();
-        numCustomer=BusinessReport.numberOfAllCustomers();
-        Assertions.assertEquals(customer.size(), numCustomer);
+        numCustomer= najah.edu.BusinessReport.numberOfAllCustomers();
+        assertEquals(customer.size(),numCustomer);
     }
 
     @Given("that needs the number of all business worker")
@@ -57,8 +55,8 @@ class BusinessReportTest {
     @Then("calculate number of all business worker")
     public void calculateNumberOfAllBusinessWorker() {
         workers=getWorkers();
-        numWorker=BusinessReport.numberOfAllWorker();
-        Assertions.assertEquals(workers.size(), numWorker[0]);
+        numWorker= najah.edu.BusinessReport.numberOfAllWorker();
+        assertEquals(workers.size(),numWorker[0]);
     }
 
     @Given("that needs the number of all business worker in category sofa")
@@ -73,8 +71,8 @@ class BusinessReportTest {
                 numSofaWorker++;
             }
         }
-        numWorker=BusinessReport.numberOfAllWorker();
-        Assertions.assertEquals(numSofaWorker, numWorker[1]);
+        numWorker= najah.edu.BusinessReport.numberOfAllWorker();
+        assertEquals(numSofaWorker,numWorker[1]);
     }
 
     @Given("that needs the number of all business worker in category carpet")
@@ -89,8 +87,8 @@ class BusinessReportTest {
                 numCarpetWorker++;
             }
         }
-        numWorker=BusinessReport.numberOfAllWorker();
-        Assertions.assertEquals(numCarpetWorker, numWorker[2]);
+        numWorker= najah.edu.BusinessReport.numberOfAllWorker();
+        assertEquals(numCarpetWorker,numWorker[2]);
     }
 
     @Given("that needs the number of all business worker in category cover")
@@ -105,8 +103,8 @@ class BusinessReportTest {
                 numCoverWorker++;
             }
         }
-        numWorker=BusinessReport.numberOfAllWorker();
-        Assertions.assertEquals(numCoverWorker, numWorker[3]);
+        numWorker= najah.edu.BusinessReport.numberOfAllWorker();
+        assertEquals(numCoverWorker,numWorker[3]);
     }
     @Given("that needs the number of all orders in this month")
     public void thatNeedsTheNumberOfAllOrdersInThisMonth() {
@@ -123,8 +121,8 @@ class BusinessReportTest {
                 orders.add(order);
             }
         }
-        numOrders=BusinessReport.numberOfAllOrdersInThisMonth();
-        Assertions.assertEquals(orders.size(), numOrders);
+        numOrders= najah.edu.BusinessReport.numberOfAllOrdersInThisMonth();
+        assertEquals(orders.size(),numOrders);
     }
 
     @Given("that needs the number of sofas in all orders in this month")
@@ -147,8 +145,8 @@ class BusinessReportTest {
                 }
             }
         }
-        numSofa=BusinessReport.numberOfSofaInThisMonth();
-        Assertions.assertEquals(numOfSofa, numSofa);
+        numSofa= najah.edu.BusinessReport.numberOfSofaInThisMonth();
+        assertEquals(numOfSofa,numSofa);
     }
 
     @Given("that needs the number of carpets in all orders in this month")
@@ -171,8 +169,8 @@ class BusinessReportTest {
                 }
             }
         }
-        numCarpet=BusinessReport.numberOfCarpetInThisMonth();
-        Assertions.assertEquals(numOfCarpet, numCarpet);
+        numCarpet= najah.edu.BusinessReport.numberOfCarpetInThisMonth();
+        assertEquals(numOfCarpet,numCarpet);
     }
 
     @Given("that needs the number of covers in all orders in this month")
@@ -195,8 +193,8 @@ class BusinessReportTest {
                 }
             }
         }
-        numCover=BusinessReport.numberOfCoverInThisMonth();
-        Assertions.assertEquals(numOfCover, numCover[0]);
+        numCover= najah.edu.BusinessReport.numberOfCoverInThisMonth();
+        assertEquals(numOfCover,numCover[0]);
     }
     @Given("that needs the number of covers size King in all orders in this month")
     public void thatNeedsTheNumberOfCoversSizeKingInAllOrdersInThisMonth() {
@@ -220,8 +218,8 @@ class BusinessReportTest {
                 }
             }
         }
-        numCover=BusinessReport.numberOfCoverInThisMonth();
-        Assertions.assertEquals(numOfCover, numCover[1]);
+        numCover= najah.edu.BusinessReport.numberOfCoverInThisMonth();
+        assertEquals(numOfCover,numCover[1]);
     }
 
     @Given("that needs the number of covers size Queen in all orders in this month")
@@ -246,8 +244,8 @@ class BusinessReportTest {
                 }
             }
         }
-        numCover=BusinessReport.numberOfCoverInThisMonth();
-        Assertions.assertEquals(numOfCover, numCover[2]);
+        numCover= najah.edu.BusinessReport.numberOfCoverInThisMonth();
+        assertEquals(numOfCover,numCover[2]);
     }
 
     @Given("that needs the number of covers size TWIN_XL in all orders in this month")
@@ -272,8 +270,8 @@ class BusinessReportTest {
                 }
             }
         }
-        numCover=BusinessReport.numberOfCoverInThisMonth();
-        Assertions.assertEquals(numOfCover, numCover[3]);
+        numCover= najah.edu.BusinessReport.numberOfCoverInThisMonth();
+        assertEquals(numOfCover,numCover[3]);
     }
 
     @Given("that needs the number of covers size TWIN in all orders in this month")
@@ -298,8 +296,8 @@ class BusinessReportTest {
                 }
             }
         }
-        numCover=BusinessReport.numberOfCoverInThisMonth();
-        Assertions.assertEquals(numOfCover, numCover[4]);
+        numCover= najah.edu.BusinessReport.numberOfCoverInThisMonth();
+        assertEquals(numOfCover,numCover[4]);
     }
 
     @Given("that needs the number of covers size CRIB in all orders in this month")
@@ -324,7 +322,7 @@ class BusinessReportTest {
                 }
             }
         }
-        numCover=BusinessReport.numberOfCoverInThisMonth();
-        Assertions.assertEquals(numOfCover, numCover[5]);
+        numCover= najah.edu.BusinessReport.numberOfCoverInThisMonth();
+        assertEquals(numOfCover,numCover[5]);
     }
 }

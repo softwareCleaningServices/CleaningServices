@@ -13,7 +13,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
-public class TrackOrderTest {
+public class TrackOrder {
 Customer customer;
 AdminLogin admin;
 Order order;

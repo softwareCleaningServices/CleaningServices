@@ -10,8 +10,8 @@ import najah.edu.Order;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-public class DiscountOptionTest {
+import static org.junit.jupiter.api.Assertions.*;
+public class DiscountOption {
     Order order;
     Product product1;
     ArrayList <Product> product=new ArrayList<>();
