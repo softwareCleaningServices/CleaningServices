@@ -7,13 +7,13 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import najah.edu.AdminLogin;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
-class AddWorkerTest {
-Worker worker;
-AdminLogin admin;
+public class AddWorker {
+    Worker worker;
+    AdminLogin admin;
     @Given("that the worker is not added yet")
     public void that_the_worker_is_not_added_yet() {
         worker=new Worker();
@@ -52,11 +52,10 @@ AdminLogin admin;
     public void the_system_generate_a_unique_id_for_the_worker() {
       worker.setId(Data.getWorkerId());
     }
-    @Test
     @Then("the worker will be added to system")
-    void the_worker_will_be_added_to_system() {
-        Assertions.assertNotNull(worker);
-        Assertions.assertTrue(worker.isValidEmail());
+    public void the_worker_will_be_added_to_system() {
+        assertNotNull(worker);
+        assertTrue(worker.isValidEmail());
        admin.addWorker(worker);
     }
 

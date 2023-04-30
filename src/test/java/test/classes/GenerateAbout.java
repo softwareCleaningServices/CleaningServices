@@ -9,7 +9,7 @@ import najah.edu.AdminLogin;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class GenerateAboutTest {
+public class GenerateAbout {
     AdminLogin admin=new AdminLogin();
     int cash;
     int paid;

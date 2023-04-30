@@ -5,15 +5,14 @@ import entities.Data;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import najah.edu.RecordCustomer;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class RecordCustomerTest {
-    RecordCustomer recordCustomer;
+public class RecordCustomer {
+    najah.edu.RecordCustomer recordCustomer;
     Customer customer;
     boolean taken=false;
     List<Customer>customers;
@@ -21,7 +20,7 @@ public class RecordCustomerTest {
     @Given("that I enter customer name={string}")
     public void that_i_enter_customer_name(String name) {
         customer=new Customer();
-        recordCustomer =new RecordCustomer();
+        recordCustomer =new najah.edu.RecordCustomer();
         customer.setFullName(name);
         customers=new ArrayList<>();
         customers.add(new Customer("Khalid","khalid@gmail.com","059823135","Nablus","khall"));

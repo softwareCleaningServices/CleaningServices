@@ -9,7 +9,7 @@ import najah.edu.AdminLogin;
 
 import static org.junit.Assert.*;
 
-public class Notify_Test {
+public class Notify {
     AdminLogin admin;
     Order order;
     String status;
@@ -18,14 +18,11 @@ public class Notify_Test {
         admin=new AdminLogin();
         order=Data.getOrderByID(orderID);
     }
-
-
     @When("the admin set order status to {string}")
     public void the_admin_set_order_status_to(String status) {
         admin.changeStatus(order.getId(),status);
         this.status=status;
     }
-
     @Then("a notify message will send to customer")
     public void a_notify_message_will_send_to_customer() {
         assertEquals("complete", status);
