@@ -7,6 +7,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import najah.edu.Login;
 import najah.edu.Order;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -14,9 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static entities.Data.*;
-import static org.junit.Assert.*;
 
-public class BusinessReportTest {
+class BusinessReportTest {
     List<Customer> customer;
     List<Worker> workers;
     List<Order> orders;
@@ -35,18 +36,18 @@ public class BusinessReportTest {
         customer=new ArrayList<>();
     }
 
-    @When("the admin enters to show the report")//TODO
+    @When("the admin enters to show the report")
     public void theAdminEntersToShowTheReport() {
         login.setEmail("adminClean@gmail.com");
         login.setPassword("adminCSS");
         login.setRul("admin");
     }
-
+    @Test
     @Then("calculate number of all business customers")
-    public void calculateNumberOfAllBusinessCustomers() {
+     void calculateNumberOfAllBusinessCustomers() {
         customer=getCustomers();
         numCustomer=BusinessReport.numberOfAllCustomers();
-        assertEquals(customer.size(),numCustomer);
+        Assertions.assertEquals(customer.size(), numCustomer);
     }
 
     @Given("that needs the number of all business worker")
@@ -57,7 +58,7 @@ public class BusinessReportTest {
     public void calculateNumberOfAllBusinessWorker() {
         workers=getWorkers();
         numWorker=BusinessReport.numberOfAllWorker();
-        assertEquals(workers.size(),numWorker[0]);
+        Assertions.assertEquals(workers.size(), numWorker[0]);
     }
 
     @Given("that needs the number of all business worker in category sofa")
@@ -73,7 +74,7 @@ public class BusinessReportTest {
             }
         }
         numWorker=BusinessReport.numberOfAllWorker();
-        assertEquals(numSofaWorker,numWorker[1]);
+        Assertions.assertEquals(numSofaWorker, numWorker[1]);
     }
 
     @Given("that needs the number of all business worker in category carpet")
@@ -89,7 +90,7 @@ public class BusinessReportTest {
             }
         }
         numWorker=BusinessReport.numberOfAllWorker();
-        assertEquals(numCarpetWorker,numWorker[2]);
+        Assertions.assertEquals(numCarpetWorker, numWorker[2]);
     }
 
     @Given("that needs the number of all business worker in category cover")
@@ -105,7 +106,7 @@ public class BusinessReportTest {
             }
         }
         numWorker=BusinessReport.numberOfAllWorker();
-        assertEquals(numCoverWorker,numWorker[3]);
+        Assertions.assertEquals(numCoverWorker, numWorker[3]);
     }
     @Given("that needs the number of all orders in this month")
     public void thatNeedsTheNumberOfAllOrdersInThisMonth() {
@@ -123,7 +124,7 @@ public class BusinessReportTest {
             }
         }
         numOrders=BusinessReport.numberOfAllOrdersInThisMonth();
-        assertEquals(orders.size(),numOrders);
+        Assertions.assertEquals(orders.size(), numOrders);
     }
 
     @Given("that needs the number of sofas in all orders in this month")
@@ -147,7 +148,7 @@ public class BusinessReportTest {
             }
         }
         numSofa=BusinessReport.numberOfSofaInThisMonth();
-        assertEquals(numOfSofa,numSofa);
+        Assertions.assertEquals(numOfSofa, numSofa);
     }
 
     @Given("that needs the number of carpets in all orders in this month")
@@ -171,7 +172,7 @@ public class BusinessReportTest {
             }
         }
         numCarpet=BusinessReport.numberOfCarpetInThisMonth();
-        assertEquals(numOfCarpet,numCarpet);
+        Assertions.assertEquals(numOfCarpet, numCarpet);
     }
 
     @Given("that needs the number of covers in all orders in this month")
@@ -195,7 +196,7 @@ public class BusinessReportTest {
             }
         }
         numCover=BusinessReport.numberOfCoverInThisMonth();
-        assertEquals(numOfCover,numCover[0]);
+        Assertions.assertEquals(numOfCover, numCover[0]);
     }
     @Given("that needs the number of covers size King in all orders in this month")
     public void thatNeedsTheNumberOfCoversSizeKingInAllOrdersInThisMonth() {
@@ -220,7 +221,7 @@ public class BusinessReportTest {
             }
         }
         numCover=BusinessReport.numberOfCoverInThisMonth();
-        assertEquals(numOfCover,numCover[1]);
+        Assertions.assertEquals(numOfCover, numCover[1]);
     }
 
     @Given("that needs the number of covers size Queen in all orders in this month")
@@ -246,7 +247,7 @@ public class BusinessReportTest {
             }
         }
         numCover=BusinessReport.numberOfCoverInThisMonth();
-        assertEquals(numOfCover,numCover[2]);
+        Assertions.assertEquals(numOfCover, numCover[2]);
     }
 
     @Given("that needs the number of covers size TWIN_XL in all orders in this month")
@@ -272,7 +273,7 @@ public class BusinessReportTest {
             }
         }
         numCover=BusinessReport.numberOfCoverInThisMonth();
-        assertEquals(numOfCover,numCover[3]);
+        Assertions.assertEquals(numOfCover, numCover[3]);
     }
 
     @Given("that needs the number of covers size TWIN in all orders in this month")
@@ -298,7 +299,7 @@ public class BusinessReportTest {
             }
         }
         numCover=BusinessReport.numberOfCoverInThisMonth();
-        assertEquals(numOfCover,numCover[4]);
+        Assertions.assertEquals(numOfCover, numCover[4]);
     }
 
     @Given("that needs the number of covers size CRIB in all orders in this month")
@@ -324,6 +325,6 @@ public class BusinessReportTest {
             }
         }
         numCover=BusinessReport.numberOfCoverInThisMonth();
-        assertEquals(numOfCover,numCover[5]);
+        Assertions.assertEquals(numOfCover, numCover[5]);
     }
 }
