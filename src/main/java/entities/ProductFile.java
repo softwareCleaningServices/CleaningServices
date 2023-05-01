@@ -113,30 +113,10 @@ public class ProductFile {
     }
     public static double [] switchInUpdateCostOfCategory(int num,double cost){
         double []costCat = getCostOfCategory();
-        switch (num) {
-            case 1:
-                costCat[0] = cost;
-                break;
-            case 2:
-                costCat[1] = cost;
-                break;
-            case 3:
-                costCat[2] = cost;
-                break;
-            case 4:
-                costCat[3] = cost;
-                break;
-            case 5:
-                costCat[4] = cost;
-                break;
-            case 6:
-                costCat[5] = cost;
-                break;
-            case 7:
-                costCat[7] = cost;
-                break;
-            default:
-                logger.info("error!no category in this number");
+        if(num<1||num>7){
+            logger.info("error!no category in this number");
+        }else{
+            costCat[num-1]=cost;
         }
         return costCat;
     }

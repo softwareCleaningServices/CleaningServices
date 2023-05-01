@@ -113,7 +113,7 @@ public class Data {
             order.setCustomer(customer);
             order.setStatus(arr[4]);
             order.setPaid(Boolean.parseBoolean(arr[5]));
-                order.setWorker(Data.getWorkerById(Integer.parseInt(arr[6])));
+            order.setWorker(Data.getWorkerById(Integer.parseInt(arr[6])));
             products=ProductFile.getProductByOrder(order.getId());
             order.setProducts(products);
             orders.add(order);
