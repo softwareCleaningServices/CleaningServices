@@ -384,8 +384,6 @@ public class AdminLogin {
                 logger.info("Enter a valid option number ");
                 adminPage();
             }
-
-
         }
     }
     public boolean isExistCustomer(int id){

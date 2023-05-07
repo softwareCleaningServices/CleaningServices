@@ -16,7 +16,7 @@ Feature: generate invoice for order
     When the admin enter the order Id =12
     And the first product coast =320
     Then the total order cost =320
-    And the customer id =103
+    And the customer id =107
     And the invoice will be generated
     And the order will set to paid
 
