@@ -1,4 +1,6 @@
-11,101,2023-03-17,840.0,complete,true
-12,103,2023-03-17,640.0,waiting,false
-13,103,2023-03-17,0.0,waiting,false
-14,112,2023-04-23,18.0,waiting,false
+11,101,2023-03-17,0.0,complete,true,120
+12,107,2023-03-17,0.0,in terminate,true,110
+13,103,2023-03-17,0.0,complete,true,130
+14,110,2023-04-25,0.0,waiting,false,110
+15,112,2023-04-27,0.0,waiting,false,132
+16,101,2023-04-27,0.0,waiting,false,133
