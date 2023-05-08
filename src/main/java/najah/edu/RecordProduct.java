@@ -9,6 +9,9 @@ import java.util.logging.Logger;
 public class RecordProduct {
     private RecordProduct(){}
     static Logger logger = Logger.getLogger(RecordProduct.class.getName());
+    public static void menu(){
+
+    }
     public static Product addAProduct() {
         Scanner input = new Scanner(System.in);
         logger.info("Enter your product category (CARPET,COVER,SOFA)");
