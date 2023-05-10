@@ -7,6 +7,7 @@ import net.sf.jasperreports.view.JasperViewer;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,24 +40,21 @@ public class BusinessReport {
         }
         return numWorker;
     }
-    public static List<Order> allOrdersInThisMonth(){
-        LocalDate currentDate = LocalDate.now();
-        Month currentMonth = currentDate.getMonth();
-        int currentYear =currentDate.getYear();
+    public static List<Order> allOrdersInThisMonth(int month,int year){
         List<Order> orders=new ArrayList<>();
         for(Order order:getOrders()){
-            if(currentMonth==order.getDate().getMonth() && currentYear==order.getDate().getYear()){
+            if(Month.of(month) ==order.getDate().getMonth() && year ==order.getDate().getYear()){
                 orders.add(order);
             }
         }
         return orders;
     }
-    public static int numberOfAllOrdersInThisMonth(){
-        List<Order> orders=allOrdersInThisMonth();
+    public static int numberOfAllOrdersInThisMonth(int month,int year){
+        List<Order> orders=allOrdersInThisMonth(month,year);
         return orders.size();
     }
-    public static int numberOfSofaInThisMonth(){
-        List<Order> orders=allOrdersInThisMonth();
+    public static int numberOfSofaInThisMonth(int month,int year){
+        List<Order> orders=allOrdersInThisMonth(month,year);
         int numSofa = 0;
         for(Order order:orders) {
             for (Product product : order.getProducts()) {
@@ -67,8 +65,8 @@ public class BusinessReport {
         }
         return numSofa;
     }
-    public static int numberOfCarpetInThisMonth(){
-        List<Order> orders=allOrdersInThisMonth();
+    public static int numberOfCarpetInThisMonth(int month,int year){
+        List<Order> orders=allOrdersInThisMonth(month,year);
         int numCarpet = 0;
         for(Order order:orders) {
             for (Product product : order.getProducts()) {
@@ -79,9 +77,12 @@ public class BusinessReport {
         }
         return numCarpet;
     }
-    public static int[] numberOfCoverInThisMonth(){
-        List<Order> orders=allOrdersInThisMonth();
+    public static int[] numberOfCoverInThisMonth(int month,int year){
+        List<Order> orders=allOrdersInThisMonth(month,year);
         int []numCover=new int[6];
+        for (int i=0;i<=5;i++){
+            numCover[i]=0;
+        }
         for(Order order:orders) {
             for (Product product : order.getProducts()) {
                 if (product.getCategory() == Category.COVER) {
@@ -97,7 +98,6 @@ public class BusinessReport {
                     } else if (product.getCover()== SizeOfCover.CRIB) {
                         numCover[5]++;
                     }
-
                 }
             }
         }
@@ -108,16 +108,19 @@ public class BusinessReport {
             List<Order> list=Data.getOrders();
             JasperReport report= JasperCompileManager.compileReport("report.jrxml");
             Map<String,Object> parameters=new HashMap<>();
+            LocalDate today = LocalDate.now();
+            int month=today.getMonthValue();
+            int year=today.getYear();
             parameters.put("all_customers",numberOfAllCustomers());
             int []peopleWork=numberOfAllWorker();
             parameters.put("all_workers",peopleWork[0]);
             parameters.put("sofas_worker",peopleWork[1]);
             parameters.put("carpet_worker",peopleWork[2]);
             parameters.put("cover_worker",peopleWork[3]);
-            parameters.put("all_order",numberOfAllOrdersInThisMonth());
-            parameters.put("sofa_order",numberOfSofaInThisMonth());
-            parameters.put("carpet_order",numberOfCarpetInThisMonth());
-            int[]cover=numberOfCoverInThisMonth();
+            parameters.put("all_order",numberOfAllOrdersInThisMonth(month,year));
+            parameters.put("sofa_order",numberOfSofaInThisMonth(month,year));
+            parameters.put("carpet_order",numberOfCarpetInThisMonth(month,year));
+            int[]cover=numberOfCoverInThisMonth(month,year);
             parameters.put("cover_order",cover[0]);
             parameters.put("king_order",cover[1]);
             parameters.put("queen_order",cover[2]);
