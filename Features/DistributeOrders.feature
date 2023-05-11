@@ -13,7 +13,10 @@ Feature: Distribute Orders on Available Workers
     When the admin select the distribution process
     Then the system should show that there are no available workers
 
-
+  Scenario: there is no waiting orders
+    Given no orders are waiting
+    When the admin select the distribution process
+    Then the system should show that there are no waiting orders
 
 
 
