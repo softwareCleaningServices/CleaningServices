@@ -33,7 +33,7 @@ public class BusinessReport {
                 numWorker[1]++;
             } else if (worker.getCategory() == Category.CARPET) {
                 numWorker[2]++;
-            }else if (worker.getCategory() == Category.COVER) {
+            }else{
                 numWorker[3]++;
             }
         }
@@ -94,7 +94,7 @@ public class BusinessReport {
                         numCover[3]++;
                     } else if (product.getCover()== SizeOfCover.TWIN) {
                         numCover[4]++;
-                    } else if (product.getCover()== SizeOfCover.CRIB) {
+                    } else {
                         numCover[5]++;
                     }
                 }
