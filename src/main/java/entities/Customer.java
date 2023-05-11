@@ -6,7 +6,6 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.List;
-import java.util.Objects;
 import java.util.Properties;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -20,7 +19,6 @@ public class Customer {
     private String address;
     private String phone;
     private Customer existCustomer;
-    Logger logger = Logger.getLogger(Customer.class.getName());
     public Customer() {
     }
     public Customer(int id,String fullName, String email, String phone, String address,String password) {
@@ -78,27 +76,7 @@ public class Customer {
     public Customer getCustomerDetails() {
         return existCustomer;
     }
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Customer customer = (Customer) o;
-        if (!Objects.equals(email, customer.email)) return false;
 
-        return Objects.equals(id, customer.id);
-    }
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (fullName != null ? fullName.hashCode() : 0);
-        result = 31 * result + (existCustomer != null ? existCustomer.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (address != null ? address.hashCode() : 0);
-        result = 31 * result + (phone != null ? phone.hashCode() : 0);
-        result = 31 * result + (logger != null ? logger.hashCode() : 0);
-        return result;
-    }
     @Override
     public String toString() {
         return  id +
@@ -120,7 +98,6 @@ public class Customer {
             }
         }
         return flag == 1;
-
     }
     public boolean isValidEmail() {
         String emailRegex= "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
@@ -157,5 +134,7 @@ public class Customer {
             //ignored
         }
     }
+    static Logger logger = Logger.getLogger(Customer.class.getName());
+
 
 }

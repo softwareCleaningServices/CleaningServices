@@ -1,10 +1,17 @@
 package test.classes;
 
+import entities.Admin;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import najah.edu.AdminLogin;
 
-import static org.junit.Assert.assertEquals;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.PrintStream;
+
+import static org.junit.Assert.*;
 
 public class Login {
     boolean logged;
@@ -15,9 +22,10 @@ public class Login {
         login=new najah.edu.Login();
         logged=false;
     }
-
+String email;
     @When("the user  enter email {string}")
     public void the_user_enter_email(String email) {
+        this.email=email;
        login.setEmail(email);
     }
 
@@ -40,13 +48,51 @@ public class Login {
     public void the_user_move_to_the(String page) {
 
        if(page.equals("adminPage")){
+           assertTrue(login.isCorrectInfo());
+           Admin admin=new Admin();
+           AdminLogin adminLogin=new AdminLogin();
+           admin.setEmail(login.getEmail());
+           assertEquals(admin.getEmail(), email);
+           adminLogin.setAdmin(admin);
          login.adminLogin();
+         test();
         } else if (page.equals("customerPage")) {
           login.customerLogin();
+          login.setRul("customer");
+         String rul= login.getRul();
+         test2();
        }
        else {
+           assertFalse(login.isCorrectInfo());
+           login.login();
            login.loginPage();
+
        }
 
+    }
+    public void test(){
+        InputStream stdin = System.in;
+        System.setIn(new ByteArrayInputStream("8\n".getBytes()));
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(byteArrayOutputStream);
+        PrintStream stdout = System.out;
+        System.setOut(ps);
+
+     login.login();
+
+        System.setIn(stdin);
+        System.setOut(stdout);
+    }
+    public void test2(){
+        InputStream stdin = System.in;
+        System.setIn(new ByteArrayInputStream("5\n".getBytes()));
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(byteArrayOutputStream);
+        PrintStream stdout = System.out;
+        System.setOut(ps);
+      login.login();
+
+        System.setIn(stdin);
+        System.setOut(stdout);
     }
 }

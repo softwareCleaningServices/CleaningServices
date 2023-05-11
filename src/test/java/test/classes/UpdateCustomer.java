@@ -5,6 +5,9 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import najah.edu.CustomerLogin;
+import najah.edu.Login;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -36,10 +39,23 @@ public class UpdateCustomer {
     }
 
 
+
     @Then("my address will updated successfully")
     public void my_address_will_updated_successfully() {
         assertEquals(customer.getCustomer().getAddress(), value);
         customer.updateMsg();
+        Data.updateCustomers(Data.getCustomers());
+        List<najah.edu.Login> loginList=Data.users();
+        for (Login login:loginList){
+            if(login.getEmail().equals(customer.getCustomer().getEmail())){
+                login.setPassword(value);
+                break;
+            }
+        }
+        Data.updateLogin(loginList);
+        Data.storeObject("product",new Object());
+
+
     }
 
 }

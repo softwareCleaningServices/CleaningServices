@@ -1,7 +1,7 @@
 Feature: Add new order
 
   Scenario: add order with two product for exist customer
-    Given a customer with name "Ali Mohammed" and id=101
+    Given a customer with name "ali@gmail.com" and id=101
     And a product with name "carpet" and category="CARPET" and dimension=4.5 and material="test" and specialTerminate="" and coast= 95.0
     And a product with name "cover" and category="COVER" and size="QUEEN" and material="test" and specialTerminate="" and coast= 110.0
     When the customer orders the two products

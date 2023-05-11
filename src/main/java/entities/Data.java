@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 public class Data {
+    static String msg= "Error";
     private Data(){
     }
-    static String msg= "Error";
     static String path="src/main/resources/Back/";
     static Logger logger = Logger.getLogger(Data.class.getName());
     public static List<String> getObjects(String fileName){
@@ -25,26 +25,29 @@ public class Data {
         }
         catch(Exception e){
             logger.info(msg);
+
         }
         return strings;
     }
     public static void storeObject(String fileName,Object object){
         try ( RandomAccessFile raf =new RandomAccessFile(path+fileName+".txt", "rw")){
+
             raf.seek(raf.length());
             raf.write(object.toString().getBytes());
         }
         catch(Exception e){
             logger.info(msg);
+
         }
     }
     public static void removeFileContent(String fileName){
         try (
-             BufferedWriter writer = new BufferedWriter(new FileWriter(path+fileName+".txt"))
+                BufferedWriter writer = new BufferedWriter(new FileWriter(path+fileName+".txt"))
         ){
             writer.write("");
             writer.flush();
         }catch (Exception ignored) {
-            //ignored
+            logger.info(msg);
         }
     }
     public static List<Login> users(){
@@ -79,7 +82,7 @@ public class Data {
     public static Customer getCustomerBy(String email) {
         Customer foundCustomer=new Customer();
         for(Customer customer:getCustomers()){
-            if(customer.getEmail().equals(email) || customer.getFullName().equalsIgnoreCase(email)){
+            if(customer.getEmail().equals(email)){
                 foundCustomer=customer;
                 break;
             }
@@ -99,6 +102,7 @@ public class Data {
         }
         catch(Exception e){
             logger.info(msg);
+
         }
     }
     public static List<Order> getOrders(){
@@ -122,9 +126,6 @@ public class Data {
     }
     public static int getOrderId(){
         int id;
-        if(getOrders().isEmpty())
-            id=11;
-        else
             id=getOrders().get(getOrders().size()-1).getId();
         return id+1;
     }
@@ -139,6 +140,7 @@ public class Data {
         }
         catch(Exception e){
             logger.info(msg);
+
         }
     }
     public static Order getOrderByID(int id){
@@ -154,8 +156,8 @@ public class Data {
     public static List<Order> getOrderByCustomer(Customer customer){
         List<Order>orders=new ArrayList<>();
         for (Order order1:getOrders()){
-            if(order1.getCustomer().equals(customer)){
-               orders.add(order1);
+            if(order1.getCustomer().getId()==(customer.getId())){
+                orders.add(order1);
             }
         }
         return orders;
@@ -182,12 +184,8 @@ public class Data {
     }
     public static int getWorkerId() {
         int id;
-        if(getWorkers().isEmpty()){
-           id=110;
-        }
-        else {
+
             id=getWorkers().get(getWorkers().size()-1).getId();
-        }
         return id+1;
     }
     public static Worker getWorkerById(int id){
@@ -212,6 +210,7 @@ public class Data {
         }
         catch(Exception e){
             logger.info(msg);
+
         }
     }
     public static int getPaid(boolean b){
@@ -225,9 +224,7 @@ public class Data {
     }
     public static int getId(){
         int id;
-        if(getCustomers().isEmpty())
-            id=100;
-        else
+
             id=getCustomers().get(getCustomers().size()-1).getId();
         return id+1;
     }
@@ -243,8 +240,8 @@ public class Data {
 
         catch(Exception e){
             logger.info(msg);
+
         }
     }
 }
-
 

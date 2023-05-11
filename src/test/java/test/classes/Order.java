@@ -18,6 +18,7 @@ public class Order {
     Customer customer;
     boolean exist;
     List<Product>products;
+    String name;
     List<Customer>customers=new ArrayList<>();
     @Before
     public void setUp(){
@@ -28,6 +29,7 @@ public class Order {
     @Given("a customer with name {string} and id={int}")
     public void a_customer_with_name_and_id(String name, Integer id) {
         customer=Data.getCustomerBy(name);
+        this.name=name;
         customer=Data.getCustomerById(id);
     }
     @Given("a product with name {string} and category={string} and dimension={double} and material={string} and specialTerminate={string} and coast= {double}")
@@ -70,11 +72,18 @@ public class Order {
         assertEquals(2,order.getProducts().size());
         admin.addOrder(order);
         System.out.println("The Order added successfully");
+        order.setWorker(new Worker());
+        System.out.println(order.getString());
+        order.setPaid(true);
+        System.out.println(order.getString());
     }
     @Then("I should add the customer details")
     public void i_should_add_the_customer_details() {
-        assertFalse(exist);
+        customer=Data.getCustomerBy(name);
+        assertFalse(Data.getCustomers().contains(customer));
         customer=new Customer("Alaa Hasan","alaa@gmail.com","056932146","Tulkarem","alaa20");
         customers.add(customer);
+
+
     }
 }

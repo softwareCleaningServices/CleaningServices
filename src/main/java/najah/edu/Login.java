@@ -36,17 +36,16 @@ public class Login {
     @Override
     public String toString() {
         return
-                 email +" " + password +" "  + rul + "\r\n";
+                email +" " + password +" "  + rul + "\r\n";
     }
     public String msg(){
-        String message="";
-        if(isCorrectInfo()) {
+        String message;
             if (rul.equals("admin")) {
                 message = "Admin login success";
             } else if (rul.equals("customer")) {
                 message = "Customer login success";
             }
-        }
+
         else {
             message="login fail";
         }
@@ -55,8 +54,8 @@ public class Login {
     public boolean isCorrectInfo() {
         int flag=0;
         for (Login logins: Data.users()){
-            if(logins.getEmail().equals(email)&&logins.getPassword().equals(password)){
-            this.loginVar =logins;
+            if(logins.getEmail().equals(email)){
+                this.loginVar =logins;
                 flag=1;
                 break;
             }
