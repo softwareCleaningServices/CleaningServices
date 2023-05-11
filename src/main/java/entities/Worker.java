@@ -12,6 +12,7 @@ public class Worker {
     private int salary;
     private int numOfProd;
     Category category;
+
     public Worker() {
     }
     public Worker(int id, String name, String phone, String address, String email, int salary, Category category) {
@@ -59,9 +60,6 @@ public class Worker {
     }
     public void setSalary(int salary) {
         this.salary = salary;
-    }
-    public int getNumOfProd() {
-        return numOfProd;
     }
     public void setNumOfProd(int numOfProd) {
         this.numOfProd = numOfProd;

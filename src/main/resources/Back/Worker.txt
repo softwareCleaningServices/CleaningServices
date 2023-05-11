@@ -1,25 +1,3 @@
 110,Ruba,058721355,Tulkarem,rubaos@gmail.com,3000,CARPET,0
 120,Ahmed,123456,Awarta,ahmod@gmail.com,3000,COVER,1
-130,Salem,059812346,Nablus,salem@gmail.com,2000,CARPET,2
-131,Salem,059812346,Nablus,salem@gmail.com,1500,CARPET,0
-132,Salem,059812346,Nablus,salem@gmail.com,2000,CARPET,0
-133,Ruba,059812346,Jericho,ruba@gmail.com,2500,COVER,0
-134,Ali Mohammed,059812346,Nablus,ali@gmail.com,1800,SOFA,0
-135,Salem,059812346,Nablus,salem@gmail.com,2000,CARPET,0
-136,Ruba,059812346,Jericho,ruba@gmail.com,2500,COVER,0
-137,Ali Mohammed,059812346,Nablus,ali@gmail.com,1800,SOFA,0
-138,Salem,059812346,Nablus,salem@gmail.com,2000,CARPET,0
-139,Ruba,059812346,Jericho,ruba@gmail.com,2500,COVER,0
-140,Ali Mohammed,059812346,Nablus,ali@gmail.com,1800,SOFA,0
-141,Salem,059812346,Nablus,salem@gmail.com,2000,CARPET,0
-142,Ruba,059812346,Jericho,ruba@gmail.com,2500,COVER,0
-143,Ali Mohammed,059812346,Nablus,ali@gmail.com,1800,SOFA,0
-144,Salem,059812346,Nablus,salem@gmail.com,2000,CARPET,0
-145,Ruba,059812346,Jericho,ruba@gmail.com,2500,COVER,0
-146,Ali Mohammed,059812346,Nablus,ali@gmail.com,1800,SOFA,0
-147,Salem,059812346,Nablus,salem@gmail.com,2000,CARPET,0
-148,Ruba,059812346,Jericho,ruba@gmail.com,2500,COVER,0
-149,Ali Mohammed,059812346,Nablus,ali@gmail.com,1800,SOFA,0
-150,Salem,059812346,Nablus,salem@gmail.com,2000,CARPET,0
-151,Ruba,059812346,Jericho,ruba@gmail.com,2500,COVER,0
-152,Ali Mohammed,059812346,Nablus,ali@gmail.com,1800,SOFA,0
+130,Salem,058721355,Tulkarem,salem@gmail.com,3000,CARPET,2
