@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 public class Data {
+    public static String msg="error";
     private Data(){
     }
     static String path="src/main/resources/Back/";
@@ -23,7 +24,7 @@ public class Data {
             }
         }
         catch(Exception e){
-            logger.info("error");
+            logger.info(msg);
 
         }
         return strings;
@@ -35,7 +36,7 @@ public class Data {
             raf.write(object.toString().getBytes());
         }
         catch(Exception e){
-            logger.info("error");
+            logger.info(msg);
 
         }
     }
@@ -46,7 +47,7 @@ public class Data {
             writer.write("");
             writer.flush();
         }catch (Exception ignored) {
-            logger.info("error");
+            logger.info(msg);
         }
     }
     public static List<Login> users(){
@@ -100,7 +101,7 @@ public class Data {
             }
         }
         catch(Exception e){
-            logger.info("error");
+            logger.info(msg);
 
         }
     }
@@ -138,7 +139,7 @@ public class Data {
             }
         }
         catch(Exception e){
-            logger.info("error");
+            logger.info(msg);
 
         }
     }
@@ -208,7 +209,7 @@ public class Data {
             }
         }
         catch(Exception e){
-            logger.info("error");
+            logger.info(msg);
 
         }
     }
@@ -238,7 +239,7 @@ public class Data {
         }
 
         catch(Exception e){
-            logger.info("error");
+            logger.info(msg);
 
         }
     }
