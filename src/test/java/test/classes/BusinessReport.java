@@ -323,6 +323,7 @@ public class BusinessReport {
             }
         }
         numCover= najah.edu.BusinessReport.numberOfCoverInThisMonth();
+
         assertEquals(numOfCover,numCover[5]);
     }
 }
