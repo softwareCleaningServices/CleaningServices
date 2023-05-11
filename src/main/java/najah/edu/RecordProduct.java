@@ -9,9 +9,6 @@ import java.util.logging.Logger;
 public class RecordProduct {
     private RecordProduct(){}
     static Logger logger = Logger.getLogger(RecordProduct.class.getName());
-    public static void menu(){
-
-    }
     public static Product addAProduct() {
         Scanner input = new Scanner(System.in);
         logger.info("Enter your product category (CARPET,COVER,SOFA)");
@@ -45,8 +42,8 @@ public class RecordProduct {
         Scanner input = new Scanner(System.in);
         String category = input.nextLine();
         while (!category.equalsIgnoreCase("CARPET") &&
-                !category.equalsIgnoreCase("SOFA") &&
-                !category.equalsIgnoreCase("COVER")) {
+               !category.equalsIgnoreCase("SOFA") &&
+               !category.equalsIgnoreCase("COVER")) {
             logger.info("please,Enter your product category");
             category = input.nextLine();
         }
@@ -94,10 +91,10 @@ public class RecordProduct {
         Scanner input = new Scanner(System.in);
         String sizeCover = input.nextLine();
         while (!sizeCover.equalsIgnoreCase("KING") &&
-                !sizeCover.equalsIgnoreCase("QUEEN") &&
-                !sizeCover.equalsIgnoreCase("TWIN_XL") &&
-                !sizeCover.equalsIgnoreCase("TWIN") &&
-                !sizeCover.equalsIgnoreCase("CRIB")) {
+               !sizeCover.equalsIgnoreCase("QUEEN") &&
+               !sizeCover.equalsIgnoreCase("TWIN_XL") &&
+               !sizeCover.equalsIgnoreCase("TWIN") &&
+               !sizeCover.equalsIgnoreCase("CRIB")) {
             logger.info("please,Enter the size of cover");
             sizeCover = input.nextLine();
         }
@@ -113,5 +110,4 @@ public class RecordProduct {
                 .setCost(cost)
                 .build();
     }
-
 }
