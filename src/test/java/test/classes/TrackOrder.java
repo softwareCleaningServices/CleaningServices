@@ -42,7 +42,7 @@ int orderId=0;
 
     @Then("the system displays the other order details")
     public void the_system_displays_the_other_order_details() {
-        order.displayDetails();
+        System.out.println(order);
     }
 
     @Then("the system displays a not exist message")

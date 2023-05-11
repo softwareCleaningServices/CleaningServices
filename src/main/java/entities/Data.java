@@ -23,6 +23,8 @@ public class Data {
             }
         }
         catch(Exception e){
+            logger.info("error");
+
         }
         return strings;
     }
@@ -33,6 +35,8 @@ public class Data {
             raf.write(object.toString().getBytes());
         }
         catch(Exception e){
+            logger.info("error");
+
         }
     }
     public static void removeFileContent(String fileName){
@@ -42,7 +46,7 @@ public class Data {
             writer.write("");
             writer.flush();
         }catch (Exception ignored) {
-            //ignored
+            logger.info("error");
         }
     }
     public static List<Login> users(){
@@ -96,6 +100,8 @@ public class Data {
             }
         }
         catch(Exception e){
+            logger.info("error");
+
         }
     }
     public static List<Order> getOrders(){
@@ -132,6 +138,8 @@ public class Data {
             }
         }
         catch(Exception e){
+            logger.info("error");
+
         }
     }
     public static Order getOrderByID(int id){
@@ -200,6 +208,8 @@ public class Data {
             }
         }
         catch(Exception e){
+            logger.info("error");
+
         }
     }
     public static int getPaid(boolean b){
@@ -228,6 +238,8 @@ public class Data {
         }
 
         catch(Exception e){
+            logger.info("error");
+
         }
     }
 }

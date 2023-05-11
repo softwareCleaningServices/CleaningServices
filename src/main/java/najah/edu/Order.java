@@ -105,7 +105,5 @@ public class Order {
     }
     static Logger logger = Logger.getLogger(Order.class.getName());
 
-    public void displayDetails() {
-       logger.info(toString());
-    }
+
 }
