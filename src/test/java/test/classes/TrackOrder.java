@@ -35,7 +35,7 @@ int orderId=0;
 
     @Then("the system displays the status of the order")
     public void the_system_displays_the_status_of_the_order() {
-        assertEquals(order.getCustomer(), customer);
+        assertEquals(order.getCustomer().getId(), customer.getId());
         assertEquals(order.getId(), orderId);
         order.displayStatus();
     }
