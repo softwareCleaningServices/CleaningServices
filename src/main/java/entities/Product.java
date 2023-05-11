@@ -100,7 +100,7 @@ public class Product {
         return numOfSofa * costCat[1];
     }
     public static double coverCost(String sizeOfCover){
-        double costOfProduct = 0.0;
+        double costOfProduct ;
         double []costCat = ProductFile.getCostOfCategory();
         if(sizeOfCover.equalsIgnoreCase("KING")){
             costOfProduct=costCat[2];
@@ -110,7 +110,7 @@ public class Product {
             costOfProduct=costCat[4];
         }else if (sizeOfCover.equalsIgnoreCase("TWIN")) {
             costOfProduct=costCat[5];
-        }else if (sizeOfCover.equalsIgnoreCase("CRIB")) {
+        }else{
             costOfProduct=costCat[6];
         }
         return costOfProduct;
