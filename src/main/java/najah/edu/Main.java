@@ -14,6 +14,9 @@ public class Main {
     }
 
     public static void main(String[]args) {
+
+
+
         Scanner in = new Scanner(System.in);
         int option = 0;
 
@@ -45,6 +48,10 @@ public class Main {
             Login login=new Login();
             login.setEmail(email);
             login.setPassword(password);
+            if(email.equals("adminClean@gmail.com")){
+                login.setRul("admin");
+            }
+            else login.setRul("customer");
             if(login.isCorrectInfo()){
                 login.login();
                 break;

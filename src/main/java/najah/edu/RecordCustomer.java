@@ -1,5 +1,4 @@
 package najah.edu;
-
 import entities.Customer;
 import entities.Data;
 import java.util.Scanner;
@@ -16,14 +15,13 @@ public class RecordCustomer {
         customer.setEmail(in.nextLine());
         logger.info("Enter customer Phone ");
         customer.setPhone(in.nextLine());
-        logger.info("Enter customer Address ");
+       logger.info("Enter customer Address ");
         customer.setAddress(in.nextLine());
         logger.info("Enter customer Password ");
         customer.setPassword(in.nextLine());
         customer.setId(Data.getId());
         if(customer.isTakenEmail()){
-            logger.info("This email is already taken and this is his details");
-            logger.info(()->String.valueOf(customer.getCustomerDetails()));
+           logger.info("This email is already taken and this is his details");
             logger.info("Enter new Email");
             customer.setEmail(in.nextLine());
         }
@@ -37,11 +35,11 @@ public class RecordCustomer {
     login.setPassword(customer.getPassword());
     login.setRul("customer");
     Data.storeObject("Login",login);
-    logger.info("You have been one of our Customer, Thank you!");
-        login.customerLogin();
+        logger.info("You have been one of our Customer, Thank you!");
 
     }
+
     public void takenMsg() {
-        logger.info("This email is already taken and this is the customer information ");
+       logger.info("This email is already taken and this is the customer information ");
     }
 }

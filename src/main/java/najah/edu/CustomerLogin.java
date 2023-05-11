@@ -75,8 +75,8 @@ public class CustomerLogin {
         Scanner in=new Scanner(System.in);
         int option;
         try {
-             option = in.nextInt();
-             updateOptions(option);
+            option = in.nextInt();
+            updateOptions(option);
         }catch (InputMismatchException e){
             logger.info("Enter a valid option number");
             updateInfo();
@@ -123,7 +123,7 @@ public class CustomerLogin {
                 }
             }
         }
-     updateInfo(attribute,value);
+        updateInfo(attribute,value);
     }
     public void setCustomer(Customer customer) {
         this.customer = customer;

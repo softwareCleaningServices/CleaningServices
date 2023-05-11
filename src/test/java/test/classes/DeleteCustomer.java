@@ -1,5 +1,6 @@
 package test.classes;
 
+import entities.Data;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -32,7 +33,7 @@ public class DeleteCustomer {
     @When("the entered customer id is not exist int the recorded customer")
     public void theEnteredCustomerIdIsNotExistIntTheRecordedCustomer() {
         customer=new Customer();
-        customer.setId(100);
+        customer= Data.getCustomerById(100);
     }
     @Then("the message that the customer not exist will be shown")
     public void the_message_that_the_customer_not_exist_will_be_shown() {

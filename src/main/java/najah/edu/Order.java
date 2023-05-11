@@ -8,8 +8,7 @@ import entities.Worker;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import static najah.edu.Main.logger;
+import java.util.logging.Logger;
 
 public class Order {
     private int id;
@@ -29,14 +28,15 @@ public class Order {
     }
     @Override
     public String toString() {
-        return id+","+customer.getId()+","+date+","+total+","+status+","+paid+","+worker.getId()+"\r\n";
+
+        return id+","+customer.getId()+","+date+","+total+","+status+","+paid+","+(worker==null?0:worker.getId())+"\r\n";
     }
     public  String getString(){
         String threeSpace="\t\t\t";
         StringBuilder str;
         str = new StringBuilder(this.getId() + "\t\t" + this.getCustomer().getFullName() + threeSpace+
                 this.getDate() + threeSpace+this.getTotal()+threeSpace + this.getStatus() + threeSpace + (paid ? "Yes" : "No") +
-               this.getWorker().getName()+ "\n");
+                threeSpace+this.getWorker().getName()+ "\n");
         for (Product product:this.getProducts()){
             str.append(product.toString()).append("  ").append("\n");
         }
@@ -103,8 +103,7 @@ public class Order {
     public void displayStatus() {
         logger.info("The Order Status is: "+this.getStatus());
     }
-    public void displayDetails() {
-        String msg="The Order Id ="+id+"The Order Date: "+date+"The Order Total Coast: "+total;
-        logger.info(msg);
-    }
+    static Logger logger = Logger.getLogger(Order.class.getName());
+
+
 }

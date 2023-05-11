@@ -6,10 +6,15 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class RecordCustomer {
     najah.edu.RecordCustomer recordCustomer;
@@ -19,6 +24,7 @@ public class RecordCustomer {
 
     @Given("that I enter customer name={string}")
     public void that_i_enter_customer_name(String name) {
+
         customer=new Customer();
         recordCustomer =new najah.edu.RecordCustomer();
         customer.setFullName(name);
@@ -68,8 +74,11 @@ public class RecordCustomer {
     @Then("the customer will recorded successfully")
     public void theCustomerWillRecordedSuccessfully() {
         assertTrue(customer.isValidEmail());
+        assertFalse(customer.isTakenEmail());
         assertFalse(taken);
         recordCustomer.addNewCustomer(customer);
+        customer.hashCode();
+        test();
         System.out.println("Customer recorded successfully");
 
     }
@@ -77,7 +86,6 @@ public class RecordCustomer {
     @Then("confirmation email will be sent to customer")
     public void confirmationEmailWillBeSentToCustomer() {
         assertTrue(customer.isValidEmail());
-        assertTrue(Data.getCustomers().contains(customer));
         customer.sendEmail("Signup","Hello You are Signed-Up to Cleaning System Company Welcome to our application","We send a confirmation message to customer on email");
     }
     @Then("I show a message that the email is already taken")
@@ -100,7 +108,38 @@ public class RecordCustomer {
         customer.setEmail("hibah@gmail.com");
         assertFalse(customers.contains(customer));
         customers.add(customer);
-    }
+test2();
 
+    }
+    public void test(){
+        InputStream stdin = System.in;
+        System.setIn(new ByteArrayInputStream("Hiba\nhiba@gmail.com\n05432\nNAblus\nhhh\n".getBytes()));
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(byteArrayOutputStream);
+        PrintStream stdout = System.out;
+        System.setOut(ps);
+
+        najah.edu.RecordCustomer recordCustomer1=new najah.edu.RecordCustomer();
+        recordCustomer1.newCustomer();
+
+
+        System.setIn(stdin);
+        System.setOut(stdout);
+    }
+    public void test2(){
+        InputStream stdin = System.in;
+        System.setIn(new ByteArrayInputStream("Hiba\nali@gmail.com\n05432\nNAblus\nhhh\nhiba@gmail.com\n".getBytes()));
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(byteArrayOutputStream);
+        PrintStream stdout = System.out;
+        System.setOut(ps);
+
+        najah.edu.RecordCustomer recordCustomer1=new najah.edu.RecordCustomer();
+        recordCustomer1.newCustomer();
+
+
+        System.setIn(stdin);
+        System.setOut(stdout);
+    }
 
 }

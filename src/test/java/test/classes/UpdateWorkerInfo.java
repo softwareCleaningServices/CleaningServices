@@ -7,6 +7,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import najah.edu.AdminLogin;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UpdateWorkerInfo {
@@ -17,7 +19,7 @@ public class UpdateWorkerInfo {
     @Given("that I choose to update worker info")
     public void that_i_choose_to_update_worker_info() {
        admin=new AdminLogin();
-       worker= Data.getWorkers().get(0);
+       worker= Data.getWorkerById(130);
     }
 
     @When("I select to update Salary")
@@ -67,5 +69,12 @@ public class UpdateWorkerInfo {
     @Then("the address will updated successfully")
     public void the_address_will_updated_successfully() {
         assertEquals(worker.getAddress(), value);
+        List<Worker>workers=Data.getWorkers();
+        for (Worker worker1:workers){
+            if(worker1.getId()==worker.getId()){
+                worker1=worker;
+            }
+        }
+        Data.updateWorkers(workers);
     }
 }
