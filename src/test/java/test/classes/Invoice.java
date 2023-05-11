@@ -1,6 +1,7 @@
 package test.classes;
 
 import entities.Data;
+import entities.Product;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -8,7 +9,11 @@ import najah.edu.AdminLogin;
 import najah.edu.InvoiceOrder;
 import najah.edu.Order;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class Invoice {
     AdminLogin admin;
@@ -70,7 +75,12 @@ public class Invoice {
     }
     @Then("the order Id is not exist on the recorded ordered")
     public void the_order_id_is_not_exist_on_the_recorded_ordered() {
-        assertFalse(admin.isExistOrder(order.getId()));
+        order=Data.getOrderByID(1);
+        assertEquals(order.getId(),0);
+        assertEquals(Data.getCustomerById(9).getId(),0);
+        List<Product>products=new ArrayList<>();
+        order.setProducts(products);
+        InvoiceOrder.invoice(order,0);
         admin.notExistMsg();
     }
 

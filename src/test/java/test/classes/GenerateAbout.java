@@ -25,6 +25,8 @@ public class GenerateAbout {
      admin.adminOptions(5);
          paid= Data.getPaid(true);
          debt=Data.getPaid(false);
+         int not=Data.getCountOrders("else");
+         assertEquals(not,0);
          cash=paid+debt;
     }
 
@@ -34,7 +36,6 @@ public class GenerateAbout {
         assertEquals(cash,paid+debt);
 
         admin.generateAbout();
-
     }
     @Then("the report generated with all field puts to {int}")
     public void the_report_generated_with_all_field_puts_to(Integer int1) {

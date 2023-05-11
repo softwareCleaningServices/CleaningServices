@@ -1,5 +1,4 @@
 package najah.edu;
-
 import entities.Data;
 import entities.ProductFile;
 import net.sf.jasperreports.engine.*;
@@ -11,12 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 import static najah.edu.Main.logger;
-
 public class InvoiceOrder {
     Order order;
-    public InvoiceOrder(){
-        //not used
-    }
     public static void invoice(Order order, double total) {
         try {
             List<Order> list= Data.getOrders();
