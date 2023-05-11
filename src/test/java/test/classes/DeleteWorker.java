@@ -21,9 +21,10 @@ public class DeleteWorker {
        worker=new Worker();
        workers= Data.getWorkers();
     }
-
+int id;
     @When("I enter the worker Id={string}")
     public void i_enter_the_worker_id(String id) {
+        this.id=Integer.parseInt(id);
       worker.setId(Integer.parseInt(id));
     }
     @Then("the worker deleted successfully")
@@ -41,6 +42,7 @@ public class DeleteWorker {
     @Then("The message {string} will be shown")
     public void the_message_will_be_shown(String msg) {
         assertFalse(worker.isExistWorker());
+        assertEquals(Data.getWorkerById(id).getId(),0);
         assertEquals("This worker doesn't exist",msg);
         System.out.println(msg);
     }
