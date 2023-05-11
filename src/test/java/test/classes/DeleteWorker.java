@@ -42,7 +42,7 @@ int id;
     @Then("The message {string} will be shown")
     public void the_message_will_be_shown(String msg) {
         assertFalse(worker.isExistWorker());
-        assertEquals(Data.getWorkerById(id).getId(),0);
+        assertEquals(0,Data.getWorkerById(id).getId());
         assertEquals("This worker doesn't exist",msg);
         System.out.println(msg);
     }

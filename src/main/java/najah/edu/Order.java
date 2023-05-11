@@ -106,6 +106,6 @@ public class Order {
     static Logger logger = Logger.getLogger(Order.class.getName());
 
     public void displayDetails() {
-       logger.info("The Order Id ="+id+"The Order Date: "+date+"The Order Total Coast: "+total);
+       logger.info(toString());
     }
 }

@@ -76,7 +76,7 @@ public class Invoice {
     @Then("the order Id is not exist on the recorded ordered")
     public void the_order_id_is_not_exist_on_the_recorded_ordered() {
         order=Data.getOrderByID(1);
-        assertEquals(order.getId(),0);
+        assertEquals(0,order.getId());
         assertEquals(0,Data.getCustomerById(9).getId());
         List<Product>products=new ArrayList<>();
         order.setProducts(products);

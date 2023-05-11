@@ -22,7 +22,6 @@ public class RecordCustomer {
         customer.setId(Data.getId());
         if(customer.isTakenEmail()){
            logger.info("This email is already taken and this is his details");
-            logger.info(customer.getCustomerDetails().toString());
             logger.info("Enter new Email");
             customer.setEmail(in.nextLine());
         }

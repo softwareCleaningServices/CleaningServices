@@ -26,7 +26,7 @@ public class GenerateAbout {
          paid= Data.getPaid(true);
          debt=Data.getPaid(false);
          int not=Data.getCountOrders("else");
-         assertEquals(not,0);
+         assertEquals(0,not);
          cash=paid+debt;
     }
 
