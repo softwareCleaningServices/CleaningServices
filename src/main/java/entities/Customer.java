@@ -7,6 +7,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.List;
 import java.util.Properties;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -128,9 +129,12 @@ public class Customer {
             message1.setSubject(title);
             message1.setText(message);
             Transport.send(message1);
+            logger.info(msg);
         } catch (Exception ignored) {
             //ignored
         }
     }
+    static Logger logger = Logger.getLogger(Customer.class.getName());
+
 
 }
