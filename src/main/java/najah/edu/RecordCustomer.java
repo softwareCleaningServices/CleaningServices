@@ -1,5 +1,4 @@
 package najah.edu;
-
 import entities.Customer;
 import entities.Data;
 import java.util.Scanner;
@@ -10,21 +9,21 @@ public class RecordCustomer {
     public Customer newCustomer(){
         Scanner in=new Scanner(System.in);
         Customer customer = new Customer();
-        logger.info("Enter customer Name ");
+        System.out.println("Enter customer Name ");
         customer.setFullName(in.nextLine());
-        logger.info("Enter customer Email ");
+        System.out.println("Enter customer Email ");
         customer.setEmail(in.nextLine());
-        logger.info("Enter customer Phone ");
+        System.out.println("Enter customer Phone ");
         customer.setPhone(in.nextLine());
-        logger.info("Enter customer Address ");
+        System.out.println("Enter customer Address ");
         customer.setAddress(in.nextLine());
-        logger.info("Enter customer Password ");
+        System.out.println("Enter customer Password ");
         customer.setPassword(in.nextLine());
         customer.setId(Data.getId());
         if(customer.isTakenEmail()){
-            logger.info("This email is already taken and this is his details");
-            logger.info(()->String.valueOf(customer.getCustomerDetails()));
-            logger.info("Enter new Email");
+            System.out.println("This email is already taken and this is his details");
+            System.out.println(customer.getCustomerDetails());
+            System.out.println("Enter new Email");
             customer.setEmail(in.nextLine());
         }
         addNewCustomer(customer);
@@ -37,11 +36,11 @@ public class RecordCustomer {
     login.setPassword(customer.getPassword());
     login.setRul("customer");
     Data.storeObject("Login",login);
-    logger.info("You have been one of our Customer, Thank you!");
-        login.customerLogin();
+        logger.info("You have been one of our Customer, Thank you!");
 
     }
+
     public void takenMsg() {
-        logger.info("This email is already taken and this is the customer information ");
+        System.out.println("This email is already taken and this is the customer information ");
     }
 }
