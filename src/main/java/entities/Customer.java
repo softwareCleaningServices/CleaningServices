@@ -128,7 +128,6 @@ public class Customer {
             message1.setSubject(title);
             message1.setText(message);
             Transport.send(message1);
-            System.out.println(msg);
         } catch (Exception ignored) {
             //ignored
         }

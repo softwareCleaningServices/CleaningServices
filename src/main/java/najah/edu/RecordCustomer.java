@@ -9,21 +9,21 @@ public class RecordCustomer {
     public Customer newCustomer(){
         Scanner in=new Scanner(System.in);
         Customer customer = new Customer();
-        System.out.println("Enter customer Name ");
+        logger.info("Enter customer Name ");
         customer.setFullName(in.nextLine());
-        System.out.println("Enter customer Email ");
+        logger.info("Enter customer Email ");
         customer.setEmail(in.nextLine());
-        System.out.println("Enter customer Phone ");
+        logger.info("Enter customer Phone ");
         customer.setPhone(in.nextLine());
-        System.out.println("Enter customer Address ");
+       logger.info("Enter customer Address ");
         customer.setAddress(in.nextLine());
-        System.out.println("Enter customer Password ");
+        logger.info("Enter customer Password ");
         customer.setPassword(in.nextLine());
         customer.setId(Data.getId());
         if(customer.isTakenEmail()){
-            System.out.println("This email is already taken and this is his details");
-            System.out.println(customer.getCustomerDetails());
-            System.out.println("Enter new Email");
+           logger.info("This email is already taken and this is his details");
+            logger.info(customer.getCustomerDetails().toString());
+            logger.info("Enter new Email");
             customer.setEmail(in.nextLine());
         }
         addNewCustomer(customer);
@@ -41,6 +41,6 @@ public class RecordCustomer {
     }
 
     public void takenMsg() {
-        System.out.println("This email is already taken and this is the customer information ");
+       logger.info("This email is already taken and this is the customer information ");
     }
 }

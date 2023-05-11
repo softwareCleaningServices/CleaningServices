@@ -8,6 +8,7 @@ import entities.Worker;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class Order {
     private int id;
@@ -100,10 +101,11 @@ public class Order {
         return total;
     }
     public void displayStatus() {
-        System.out.println("The Order Status is: "+this.getStatus());
+        logger.info("The Order Status is: "+this.getStatus());
     }
+    static Logger logger = Logger.getLogger(Order.class.getName());
 
     public void displayDetails() {
-        System.out.println("The Order Id ="+id+"The Order Date: "+date+"The Order Total Coast: "+total);
+       logger.info("The Order Id ="+id+"The Order Date: "+date+"The Order Total Coast: "+total);
     }
 }
