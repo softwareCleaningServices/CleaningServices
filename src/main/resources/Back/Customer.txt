@@ -7,7 +7,3 @@
 110,asmaa,asmaa@gmail.com,2323231,nablus,1123456
 111,Leen,leen@gmail.com,02345,Nablus,lendfg
 112,Ayat AbuOmar,ayat@gmail.com,0324567,Nablus,ayatt
-113,Ibrahim Ahmed,ibrahim@gmail.com,059823135,Nablus,ibrahim
-114,Ibrahim Ahmed,ibrahim@gmail.com,059823135,Nablus,ibrahim
-115,Ibrahim Ahmed,ibrahim@gmail.com,059823135,Nablus,ibrahim
-116,Ibrahim Ahmed,ibrahim@gmail.com,059823135,Nablus,ibrahim
