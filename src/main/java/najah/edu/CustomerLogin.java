@@ -138,8 +138,7 @@ public class CustomerLogin {
             customer.setAddress(value);
         } else if (attribute.equalsIgnoreCase("phone")) {
             customer.setPhone(value);
-        }
-        else if (attribute.equalsIgnoreCase("password")){
+        }else if (attribute.equalsIgnoreCase("password")){
             customer.setPassword(value);
             List<Login>loginList=Data.users();
             for (Login login:loginList){
