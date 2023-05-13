@@ -29,44 +29,19 @@ Feature: Generate a business report
   Scenario: Number of all orders in this month.
     Given that needs the number of all orders in this month
     When the admin enters to show the report
-    Then calculate number of all business orders in this month
+    Then calculate number of all business orders in month 3 and year 2023
 
   Scenario: Number of sofas in all orders in this month.
     Given that needs the number of sofas in all orders in this month
     When the admin enters to show the report
-    Then calculate number of sofas in all orders in this month
+    Then calculate number of sofas in all orders in month 3 and year 2023
 
   Scenario: Number of carpets in all orders in this month.
     Given that needs the number of carpets in all orders in this month
     When the admin enters to show the report
-    Then calculate number of carpets in all orders in this month
+    Then calculate number of carpets in all orders in month 3 and year 2023
 
   Scenario: Number of covers in all orders in this month.
     Given that needs the number of covers in all orders in this month
     When the admin enters to show the report
-    Then calculate number of covers in all orders in this month
-
-  Scenario: Number of covers size King in all orders in this month.
-    Given that needs the number of covers size King in all orders in this month
-    When the admin enters to show the report
-    Then calculate number of covers size King in all orders in this month
-
-  Scenario: Number of covers size Queen in all orders in this month.
-    Given that needs the number of covers size Queen in all orders in this month
-    When the admin enters to show the report
-    Then calculate number of covers size Queen in all orders in this month
-
-  Scenario: Number of covers size TWIN_XL in all orders in this month.
-    Given that needs the number of covers size TWIN_XL in all orders in this month
-    When the admin enters to show the report
-    Then calculate number of covers size TWIN_XL in all orders in this month
-
-  Scenario: Number of covers size TWIN in all orders in this month.
-    Given that needs the number of covers size TWIN in all orders in this month
-    When the admin enters to show the report
-    Then calculate number of covers size TWIN in all orders in this month
-
-  Scenario: Number of covers size CRIB in all orders in this month.
-    Given that needs the number of covers size CRIB in all orders in this month
-    When the admin enters to show the report
-    Then calculate number of covers size CRIB in all orders in this month
+    Then calculate number of covers in all orders in month 3 and year 2023

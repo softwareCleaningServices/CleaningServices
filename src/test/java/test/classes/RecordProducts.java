@@ -2,12 +2,17 @@ package test.classes;
 
 import entities.*;
 import io.cucumber.java.Before;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import najah.edu.RecordProduct;
 
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 public class RecordProducts {
@@ -21,6 +26,7 @@ public class RecordProducts {
     String material;
     String specialTreatment;
     Double cost;
+    List<Product> product1;
 
     @Before
     public void initialization() {
@@ -74,6 +80,10 @@ public class RecordProducts {
     }
     @Then("the product will be recorded successfully")
     public void the_will_recorded_successfully() {
+
+//        product=RecordProduct.addAProduct();
+//        assertNotNull(product);
+//        product1=ProductFile.getProduct();
         assertEquals(name,product.getName());
         assertEquals(pictureName,product.getPictureName());
         assertEquals(material,product.getMaterial());
