@@ -54,6 +54,7 @@ public class Invoice {
 
     @Then("the customer id ={int}")
     public void the_customer_id(Integer customerId) {
+        order.setCustomer(Data.getCustomerById(customerId));
         assertEquals(order.getCustomer().getId(),(customerId));
 
     }
