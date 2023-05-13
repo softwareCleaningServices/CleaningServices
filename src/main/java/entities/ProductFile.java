@@ -97,7 +97,7 @@ public class ProductFile {
             logger.info("To change cost of TWIN cover enter 6");
             logger.info("To change cost of CRIB cover enter 7");
             int num = input.nextInt();
-            if(num >=0 && num <=7){
+            if(num >0 && num <=7){
                 logger.info("Enter the new Cost");
                 cost = input.nextDouble();
             }

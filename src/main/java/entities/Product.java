@@ -1,4 +1,7 @@
 package entities;
+
+import java.util.Objects;
+
 public class Product {
     private String name;
     private String pictureName;
@@ -91,6 +94,20 @@ public class Product {
 
         return String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s", name, pictureName, dimension==null?"":dimension,numOfSofa==null?"":numOfSofa,cover==null?"":cover, material, specialTreatment, category, cost, orderId);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return orderId == product.orderId && Objects.equals(name, product.name) && Objects.equals(pictureName, product.pictureName) && Objects.equals(dimension, product.dimension) && Objects.equals(numOfSofa, product.numOfSofa) && Objects.equals(material, product.material) && Objects.equals(specialTreatment, product.specialTreatment) && category == product.category && cover == product.cover && Objects.equals(cost, product.cost);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, pictureName, dimension, numOfSofa, material, specialTreatment, category, cover, cost, orderId);
+    }
+
     public static double carpetCost(Double dimension){
         double []costCat = ProductFile.getCostOfCategory();
         return dimension * costCat[0];

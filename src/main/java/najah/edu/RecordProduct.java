@@ -12,7 +12,13 @@ public class RecordProduct {
     public static Product addAProduct() {
         Scanner input = new Scanner(System.in);
         logger.info("Enter your product category (CARPET,COVER,SOFA)");
-        String category=checkCategory();
+        String category= input.nextLine();
+        while (!category.equalsIgnoreCase("CARPET") &&
+                !category.equalsIgnoreCase("SOFA") &&
+                !category.equalsIgnoreCase("COVER")) {
+            logger.info("please,Enter your product category");
+            category = input.nextLine();
+        }
         logger.info("Enter your product name");
         String name = input.nextLine();
         name=checkEnter(name);
@@ -28,26 +34,26 @@ public class RecordProduct {
         Product product1 = null;
         if (category.equalsIgnoreCase("CARPET")){
             logger.info("Enter your carpet dimension(in meter square)");
-            product1=carpetProduct(name,picName,material,special,category);
+            double dimension = Double.parseDouble(input.nextLine());
+            product1=carpetProduct(name,picName,material,special,category,dimension);
         } else if (category.equalsIgnoreCase("SOFA")) {
             logger.info("Enter the number of seats in all sofas");
-            product1=sofaProduct(name,picName,material,special,category);
-        } else if(category.equalsIgnoreCase("COVER")){
+            int numOfSofa= Integer.parseInt(input.nextLine());
+            product1=sofaProduct(name,picName,material,special,category,numOfSofa);
+        } else{
             logger.info("Enter the size of cover(KING,QUEEN,TWIN_XL,TWIN,CRIB)");
-            product1=coverProduct(name,picName,material,special,category);
+            String sizeCover = input.nextLine();
+            while (!sizeCover.equalsIgnoreCase("KING") &&
+                    !sizeCover.equalsIgnoreCase("QUEEN") &&
+                    !sizeCover.equalsIgnoreCase("TWIN_XL") &&
+                    !sizeCover.equalsIgnoreCase("TWIN") &&
+                    !sizeCover.equalsIgnoreCase("CRIB")) {
+                logger.info("please,Enter the size of cover");
+                sizeCover = input.nextLine();
+            }
+            product1=coverProduct(name,picName,material,special,category,sizeCover);
         }
         return product1;
-    }
-    public static String checkCategory(){
-        Scanner input = new Scanner(System.in);
-        String category = input.nextLine();
-        while (!category.equalsIgnoreCase("CARPET") &&
-               !category.equalsIgnoreCase("SOFA") &&
-               !category.equalsIgnoreCase("COVER")) {
-            logger.info("please,Enter your product category");
-            category = input.nextLine();
-        }
-        return category;
     }
     public static String checkEnter(String string){
         Scanner input = new Scanner(System.in);
@@ -57,9 +63,7 @@ public class RecordProduct {
         }
         return string;
     }
-    public static Product carpetProduct(String name, String picName, String material, String special, String category){
-        Scanner input = new Scanner(System.in);
-        double dimension = Double.parseDouble(input.nextLine());
+    public static Product carpetProduct(String name, String picName, String material, String special, String category,double dimension){
         double cost=Product.carpetCost(dimension);
         return Product
                 .builder()
@@ -72,9 +76,7 @@ public class RecordProduct {
                 .setCost(cost)
                 .build();
     }
-    public static Product sofaProduct(String name, String picName, String material, String special, String category){
-        Scanner input = new Scanner(System.in);
-        int numOfSofa= Integer.parseInt(input.nextLine());
+    public static Product sofaProduct(String name, String picName, String material, String special, String category, int numOfSofa){
         double cost=Product.sofaCost(numOfSofa);
         return Product
                 .builder()
@@ -87,17 +89,7 @@ public class RecordProduct {
                 .setCost(cost)
                 .build();
     }
-    public static Product coverProduct(String name, String picName, String material, String special, String category){
-        Scanner input = new Scanner(System.in);
-        String sizeCover = input.nextLine();
-        while (!sizeCover.equalsIgnoreCase("KING") &&
-               !sizeCover.equalsIgnoreCase("QUEEN") &&
-               !sizeCover.equalsIgnoreCase("TWIN_XL") &&
-               !sizeCover.equalsIgnoreCase("TWIN") &&
-               !sizeCover.equalsIgnoreCase("CRIB")) {
-            logger.info("please,Enter the size of cover");
-            sizeCover = input.nextLine();
-        }
+    public static Product coverProduct(String name, String picName, String material, String special, String category, String sizeCover){
         double cost=Product.coverCost(sizeCover);
         return Product
                 .builder()
