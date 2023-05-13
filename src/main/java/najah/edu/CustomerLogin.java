@@ -75,7 +75,6 @@ public class CustomerLogin {
                         }
 
                     updateInfo(attribute,value);
-//                    updateInfo();
                 }
                 else if(option==5){
                     break;
@@ -88,7 +87,7 @@ public class CustomerLogin {
             logger.info("please enter a valid number ");
         }
     }
-public void men(){
+    public void men(){
     logger.info("If you want to update your Phone enter number 1");
     logger.info("If you want to update your Address enter number 2");
     logger.info("If you want to update your Password enter number 3");
