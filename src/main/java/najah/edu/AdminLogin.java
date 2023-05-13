@@ -84,7 +84,8 @@ public class AdminLogin {
 
     }
     public void orderMenu() {
-        while (true) {
+        boolean cond=true;
+        while (cond) {
             logger.info("If you want to change the order status enter number 1");
             logger.info("If you want to invoice the order enter number 2");
             logger.info("If you want to back enter number 3");
@@ -93,14 +94,15 @@ public class AdminLogin {
             try {
                 x = in.nextInt();
 
-                if(x==3){
-                    break;
-                }
             } catch (Exception ignored) {
                 logger.info(msg);
                 break;
             }
-            orderOptions(x);
+            if(x!=3){
+                orderOptions(x);
+            }else{
+                cond=false;
+            }
         }
     }
     public void orderOptions(int x) {
@@ -209,7 +211,8 @@ public class AdminLogin {
 
     }
     public void workerMenu() {
-        while (true) {
+        boolean cond=true;
+        while (cond) {
             logger.info("If you want to add new worker enter number 1");
             logger.info("If you want to delete worker enter number 2");
             logger.info("If you want to update worker information enter number 3");
@@ -219,15 +222,15 @@ public class AdminLogin {
             try {
                 x = in.nextInt();
 
-                if (x == 4) {
-                    break;
-                }
-
             } catch (Exception ignored) {
                 logger.info(msg);
                 break;
             }
-            workerOptions(x);
+            if(x==4) {
+                cond=false;
+            }else {
+                workerOptions(x);
+            }
         }
     }
     public void workerOptions(int x) {
@@ -345,15 +348,17 @@ public class AdminLogin {
     }
     public void adminPage(){
         Scanner in=new Scanner(System.in);
-        while (true) {
+        boolean cond=true;
+        while (cond) {
             try {
                 adminMenu();
                 int option = in.nextInt();
                 if(option==8){
                     logger.info("Goodbye");
-                    break;
+                    cond=false;
+                }else{
+                    adminOptions(option);
                 }
-                adminOptions(option);
 
             } catch (Exception e) {
                 logger.info("Enter a valid option number ");
