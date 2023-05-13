@@ -86,11 +86,11 @@ public class AdminLogin {
     public void orderMenu() {
         boolean cond=true;
         while (cond) {
+            Scanner in = new Scanner(System.in);
+            int x;
             logger.info("If you want to change the order status enter number 1");
             logger.info("If you want to invoice the order enter number 2");
             logger.info("If you want to back enter number 3");
-            Scanner in = new Scanner(System.in);
-            int x;
             try {
                 x = in.nextInt();
 
