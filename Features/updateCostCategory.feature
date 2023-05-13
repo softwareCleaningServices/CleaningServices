@@ -1,10 +1,18 @@
-Feature: update Cost of the category
-  Scenario Outline: change the cost of the category
-    Given that I choose to update cost of the category
-    When I select to update cost of category "<num>" to "<cost>"
-    Then the cost will updated successfully
-    Examples:
-      | num | cost |
-      | 1   | 8.0  |
-      | 2   | 8.0  |
-      | 3   | 8.0  |
+Feature: Update cost of product categories
+
+  Scenario: User updates cost of product categories
+    Given the admin wants to update the cost of a product category
+    When the user enters a valid category number and a new cost
+    Then the system updates the cost of the selected category
+  Scenario: User updates cost of product categories
+    Given the admin wants to update the cost of a product category
+    When the user enters a valid many category number and a new cost
+    Then the system updates the cost of all selected category
+  Scenario: User updates cost of product categories
+    Given the admin wants to update the cost of a product category
+    When the user enters a Not valid category number up
+    Then the system return the same cost of the selected category
+  Scenario: User updates cost of product categories
+    Given the admin wants to update the cost of a product category
+    When the user enters a Not valid category number down
+    Then the system return the same cost of the selected category

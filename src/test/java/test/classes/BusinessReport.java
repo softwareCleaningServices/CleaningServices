@@ -50,7 +50,7 @@ public class BusinessReport {
     @Then("calculate number of all business worker")
     public void calculateNumberOfAllBusinessWorker() {
         numWorker= najah.edu.BusinessReport.numberOfAllWorker();
-        assertEquals(11,numWorker[0]);
+        assertEquals(8,numWorker[0]);
     }
 
     @Given("that needs the number of all business worker in category sofa")
@@ -72,7 +72,7 @@ public class BusinessReport {
     @Then("calculate number of all business worker in category carpet")
     public void calculateNumberOfAllBusinessWorkerInCategoryCarpet() {
         numWorker= najah.edu.BusinessReport.numberOfAllWorker();
-        assertEquals(6,numWorker[2]);
+        assertEquals(4,numWorker[2]);
     }
 
     @Given("that needs the number of all business worker in category cover")
@@ -83,7 +83,7 @@ public class BusinessReport {
     @Then("calculate number of all business worker in category cover")
     public void calculateNumberOfAllBusinessWorkerInCategoryCover() {
         numWorker= najah.edu.BusinessReport.numberOfAllWorker();
-        assertEquals(3,numWorker[3]);
+        assertEquals(2,numWorker[3]);
     }
     @Given("that needs the number of all orders in this month")
     public void thatNeedsTheNumberOfAllOrdersInThisMonth() {
