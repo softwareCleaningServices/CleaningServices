@@ -16,3 +16,9 @@ Feature: update worker information
     When I select to update Address
     And I enter the new address = "Tulkarem"
     Then the address will updated successfully
+
+  Scenario: change the email of the worker
+    Given that I choose to update worker info
+    When I select to update email
+    And I enter the new email = "sdf@gmail.com"
+    Then the email will updated successfully

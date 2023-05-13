@@ -36,7 +36,6 @@ public class RecordCustomer {
     login.setRul("customer");
     Data.storeObject("Login",login);
         logger.info("You have been one of our Customer, Thank you!");
-
     }
 
     public void takenMsg() {

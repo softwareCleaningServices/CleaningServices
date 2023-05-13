@@ -24,8 +24,6 @@ public class Data {
             }
         }
         catch(Exception e){
-            logger.info(msg);
-
         }
         return strings;
     }
@@ -47,7 +45,6 @@ public class Data {
             writer.write("");
             writer.flush();
         }catch (Exception ignored) {
-            logger.info(msg);
         }
     }
     public static List<Login> users(){
@@ -101,7 +98,6 @@ public class Data {
             }
         }
         catch(Exception e){
-            logger.info(msg);
 
         }
     }

@@ -77,4 +77,25 @@ public class UpdateWorkerInfo {
         }
         Data.updateWorkers(workers);
     }
+    @When("I select to update email")
+    public void i_select_to_update_email() {
+       attribute="email";
+    }
+    @When("I enter the new email = {string}")
+    public void i_enter_the_new_email(String email) {
+        admin.updateWorker(attribute,email,worker);
+        value=email;
+    }
+
+    @Then("the email will updated successfully")
+    public void the_email_will_updated_successfully() {
+        assertEquals(worker.getEmail(), value);
+        List<Worker>workers=Data.getWorkers();
+        for (Worker worker1:workers){
+            if(worker1.getId()==worker.getId()){
+                worker1=worker;
+            }
+        }
+        Data.updateWorkers(workers);
+    }
 }
