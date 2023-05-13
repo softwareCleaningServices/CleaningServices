@@ -23,7 +23,7 @@ public class Data {
                 strings.add(s);
             }
         }
-        catch(Exception e){
+        catch(Exception e){//ignored
         }
         return strings;
     }
@@ -44,7 +44,7 @@ public class Data {
         ){
             writer.write("");
             writer.flush();
-        }catch (Exception ignored) {
+        }catch (Exception ignored) {//ignored
         }
     }
     public static List<Login> users(){
@@ -97,8 +97,7 @@ public class Data {
 
             }
         }
-        catch(Exception e){
-
+        catch(Exception e){//ignored
         }
     }
     public static List<Order> getOrders(){
