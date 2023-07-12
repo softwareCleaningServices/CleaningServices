@@ -34,11 +34,21 @@ public class AdminLogin {
             logger.info("If you want to contact customer enter number 3");
             logger.info("If you want to back enter number 4");
             Scanner in = new Scanner(System.in);
-            int x ;
-            x = in.nextInt();
+            int x = 0;
+            try {
+                x = in.nextInt();
+                if (x < 1 || x > 4) {
+                    logger.info(msg);
+                    customerMenu();
+                }
                 if(x==4){
                     break;
                 }
+            } catch (Exception ignored) {
+                logger.info(msg);
+                customerMenu();
+            }
+            customerOptions(x);
         }
     }
     public void customerOptions(int option) {
@@ -61,6 +71,7 @@ public class AdminLogin {
         }
         catch (InputMismatchException e){
             logger.info(msgInv);
+            deleteCustomer();
         }
         deleteCustomer(customer);
     }
@@ -68,6 +79,7 @@ public class AdminLogin {
         int flag=0;
         List<Customer>customers=Data.getCustomers();
         for(Customer customer1:customers){
+
             if(customer1.getId()==(customer.getId())){
                 customers.remove(customer1);
                 flag=1;
@@ -89,16 +101,19 @@ public class AdminLogin {
             logger.info("If you want to invoice the order enter number 2");
             logger.info("If you want to back enter number 3");
             Scanner in = new Scanner(System.in);
-            int x;
+            int x = 0;
             try {
                 x = in.nextInt();
-
+                if (x < 1 || x > 3) {
+                    logger.info(msg);
+                    orderMenu();
+                }
                 if(x==3){
                     break;
                 }
             } catch (Exception ignored) {
                 logger.info(msg);
-                break;
+                orderMenu();
             }
             orderOptions(x);
         }
@@ -192,6 +207,7 @@ public class AdminLogin {
             BusinessReport.businessReport();
 
         } else if (option==7) {
+
             ProductFile.updateCostOfCategory();
         }
     }
@@ -206,7 +222,7 @@ public class AdminLogin {
                     + worker.getPhone() + getSpaces(worker.getPhone()) + worker.getAddress()+getSpaces(worker.getAddress())+worker.getCategory()+getSpaces(String.valueOf(worker.getCategory()))+worker.getSalary()
             );
         }
-
+        workerMenu();
     }
     public void workerMenu() {
         while (true) {
@@ -215,18 +231,22 @@ public class AdminLogin {
             logger.info("If you want to update worker information enter number 3");
             logger.info("If you want to back enter number 4");
             Scanner in = new Scanner(System.in);
-            int x;
+            int x = 0;
             try {
                 x = in.nextInt();
-
+                if (x < 1 || x > 4) {
+                    logger.info(msg);
+                    workerMenu();
+                }
                 if (x == 4) {
                     break;
                 }
 
             } catch (Exception ignored) {
                 logger.info(msg);
-                break;
+                customerMenu();
             }
+
             workerOptions(x);
         }
     }
@@ -253,22 +273,31 @@ public class AdminLogin {
         }
         catch (InputMismatchException e){
             logger.info(msgInv);
+            updateWorker();
         }
         if(!flag){
             logger.info("This worker doesn't exist");
         }
         else {
             worker=Data.getWorkerById(id);
-            logger.info("Enter The Attribute You Want to Update \" Phone, Address, Email, Salary \" ");
-            String attribute=in.nextLine();
-
-                logger.info("Enter The New Value ");
-                String value=in.nextLine();
-                updateWorker(attribute,value,worker);
-                    }
+            updateWorker(worker);
+        }
 
     }
-
+    private void updateWorker(Worker worker) {
+        logger.info("Enter The Attribute You Want to Update \" Phone, Address, Email, Salary \" ");
+        Scanner in =new Scanner(System.in);
+        String attribute=in.nextLine();
+        if(!(attribute.equalsIgnoreCase("Phone")||attribute.equalsIgnoreCase("Email")||
+                attribute.equalsIgnoreCase("Salary")||attribute.equalsIgnoreCase("Address"))){
+            logger.info("This Attribute not allowed try again");
+        }
+        else{
+            logger.info("Enter The New Value ");
+            String value=in.nextLine();
+            updateWorker(attribute,value,worker);
+        }
+    }
     public void updateWorker(String attribute, String value, Worker worker) {
         if(attribute.equalsIgnoreCase("Address")){
             worker.setAddress(value);
@@ -304,6 +333,7 @@ public class AdminLogin {
         }
         catch (InputMismatchException e){
             logger.info(msgInv);
+            deleteWorker();
         }
         if(flag){
             deleteWorker(worker);
@@ -357,7 +387,7 @@ public class AdminLogin {
 
             } catch (Exception e) {
                 logger.info("Enter a valid option number ");
-                break;
+                adminPage();
             }
         }
     }

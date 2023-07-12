@@ -106,8 +106,8 @@ public class Customer {
         return matcher.find();
     }
     public void sendEmail(String title,String message,String msg){
-        final String user = "rubasalon5@gmail.com";
-        final String emailPass = "wntxcpwbkocnjjdm";
+        final String user = "rubasoftcss@gmail.com";
+        final String emailPass = "$2y$12$NmfCE19oYOto9qbFZYmIEewQ79/SHYGdCoqc0MtN36iHUiOFGxwZi";
         String to = this.getEmail();
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -132,6 +132,7 @@ public class Customer {
             logger.info(msg);
         } catch (Exception ignored) {
             //ignored
+            logger.info("Can't send message");
         }
     }
     static Logger logger = Logger.getLogger(Customer.class.getName());
